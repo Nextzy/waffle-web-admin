@@ -1,0 +1,48 @@
+"""key""",th_TH,en_GB
+common.title.confirmation,ยืนยัน,Confirmation
+common.title.forceUpdate,อัพเดทเวอร์ชันใหม่,Force Update
+common.title.softUpdate,มีอัพเดทใหม่,Update Available
+common.message.confirmationDelete,คุณแน่ใจหรือไม่ที่จะลบ?,Are you sure you want to delete?
+common.message.forceUpdate,มีเวอร์ชันใหม่ กรุณาอัพเดทเพื่อดำเนินการต่อ,A new version is available. Please update to continue.
+common.message.softUpdate,มีเวอร์ชันใหม่ คุณต้องการอัพเดทเดี๋ยวนี้หรือไม่?,A new version is available. Would you like to update now?
+common.message.noData,ไม่มีข้อมูล,No data available
+common.message.processing,กำลังดำเนินการ...,Processing...
+common.message.loading,กำลังโหลด...,Loading...
+common.button.ok,ตกลง,OK
+common.button.cancel,ยกเลิก,Cancel
+common.button.back,กลับ,Back
+common.button.updateNow,Update now,Update now
+common.button.later,ภายหลัง,Later
+common.button.update,อัพเดท,Update
+common.button.save,บันทึก,Save
+common.button.edit,แก้ไข,Edit
+common.button.delete,ลบ,Delete
+common.button.confirm,ยืนยัน,Confirm
+common.button.submit,ยืนยัน,Submit
+common.button.search,ค้นหา,Search
+common.button.previous,ก่อนหน้า,Previous
+common.button.next,ถัดไป,Next
+common.pagination.ofTotal,จาก $total,of $total
+common.pagination.ofTotalPages,จาก $total หน้า,of $total pages
+common.pagination.ofTotalItems,$start-$end จาก $total รายการ,$start-$end of $total items
+common.pagination.pageOfTotal,หน้าที่ $page จาก $total,Page $page of $total
+common.pagination.itemsPerPage,รายการต่อหน้า,items per page
+common.slider.minValue,ค่าต่ำสุด,Min value
+common.slider.maxValue,ค่าสูงสุด,Max value
+common.time.am,AM,AM
+common.time.pm,PM,PM
+common.success.general,สำเร็จ,Successfully
+common.success.saved,บันทึกสำเร็จ,Saved successfully
+common.success.updated,อัพเดทสำเร็จ,Updated successfully
+common.success.deleted,ลบสำเร็จ,Deleted successfully
+common.fail.saved,บันทึกไม่สำเร็จ โปรดลองใหม่อีกครั้ง,Save failed. Please try again later
+common.fail.general,เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง,An error occurred. Please try again later
+common.fail.updated,อัพเดทไม่สำเร็จ โปรดลองใหม่อีกครั้ง,Update failed. Please try again later
+common.fail.network,ข้อผิดพลาดเครือข่าย โปรดตรวจสอบการเชื่อมต่อ,Network error. Please check your connection
+common.alert.info.doubleTapExit,กดอีกครั้งเพื่อออกจากแอป,Press back again to exit
+auth.button.signInWithGoogle,Sign in with Google,Sign in with Google
+auth.button.signInWithFacebook,Sign in with Facebook,Sign in with Facebook
+auth.button.signInWithApple,Sign in with Apple,Sign in with Apple
+auth.button.signInWithTwitter,Sign in with Twitter,Sign in with Twitter
+auth.button.signInWithGitHub,Sign in with GitHub,Sign in with GitHub
+auth.button.signInWithMicrosoft,Sign in with Microsoft,Sign in with Microsoft

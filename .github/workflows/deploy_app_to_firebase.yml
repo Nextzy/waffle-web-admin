@@ -1,0 +1,138 @@
+#=== Tutorial ===#
+# - Youtube: https://www.youtube.com/watch?v=KYG8lXZCVr4
+# - How to generate service account on GCP: https://github.com/wzieba/Firebase-Distribution-Github-Action/wiki/FIREBASE_TOKEN-migration
+
+name: Deploy App to Firebase Distribution
+
+on:
+  push:
+    branches:
+      - '**'
+
+  pull_request:
+    types: [ opened, synchronize, reopened, closed ]
+    branches:
+      - develop
+
+  workflow_dispatch:
+    inputs:
+      release_notes:
+        type: string
+        required: true
+        default: 'Manual build from github.com'
+        description: 'Release Notes'
+
+
+jobs:
+  pull_code:
+    name: ↙️ Pull code
+    runs-on: ubuntu-latest
+    if: |
+      (github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'develop') ||
+      (github.event_name == 'push' && contains(github.event.head_commit.message, '--action build')) ||
+      (github.event_name == 'push' && contains(github.event.head_commit.message, '-a build')) 
+
+    steps:
+      - name: 📂 Clone repository
+        uses: actions/checkout@v4
+      - name: 📂 Checkout submodules
+        run: git submodule update --init --recursive
+      - uses: actions/upload-artifact@v4
+        with:
+          name: github_repo
+          path: ${{ github.workspace }}
+
+  build_android:
+    name: 🤖 Build Android application
+    needs: [ pull_code ]
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/app
+    steps:
+      #====== Setup Flutter ======#
+      - uses: actions/download-artifact@v4
+        with:
+          name: github_repo
+          path: ${{ github.workspace }}
+      - name: ⟦Flutter⟧ 🐦 Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.29.1'
+          channel: 'stable'
+      - name: ⟦Flutter⟧ 🐦 Flutter Version
+        run: flutter --version
+      - name: ⟦Flutter⟧ ↙️ Install dependencies (pub get)
+        run: flutter pub get
+
+      #====== Android Build ======#
+      - name: ⟦Android⟧ 🛠 Setup Java SDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: 17
+          cache: 'gradle'  # Make your workflow faster
+      - name: ⟦Android⟧ 🔑 Decode Keystore
+        id: decode_keystore
+        uses: timheuer/base64-to-file@v1
+        with:
+          fileName: "keystore/release_dev.keystore"
+          encodedString: ${{ secrets.KEYSTORE_RELEASE_DEV_ENCODE }}
+      - name: ⟦Android⟧ 📄 Create Google Services JSON File
+        env:
+          GOOGLE_SERVICE_JSON: ${{ secrets.GOOGLE_SERVICE_JSON }}
+        run: echo $GOOGLE_SERVICE_JSON | base64 -d > ${{ github.workspace }}/apps/app/android/app/google-services.json
+      - name: ⟦Android⟧ 🏗️ Build .apk Android App for UAT Version
+        env:
+          SIGNING_KEY_ALIAS: ${{ secrets.KEYSTORE_ALIAS_RELEASE_DEV }}
+          SIGNING_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD_RELEASE_DEV }}
+        run: flutter build apk --release --flavor uat --target lib/main_uat.dart
+      - uses: actions/upload-artifact@v4
+        with:
+          name: android
+          path: apps/app
+
+  distribute_android:
+    name: 🔥 Upload .apk (Android)
+    needs: [ build_android ]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: android
+          path: ${{ github.workspace }}/apps/app
+      # Distribute Android to Firebase
+      - name: ⟦Android⟧ 🔥 Upload .apk (Android) for UAT version to Firebase App Distribution
+        uses: wzieba/Firebase-Distribution-Github-Action@v1
+        with:
+          appId: ${{ secrets.FIREBASE_ANDROID_APP_UAT_ID }}
+          serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
+          groups: 🧪-tester
+          file: ${{ github.workspace }}/apps/app/build/app/outputs/flutter-apk/app-uat-release.apk
+          releaseNotes: ${{ inputs.release_notes }}
+      # Clean up artifacts after distribution
+      - name: 🧹 Clean up artifacts
+        uses: geekyeggo/delete-artifact@v5
+        with:
+          name: |
+            github_repo
+            android
+
+#  build_ios:
+#    name: 🍎 Build iOS application...
+#    runs-on: macos-latest
+#
+#    steps:
+#      #====== iOS Build ======#
+#      - name: ⟦iOS⟧ 🏗️ Build iOS app without code signing
+#        run: flutter build ipa --release --flavor uat --target lib/main_uat.dart --no-codesign
+#
+#      # Distribute iOS to Firebase
+#      - name: ⟦iOS⟧ 🔥 Upload .ipa (iOS) for UAT version to Firebase App Distribution
+#        uses: wzieba/Firebase-Distribution-Github-Action@v1
+#        with:
+#          appId: ${{ secrets.FIREBASE_IOS_APP_UAT_ID }}
+#          serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
+#          groups: 🧪 Tester
+#          file: build/ios/ipa/your_app_name.ipa
+#          releaseNotes: ${{ inputs.release_notes }}

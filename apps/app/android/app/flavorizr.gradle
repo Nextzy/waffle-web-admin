@@ -1,0 +1,21 @@
+android {
+    flavorDimensions += "flavor-type"
+
+    productFlavors {
+        dev {
+            dimension "flavor-type"
+            applicationId "com.change_application_name.dev"
+            resValue "string", "app_name", "Template (Dev)"
+        }
+        uat {
+            dimension "flavor-type"
+            applicationId "com.change_application_name.uat"
+            resValue "string", "app_name", "Template (UAT)"
+        }
+        prod {
+            dimension "flavor-type"
+            applicationId "com.change_application_name"
+            resValue "string", "app_name", "Template"
+        }
+    }
+}

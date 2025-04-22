@@ -1,0 +1,54 @@
+name: data
+description: Data layer
+# Prevent accidental publishing to pub.dev.
+publish_to: 'none'
+version: 1.0.0
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  core:
+    path: ../../packages/core
+  change_application_name:
+    path: ../../apps/app
+
+  json_annotation: ^4.9.0
+
+  #======= DATA ========#
+  #PLATFORM: All
+  drift: ^2.26.0
+  drift_flutter: ^0.2.4
+
+
+dependency_overrides:
+  # Resolve for wechat_assets_picker
+  extended_image: ^10.0.0
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  bloc_test: ^10.0.0
+  build_runner: ^2.4.15
+  flutter_gen_runner: ^5.10.0
+  json_serializable: ^6.9.4
+  freezed: ^3.0.6
+  flutter_lints: ^5.0.0
+  retrofit_generator: ^9.1.9
+  drift_dev: ^2.26.0
+
+flutter_gen:
+  output: lib/generated/
+
+  assets:
+    enabled: true
+    outputs:
+      package_parameter_enabled: true
+      style: dot-delimiter
+
+flutter:
+  uses-material-design: true
+  generate: true

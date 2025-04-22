@@ -1,0 +1,37 @@
+import 'package:design_system/lib.dart';
+
+class BodyStackLayout extends StackLayout {
+  const BodyStackLayout({
+    super.key,
+    super.ratio,
+    super.width = double.infinity,
+    super.height,
+    super.minWidth,
+    super.maxWidth,
+    super.minHeight,
+    super.maxHeight,
+    super.rotate,
+    super.decoration,
+    super.padding,
+    super.margin,
+    super.border,
+    super.borderRadius,
+    super.backgroundColor,
+    super.backgroundGradient,
+    super.backgroundImage,
+    super.foregroundColor,
+    super.foregroundGradient,
+    super.foregroundImage,
+    super.opacity,
+    super.clipBehavior,
+    super.innerShadow,
+    super.dropShadow,
+    super.backgroundBlur,
+    super.transform,
+    super.alignment = AlignmentDirectional.topCenter,
+    super.fit,
+    super.textDirection,
+    super.scrollable,
+    required super.children,
+  });
+}

@@ -1,0 +1,54 @@
+name: utils
+description: Function tools.
+# Prevent accidental publishing to pub.dev.
+publish_to: 'none'
+version: 1.0.0
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  core:
+    path: ../../packages/core
+
+
+  #======= Utils ========#
+  #PLATFORM: All
+  intl: ^0.19.0
+  encrypt: ^5.0.3
+  url_launcher: ^6.3.1
+  url_strategy: ^0.3.0
+  timer_count_down: ^2.2.2
+  freezed_annotation: ^3.0.0
+  json_annotation: ^4.9.0
+
+  #PLATFORM: Android, iOS, Webs
+  flutter_libphonenumber: ^2.5.1
+
+
+dependency_overrides:
+  # Resolve for wechat_assets_picker
+  extended_image: ^10.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  bloc_test: ^10.0.0
+  build_runner: ^2.4.15
+  flutter_gen_runner: ^5.10.0
+  flutter_lints: ^5.0.0
+
+flutter_gen:
+  output: lib/generated/
+
+  assets:
+    enabled: true
+    outputs:
+      package_parameter_enabled: true
+      style: dot-delimiter
+
+flutter:
+  uses-material-design: true
+  generate: true

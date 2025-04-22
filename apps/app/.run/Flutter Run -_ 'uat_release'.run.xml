@@ -1,0 +1,8 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Flutter Run -&gt; 'uat:release'" type="FlutterRunConfigurationType" factoryName="Flutter">
+    <option name="additionalArgs" value="--release --dart-define=ENVIRONMENT=uat --web-port=5000 --enable-software-rendering" />
+    <option name="buildFlavor" value="uat" />
+    <option name="filePath" value="$PROJECT_DIR$/apps/app/lib/main_uat.dart" />
+    <method v="2" />
+  </configuration>
+</component>

@@ -1,0 +1,52 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  plugins:
+    - dart_code_metrics
+
+# [Install]
+# Install CLI: flutter pub global activate dart_code_metrics
+# Install executable: https://dcm.dev/docs/teams/getting-started/
+dart_code_metrics:
+  metrics:
+    cyclomatic-complexity: 20
+    number-of-parameters: 4
+    maximum-nesting-level: 5
+
+  rules:
+    #==== Common ====#
+    - avoid-global-state
+    - avoid-missing-enum-constant-in-map
+#    - avoid-throw-in-catch-block
+#    - newline-before-return
+    - no-boolean-literal-compare
+    - no-empty-block
+    - prefer-conditional-expressions
+    - no-equal-then-else
+    #==== FLUTTER ====#
+    - always-remove-listener
+    - avoid-border-all
+    - prefer-correct-edge-insets-constructor
+#    - prefer-extracting-callbacks
+    - avoid-unnecessary-setstate
+    - avoid-shrink-wrap-in-lists
+    - avoid-expanded-as-spacer
+#    - prefer-using-list-view
+#    - use-setstate-synchronously
+
+linter:
+  # The lint rules applied to this project can be customized in the
+  # section below to disable rules from the `package:flutter_lints/flutter.yaml`
+  # included above or to enable additional rules. A list of all available lints
+  # and their documentation is published at
+  # https://dart-lang.github.io/linter/lints/index.html.
+
+  rules:
+    constant_identifier_names: false
+    prefer_typing_uninitialized_variables: false #https://dart-lang.github.io/linter/lints/prefer_typing_uninitialized_variables.html
+    avoid_print: true # https://dart.dev/tools/linter-rules#avoid_print
+    avoid_relative_lib_imports: true # https://dart.dev/tools/linter-rules#avoid_relative_lib_imports
+    prefer_single_quotes: true  # Uncomment to enable the `prefer_single_quotes` rule
+
+# Additional information about this file can be found at
+# https://dart.dev/guides/language/analysis-options

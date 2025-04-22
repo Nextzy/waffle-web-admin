@@ -1,0 +1,126 @@
+name: design_system
+description: Project design system.
+# Prevent accidental publishing to pub.dev.
+publish_to: 'none'
+version: 1.0.0
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  core:
+    path: ../../packages/core
+  utils:
+    path: ../../packages/utils
+  localization:
+    path: ../../packages/localization
+
+
+  #======= UI ========#
+  #PLATFORM: All
+  responsive_framework: ^1.5.1
+  loading_more_list: ^7.1.0
+  custom_refresh_indicator: ^4.0.1
+  loading_animation_widget: ^1.3.0
+  dropdown_button2: ^2.3.9
+  badges: ^3.1.2
+  qr_flutter: ^4.1.0
+  toastification: ^3.0.2
+  buttons_tabbar: ^1.3.15
+  group_button: ^5.3.4
+  carousel_slider: ^5.0.0
+  pin_code_fields: ^8.0.1
+  flutter_spinkit: ^5.2.1
+  modal_bottom_sheet: ^3.0.0
+  flutter_inappwebview: ^6.1.5
+  #PLATFORM: Android, iOS, MacOS
+  wechat_assets_picker: ^9.5.0
+  #PLATFORM: Android, iOS
+  qr_code_scanner_plus: ^2.0.10+1
+  popover: ^0.3.1
+  calendar_date_picker2: ^2.0.0
+  flutter_colorpicker: ^1.1.0
+  audioplayers: ^6.4.0
+  flick_video_player: ^0.9.0
+  video_player: ^2.9.5
+  fleather: ^1.20.1
+
+
+  # Maybe you can use
+  #fl_chart: ^0.69.2
+  #funvas: ^0.1.8 # Flutter package that allows creating canvas animations based on time and math functions.
+  #animated_toggle_switch: ^0.8.3
+  #animations: ^2.0.11 # Material motion is a set of transition patterns that help users understand and navigate an app
+  #animated_text_kit: ^4.2.2
+  #expansion_tile_list: ^1.0.2
+  #home_widget: ^0.7.0 # HomeWidget is a plugin to make it easier to create HomeScreen Widgets on Android and iOS
+
+dependency_overrides:
+  # Resolve for wechat_assets_picker
+  extended_image: ^9.1.0
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  bloc_test: ^10.0.0
+  build_runner: ^2.4.15
+  flutter_gen_runner: ^5.10.0
+  flutter_lints: ^5.0.0
+  json_serializable: ^6.9.4
+  freezed: ^3.0.6
+
+flutter_gen:
+  output: lib/generated/
+  line_length: 120
+
+  integrations:
+    flutter_svg: true
+    lottie: true
+
+  assets:
+    enabled: true
+    outputs:
+      package_parameter_enabled: true
+      style: dot-delimiter
+      class_name: Assets
+
+flutter:
+  uses-material-design: true
+  generate: true
+
+  assets:
+    - assets/
+    - assets/icon/
+    - assets/icon/button/
+    - assets/icon/social/
+    - assets/logo/
+    - assets/image/
+    - assets/illustration/
+    - assets/mock/
+
+
+  fonts:
+    - family: PrimaryEnglish
+      fonts:
+        - asset: fonts/inter_regular.otf
+          weight: 400
+        - asset: fonts/inter_medium.otf
+          weight: 500
+        - asset: fonts/inter_semibold.otf
+          weight: 600
+        - asset: fonts/inter_bold.otf
+          weight: 700
+    - family: PrimaryThai
+      fonts:
+        - asset: fonts/anuphan_regular.otf
+          weight: 400
+        - asset: fonts/anuphan_medium.otf
+          weight: 500
+        - asset: fonts/anuphan_semibold.otf
+          weight: 600
+        - asset: fonts/anuphan_bold.otf
+          weight: 700
+

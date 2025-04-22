@@ -1,0 +1,13 @@
+# melos_managed_dependency_overrides: change_application_name,data,design_system,localization,utils,extended_image
+dependency_overrides:
+  change_application_name:
+    path: ../../apps/app
+  data:
+    path: ../data
+  design_system:
+    path: ../design_system
+  localization:
+    path: ../localization
+  utils:
+    path: ../utils
+  extended_image: ^9.1.0

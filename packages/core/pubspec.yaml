@@ -1,0 +1,78 @@
+name: core
+description: A core project.
+# Prevent accidental publishing to pub.dev.
+publish_to: 'none'
+version: 1.0.0
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  data:
+    path: ../../packages/data
+  design_system:
+    path: ../../packages/design_system
+  localization:
+    path: ../../packages/localization
+  utils:
+    path: ../../packages/utils
+
+  falconx:
+    git:
+      url: https://github.com/nextzy/falconx.git
+      path: falconx
+      ref: 3.8.8
+
+  #======= Firebase ========#
+  firebase_core: ^3.13.0
+  firebase_remote_config: ^5.4.3
+
+  #======= Utils ========#
+  #PLATFORM: All
+  flutter_dotenv: ^5.2.1
+  upgrader: ^11.3.1
+  auto_route: ^10.0.1
+  #PLATFORM: Android, iOS, MacOS, Webs, Windows
+  wakelock_plus: ^1.2.11
+  #PLATFORM: Android, iOS, MacOS, Windows
+  screen_brightness: ^2.1.2
+  #PLATFORM: Android, iOS, Windows
+  permission_handler: ^11.4.0
+  #PLATFORM: Android, iOS
+  open_file: ^3.5.10
+  flutter_upgrade_version: ^1.1.8
+
+
+  #======= Analytic ========#
+  #PLATFORM: All
+  catcher_2: ^2.1.2
+  #PLATFORM: Android, iOS
+  newrelic_mobile: ^1.1.10
+
+
+
+dependency_overrides:
+  # Resolve for wechat_assets_picker
+  extended_image: ^9.1.0
+
+
+#  falconx:
+#    path: ../../../FalconX/falconx
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  bloc_test: ^10.0.0
+  flutter_lints: ^5.0.0
+  build_runner: ^2.4.15
+  flutter_gen_runner: ^5.10.0
+  json_serializable: ^6.9.4
+  freezed: ^3.0.6
+
+
+flutter:
+  uses-material-design: true
+  generate: true

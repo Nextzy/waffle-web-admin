@@ -1,0 +1,26 @@
+# Run command: flutter pub run flutter_launcher_icons
+flutter_launcher_icons:
+  android: true # can specify file name here e.g. "ic_launcher"
+  image_path_android: "configs/launcher_icons/dev/icon-android-1024x1024.png"
+  adaptive_icon_foreground: "configs/launcher_icons/dev/icon-android-foreground-1024x1024.png" # only available for Android 8.0 devices and above
+  adaptive_icon_background: "configs/launcher_icons/dev/icon-android-background-1024x1024.png" # only available for Android 8.0 devices and above
+#  min_sdk_android: 21 # android min sdk min:16, default 21
+
+  ios: true # can specify file name here e.g. "My-Launcher-Icon"
+  remove_alpha_ios: true
+  image_path_ios: "configs/launcher_icons/dev/icon-1024x1024.png"
+
+#  web:
+#    generate: true
+#    image_path: "configs/launcher_icons/prod/icon-1024x1024.png"
+#  #    background_color: "#hexcode"
+#  #    theme_color: "#hexcode"
+#
+#  windows:
+#    generate: true
+#    image_path: "configs/launcher_icons/prod/icon-1024x1024.png"
+#    icon_size: 256 # min:48, max:256, default: 48
+#
+  macos:
+    generate: true
+    image_path: "configs/launcher_icons/prod/icon-1024x1024.png"
