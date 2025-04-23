@@ -4,9 +4,7 @@ class AuthenticationRpcService extends RpcService {
   const AuthenticationRpcService(
     super.dio, {
     this.path = '/auth',
-    // super.baseUrl = 'https://api-brick.nextzy.com/v1',
-    super.baseUrl = 'https://api-brick-dev.nextzy.com/v1',
-    // super.baseUrl = 'http://127.0.0.1:3658/m1/830561-810297-default/v1',
+    super.baseUrl = 'https://waffle.nextzy.com/v1',
   });
 
   final String path;
@@ -19,7 +17,6 @@ class AuthenticationRpcService extends RpcService {
   }) =>
           request(
             path,
-            // method: 'signInWithEmailPassword',
             method: 'requestAuthenEmail',
             id: requestId,
             params: RemoteSignInWithEmailBody(

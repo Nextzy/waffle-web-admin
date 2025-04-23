@@ -15,7 +15,6 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$RemoteAuthenticationResponse {
-  @JsonKey(name: 'access_token')
   String? get accessToken;
   String? get refreshToken;
 
@@ -59,9 +58,7 @@ abstract mixin class $RemoteAuthenticationResponseCopyWith<$Res> {
           $Res Function(RemoteAuthenticationResponse) _then) =
       _$RemoteAuthenticationResponseCopyWithImpl;
   @useResult
-  $Res call(
-      {@JsonKey(name: 'access_token') String? accessToken,
-      String? refreshToken});
+  $Res call({String? accessToken, String? refreshToken});
 }
 
 /// @nodoc
@@ -96,13 +93,11 @@ class _$RemoteAuthenticationResponseCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _RemoteAuthenticationResponse implements RemoteAuthenticationResponse {
-  const _RemoteAuthenticationResponse(
-      {@JsonKey(name: 'access_token') this.accessToken, this.refreshToken});
+  const _RemoteAuthenticationResponse({this.accessToken, this.refreshToken});
   factory _RemoteAuthenticationResponse.fromJson(Map<String, dynamic> json) =>
       _$RemoteAuthenticationResponseFromJson(json);
 
   @override
-  @JsonKey(name: 'access_token')
   final String? accessToken;
   @override
   final String? refreshToken;
@@ -153,9 +148,7 @@ abstract mixin class _$RemoteAuthenticationResponseCopyWith<$Res>
       __$RemoteAuthenticationResponseCopyWithImpl;
   @override
   @useResult
-  $Res call(
-      {@JsonKey(name: 'access_token') String? accessToken,
-      String? refreshToken});
+  $Res call({String? accessToken, String? refreshToken});
 }
 
 /// @nodoc

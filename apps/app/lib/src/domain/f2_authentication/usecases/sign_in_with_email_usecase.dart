@@ -7,15 +7,12 @@ class SignInWithEmailAndPasswordUsecase extends BaseUsecase {
 
   final AppRepository _repo;
 
-  Stream<Either<Failure, bool>> call({
+  Future<JsonRpcResponse<RemoteAuthenticationResponse, ErrorResponse>> call({
     required String email,
     required String password,
   }) =>
-      _repo
-          .signInWithEmailPassword(email: email, password: password)
-          .mapEitherFailure(
-        (exception) {
-          return getFailure(exception);
-        },
+      _repo.signInWithEmailPassword(
+        email: email,
+        password: password,
       );
 }

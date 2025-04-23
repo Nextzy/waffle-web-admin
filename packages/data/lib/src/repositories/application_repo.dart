@@ -15,21 +15,32 @@ class AppRepository {
   final MovieRemoteDatasources _movieRemoteDatasource;
   final DatabaseLocalDataSources _localDatasource;
 
-  Stream<Either<AppException, bool>> signInWithEmailPassword({
+  Future<JsonRpcResponse<RemoteAuthenticationResponse, ErrorResponse>>
+      signInWithEmailPassword({
     required String email,
     required String password,
-  }) =>
-      DatasourceBoundState.asStream<RemoteAuthenticationResponse, bool>(
-        createCallFuture: () => _authRemoteDatasource.signInWithEmailPassword(
-          email: email,
-          password: password,
-        ),
-        saveCallResult: (response) => _localDatasource.saveToken(
-          token: response.accessToken,
-          refreshToken: response.refreshToken,
-        ),
-        processResponse: (response) => true,
-      ).mapAppException();
+  }) {
+    return _authRemoteDatasource.signInWithEmailPassword(
+      email: email,
+      password: password,
+    );
+  }
+
+  // Stream<Either<AppException, bool>> signInWithEmailPassword({
+  //   required String email,
+  //   required String password,
+  // }) =>
+  //     DatasourceBoundState.asStream<RemoteAuthenticationResponse, bool>(
+  //       createCallFuture: () => _authRemoteDatasource.signInWithEmailPassword(
+  //         email: email,
+  //         password: password,
+  //       ),
+  //       saveCallResult: (response) => _localDatasource.saveToken(
+  //         token: response.accessToken,
+  //         refreshToken: response.refreshToken,
+  //       ),
+  //       processResponse: (response) => true,
+  //     ).mapAppException();
 
   Stream<Either<AppException, List<MovieTableData>>> getMovieList() =>
       DatasourceBoundState.asStream<

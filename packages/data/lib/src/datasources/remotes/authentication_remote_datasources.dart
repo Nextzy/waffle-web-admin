@@ -2,21 +2,23 @@ import 'package:data/lib.dart';
 
 class AuthenticationRemoteDatasources {
   AuthenticationRemoteDatasources({
-    AuthenticationApiService? authService,
+    AuthenticationRpcService? authService,
   }) : _authService =
-            authService ?? AuthenticationApiService(AppHttpClient.instance.dio);
+            authService ?? AuthenticationRpcService(AppHttpClient.instance.dio);
 
-  final AuthenticationApiService _authService;
+  final AuthenticationRpcService _authService;
 
-  Future<RemoteAuthenticationResponse> signInWithEmailPassword({
+  Future<JsonRpcResponse<RemoteAuthenticationResponse, ErrorResponse>>
+      signInWithEmailPassword({
     required String email,
     required String password,
-  }) =>
-      _authService
-          .signInWithEmail(
-              body: RemoteSignInWithEmailBody(
-            email: email,
-            password: password,
-          ))
-          .unwrapResponse();
+  }) async {
+    print('authen email password');
+    print('${email} | ${password}');
+
+    return _authService.signInWithEmailPassword(
+      email: email,
+      password: password,
+    );
+  }
 }

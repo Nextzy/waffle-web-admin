@@ -55,10 +55,10 @@ class AppHttpClient extends BaseHttpClient {
     interceptors.addAll([
       ConnectivityInterceptor(),
       AppHeaderInterceptor(),
-      AppAccessTokenInterceptor(
-        dio,
-        refreshTokenPath: '/refreshToken',
-      ),
+      // AppAccessTokenInterceptor(
+      //   dio,
+      //   refreshTokenPath: '/refreshToken',
+      // ),
       AppNetworkErrorHandlerInterceptor(),
       MockHeaderInterceptor(),
       HttpLogInterceptor(), // Add to last

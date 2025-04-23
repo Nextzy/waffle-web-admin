@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Flutter Run -&gt; 'dev:debug'" type="FlutterRunConfigurationType" factoryName="Flutter">
-    <option name="additionalArgs" value="--debug --dart-define=ENVIRONMENT=dev --web-port=5000 --web-enable-expression-evaluation" />
+    <option name="additionalArgs" value="--debug --dart-define=ENVIRONMENT=dev --web-port=5000 --web-enable-expression-evaluation --web-browser-flag --disable-web-security" />
     <option name="buildFlavor" value="dev" />
     <option name="filePath" value="$PROJECT_DIR$/apps/app/lib/main_dev.dart" />
     <method v="2" />

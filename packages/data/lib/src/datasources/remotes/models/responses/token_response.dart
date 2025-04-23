@@ -8,7 +8,7 @@ part 'generated/token_response.g.dart';
 abstract class RemoteAuthenticationResponse
     with _$RemoteAuthenticationResponse {
   const factory RemoteAuthenticationResponse({
-    @JsonKey(name: 'access_token') String? accessToken,
+    String? accessToken,
     String? refreshToken,
   }) = _RemoteAuthenticationResponse;
 
