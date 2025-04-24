@@ -21,6 +21,10 @@ class AppRouter extends RootStackRouter {
           initial: true,
         ),
         AppRoute(
+          path: '/console',
+          page: ConsoleRoute.page,
+        ),
+        AppRoute(
           path: '/setting',
           page: SettingRoute.page,
         ),

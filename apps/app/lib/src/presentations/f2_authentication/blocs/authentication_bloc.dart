@@ -51,6 +51,16 @@ class AuthenticationBloc
 
     _showResult(jsonRpcResponse);
 
+    if (jsonRpcResponse.hasResult) {
+      emitEvent(
+        AuthenticationPageEvent.signInSuccess,
+      );
+    } else {
+      emitEvent(
+        AuthenticationPageEvent.signInFail,
+      );
+    }
+
     // final accessToken = jsonRpcResponse.result?.accessToken ?? '';
     //
     // _getProfile(accessToken: accessToken);

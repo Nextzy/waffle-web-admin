@@ -100,25 +100,25 @@ flutter:
     - assets/illustration/
     - assets/mock/
 
-#  fonts:
-#    - family: PrimaryEnglish
-#      fonts:
-#        - asset: fonts/inter_regular.otf
-#          weight: 400
-#        - asset: fonts/inter_medium.otf
-#          weight: 500
-#        - asset: fonts/inter_semibold.otf
-#          weight: 600
-#        - asset: fonts/inter_bold.otf
-#          weight: 700
-#    - family: PrimaryThai
-#      fonts:
-#        - asset: fonts/anuphan_regular.otf
-#          weight: 400
-#        - asset: fonts/anuphan_medium.otf
-#          weight: 500
-#        - asset: fonts/anuphan_semibold.otf
-#          weight: 600
-#        - asset: fonts/anuphan_bold.otf
-#          weight: 700
+  fonts:
+    - family: PrimaryEnglish
+      fonts:
+        - asset: fonts/inter_regular.otf
+          weight: 400
+        - asset: fonts/inter_medium.otf
+          weight: 500
+        - asset: fonts/inter_semibold.otf
+          weight: 600
+        - asset: fonts/inter_bold.otf
+          weight: 700
+    - family: PrimaryThai
+      fonts:
+        - asset: fonts/anuphan_regular.otf
+          weight: 400
+        - asset: fonts/anuphan_medium.otf
+          weight: 500
+        - asset: fonts/anuphan_semibold.otf
+          weight: 600
+        - asset: fonts/anuphan_bold.otf
+          weight: 700
 

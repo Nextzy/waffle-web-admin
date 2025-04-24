@@ -6,3 +6,4 @@ export 'f4_profile/profile.dart';
 export 'f5_setting/setting.dart';
 export 'scan/scan.dart';
 export 'shell_route_page.dart';
+export 'console/console.dart';

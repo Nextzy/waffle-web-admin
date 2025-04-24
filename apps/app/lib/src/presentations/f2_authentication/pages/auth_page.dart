@@ -2,6 +2,8 @@ import 'package:change_application_name/application.dart';
 
 enum AuthenticationPageEvent {
   showResult,
+  signInSuccess,
+  signInFail,
 }
 
 @RoutePage()
@@ -28,16 +30,18 @@ class _AuthenticationPageState extends AppPageBlocWidgetState<
     Object event,
     Object? data,
   ) {
-    final resultMessage = data as String;
-
     switch (event) {
       case AuthenticationPageEvent.showResult:
+        final resultMessage = data as String;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(resultMessage),
             duration: Duration(seconds: 5),
           ),
         );
+      case AuthenticationPageEvent.signInSuccess:
+        navigate(ConsoleRoute());
+      case AuthenticationPageEvent.signInFail:
     }
   }
 
@@ -83,6 +87,8 @@ class _AuthenticationPageState extends AppPageBlocWidgetState<
               // style: AppButtonStyle.filled,
               onPress: _onTapSignIn,
             ),
+            Gap(50),
+            AppText('1.0.0'),
           ],
         ),
       ),
