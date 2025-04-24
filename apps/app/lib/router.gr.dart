@@ -37,7 +37,7 @@ class ConsoleRoute extends PageRouteInfo<void> {
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const ConsolePage();
+      return WrappedRoute(child: const ConsolePage());
     },
   );
 }

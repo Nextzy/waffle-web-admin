@@ -1,19 +1,19 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../get_profile_response.dart';
+part of '../get_profile_body.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_RemoteGetProfileResponse _$RemoteGetProfileResponseFromJson(
+_RemoteGetProfileBody _$RemoteGetProfileBodyFromJson(
         Map<String, dynamic> json) =>
-    _RemoteGetProfileResponse(
-      user: json['user'],
+    _RemoteGetProfileBody(
+      email: json['email'] as String,
     );
 
-Map<String, dynamic> _$RemoteGetProfileResponseToJson(
-        _RemoteGetProfileResponse instance) =>
+Map<String, dynamic> _$RemoteGetProfileBodyToJson(
+        _RemoteGetProfileBody instance) =>
     <String, dynamic>{
-      'user': instance.user,
+      'email': instance.email,
     };

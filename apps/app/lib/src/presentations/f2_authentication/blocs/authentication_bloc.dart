@@ -66,20 +66,6 @@ class AuthenticationBloc
     // _getProfile(accessToken: accessToken);
   }
 
-  // Future<void> _getProfile({
-  //   required accessToken,
-  // }) async {
-  //   print('get profile');
-  //
-  //   AppHttpClient.instance.setupCredential(
-  //     token: accessToken,
-  //   );
-  //
-  //   var jsonRpcResponse = await _service.getProfile();
-  //
-  //   _showResult(jsonRpcResponse);
-  // }
-
   void _showResult(JsonRpcResponse jsonRpcResponse) {
     print('jsonRpcResponse: ${jsonRpcResponse}');
 

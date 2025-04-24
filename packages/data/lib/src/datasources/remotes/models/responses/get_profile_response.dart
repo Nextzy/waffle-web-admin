@@ -7,8 +7,7 @@ part 'generated/get_profile_response.g.dart';
 @freezed
 abstract class RemoteGetProfileResponse with _$RemoteGetProfileResponse {
   const factory RemoteGetProfileResponse({
-    String? userId,
-    String? username,
+    dynamic user,
   }) = _RemoteGetProfileResponse;
 
   factory RemoteGetProfileResponse.fromJson(Map<String, dynamic> json) =>

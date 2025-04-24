@@ -3,15 +3,19 @@ import 'package:data/lib.dart';
 class AppRepository {
   AppRepository({
     AuthenticationRemoteDatasources? authRemoteDatasource,
+    AdminRemoteDatasources? adminRemoteDatasource,
     MovieRemoteDatasources? movieRemoteDatasource,
     DatabaseLocalDataSources? localDatasource,
   })  : _authRemoteDatasource =
             authRemoteDatasource ?? AuthenticationRemoteDatasources(),
+        _adminRemoteDatasource =
+            adminRemoteDatasource ?? AdminRemoteDatasources(),
         _movieRemoteDatasource =
             movieRemoteDatasource ?? MovieRemoteDatasources(),
         _localDatasource = localDatasource ?? DatabaseLocalDataSources();
 
   final AuthenticationRemoteDatasources _authRemoteDatasource;
+  final AdminRemoteDatasources _adminRemoteDatasource;
   final MovieRemoteDatasources _movieRemoteDatasource;
   final DatabaseLocalDataSources _localDatasource;
 
@@ -23,6 +27,14 @@ class AppRepository {
     return _authRemoteDatasource.signInWithEmailPassword(
       email: email,
       password: password,
+    );
+  }
+
+  Future<JsonRpcResponse<RemoteGetProfileResponse, ErrorResponse>> getProfile({
+    required String email,
+  }) {
+    return _adminRemoteDatasource.getProfile(
+      email: email,
     );
   }
 

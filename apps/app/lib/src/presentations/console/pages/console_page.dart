@@ -1,5 +1,10 @@
 import 'package:change_application_name/application.dart';
 
+enum ConsolePageEvent {
+  showResult,
+  showProfile,
+}
+
 @RoutePage()
 class ConsolePage extends AppPage implements AutoRouteWrapper {
   const ConsolePage({super.key});
@@ -40,14 +45,7 @@ class _ConsolePageState
                       badge: null,
                     ),
                     onTap: () {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AppModal(
-                              title: 'Profile',
-                              description: 'aaa \n aaa',
-                            );
-                          });
+                      _onTapProfile();
                     },
                   ),
                 ],
@@ -103,6 +101,29 @@ class _ConsolePageState
           title: 'Billing',
         ),
       ],
+    );
+  }
+
+  void _onTapProfile() {
+    //
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AppModal(
+            title: 'Profile',
+            description: 'aaa \n aaa',
+          );
+        });
+
+    //
+    final data = (
+      accessToken: '',
+      email: '',
+    );
+
+    bloc.addEvent(
+      ConsoleEvent.tapProfile,
+      data: data,
     );
   }
 }

@@ -5,4 +5,5 @@ export 'models/models.dart';
 export 'exceptions/exceptions.dart';
 
 export 'authentication_remote_datasources.dart';
+export 'admin_remote_datasources.dart';
 export 'movie_remote_datasources.dart';

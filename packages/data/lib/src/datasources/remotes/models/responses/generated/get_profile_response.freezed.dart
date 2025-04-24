@@ -15,8 +15,7 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$RemoteGetProfileResponse {
-  String? get userId;
-  String? get username;
+  dynamic get user;
 
   /// Create a copy of RemoteGetProfileResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -34,18 +33,17 @@ mixin _$RemoteGetProfileResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is RemoteGetProfileResponse &&
-            (identical(other.userId, userId) || other.userId == userId) &&
-            (identical(other.username, username) ||
-                other.username == username));
+            const DeepCollectionEquality().equals(other.user, user));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, userId, username);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(user));
 
   @override
   String toString() {
-    return 'RemoteGetProfileResponse(userId: $userId, username: $username)';
+    return 'RemoteGetProfileResponse(user: $user)';
   }
 }
 
@@ -55,7 +53,7 @@ abstract mixin class $RemoteGetProfileResponseCopyWith<$Res> {
           $Res Function(RemoteGetProfileResponse) _then) =
       _$RemoteGetProfileResponseCopyWithImpl;
   @useResult
-  $Res call({String? userId, String? username});
+  $Res call({dynamic user});
 }
 
 /// @nodoc
@@ -71,18 +69,13 @@ class _$RemoteGetProfileResponseCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? userId = freezed,
-    Object? username = freezed,
+    Object? user = freezed,
   }) {
     return _then(_self.copyWith(
-      userId: freezed == userId
-          ? _self.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      username: freezed == username
-          ? _self.username
-          : username // ignore: cast_nullable_to_non_nullable
-              as String?,
+      user: freezed == user
+          ? _self.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as dynamic,
     ));
   }
 }
@@ -90,14 +83,12 @@ class _$RemoteGetProfileResponseCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _RemoteGetProfileResponse implements RemoteGetProfileResponse {
-  const _RemoteGetProfileResponse({this.userId, this.username});
+  const _RemoteGetProfileResponse({this.user});
   factory _RemoteGetProfileResponse.fromJson(Map<String, dynamic> json) =>
       _$RemoteGetProfileResponseFromJson(json);
 
   @override
-  final String? userId;
-  @override
-  final String? username;
+  final dynamic user;
 
   /// Create a copy of RemoteGetProfileResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -120,18 +111,17 @@ class _RemoteGetProfileResponse implements RemoteGetProfileResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _RemoteGetProfileResponse &&
-            (identical(other.userId, userId) || other.userId == userId) &&
-            (identical(other.username, username) ||
-                other.username == username));
+            const DeepCollectionEquality().equals(other.user, user));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, userId, username);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(user));
 
   @override
   String toString() {
-    return 'RemoteGetProfileResponse(userId: $userId, username: $username)';
+    return 'RemoteGetProfileResponse(user: $user)';
   }
 }
 
@@ -143,7 +133,7 @@ abstract mixin class _$RemoteGetProfileResponseCopyWith<$Res>
       __$RemoteGetProfileResponseCopyWithImpl;
   @override
   @useResult
-  $Res call({String? userId, String? username});
+  $Res call({dynamic user});
 }
 
 /// @nodoc
@@ -159,18 +149,13 @@ class __$RemoteGetProfileResponseCopyWithImpl<$Res>
   @override
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? userId = freezed,
-    Object? username = freezed,
+    Object? user = freezed,
   }) {
     return _then(_RemoteGetProfileResponse(
-      userId: freezed == userId
-          ? _self.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      username: freezed == username
-          ? _self.username
-          : username // ignore: cast_nullable_to_non_nullable
-              as String?,
+      user: freezed == user
+          ? _self.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as dynamic,
     ));
   }
 }

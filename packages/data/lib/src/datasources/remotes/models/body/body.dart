@@ -5,3 +5,4 @@ export 'echo_body.dart';
 export 'request_otp_body.dart';
 export 'verify_otp_body.dart';
 export 'get_social_profile_body.dart';
+export 'get_profile_body.dart';
