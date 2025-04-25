@@ -1,12 +1,11 @@
 import 'package:change_application_name/application.dart';
-import 'package:change_application_name/src/domain/console/console.dart';
 
 enum ConsoleEvent {
   initial,
-  tapProfile,
+  getProfile,
 }
 
-class ConsoleBloc extends AppBloc<ConsoleEvent, WidgetStateEvent> {
+class ConsoleBloc extends AppBloc<ConsoleEvent, ProfileEntity> {
   ConsoleBloc({
     GetProfileUsecase? getProfileUsecase,
   }) : _getProfileUsecase = getProfileUsecase ?? GetProfileUsecase();
@@ -18,7 +17,7 @@ class ConsoleBloc extends AppBloc<ConsoleEvent, WidgetStateEvent> {
     switch (event.name) {
       case ConsoleEvent.initial:
         return;
-      case ConsoleEvent.tapProfile:
+      case ConsoleEvent.getProfile:
         final data = event.data as ({
           String accessToken,
           String email,
@@ -35,8 +34,6 @@ class ConsoleBloc extends AppBloc<ConsoleEvent, WidgetStateEvent> {
     required accessToken,
     required email,
   }) async {
-    print('get profile');
-
     AppHttpClient.instance.setupCredential(
       token: accessToken,
     );
@@ -48,7 +45,9 @@ class ConsoleBloc extends AppBloc<ConsoleEvent, WidgetStateEvent> {
     _showResult(jsonRpcResponse);
 
     if (jsonRpcResponse.hasResult) {
-      emitEvent(ConsolePageEvent.showProfile);
+      final profile = ProfileEntity.fromResponse(jsonRpcResponse.result!);
+
+      emitSuccess(profile);
     }
   }
 

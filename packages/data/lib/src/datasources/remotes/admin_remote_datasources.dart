@@ -11,9 +11,6 @@ class AdminRemoteDatasources {
   Future<JsonRpcResponse<RemoteGetProfileResponse, ErrorResponse>> getProfile({
     required String email,
   }) async {
-    print('get profile');
-    print('${email}');
-
     return _adminService.getProfile(
       email: email,
     );

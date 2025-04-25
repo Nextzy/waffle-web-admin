@@ -1,4 +1,5 @@
 import 'package:change_application_name/application.dart';
+import 'package:change_application_name/src/domain/console/console.dart';
 
 enum ConsolePageEvent {
   showResult,
@@ -15,44 +16,94 @@ class ConsolePage extends AppPage implements AutoRouteWrapper {
   @override
   Widget wrappedRoute(BuildContext context) {
     return BlocProvider(
-      create: (context) => ConsoleBloc()..addEvent(ConsoleEvent.initial),
+      create: (context) {
+        final data = (
+          accessToken: '',
+          email: '',
+        );
+
+        return ConsoleBloc()
+          ..addEvent(
+            ConsoleEvent.getProfile,
+            data: data,
+          );
+      },
       child: this,
     );
   }
 }
 
 class _ConsolePageState
-    extends AppPageBlocWidgetState<ConsolePage, ConsoleBloc, dynamic> {
+    extends AppPageBlocWidgetState<ConsolePage, ConsoleBloc, ProfileEntity?> {
+  void onListenerEvent(
+    BuildContext context,
+    Object event,
+    Object? data,
+  ) {
+    switch (event) {
+      case ConsolePageEvent.showResult:
+        final resultMessage = data as String;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(resultMessage),
+            duration: Duration(seconds: 5),
+          ),
+        );
+      // case ConsolePageEvent.showProfile:
+      //   final user = data as RemoteUser;
+      //
+      //   showDialog(
+      //       context: context,
+      //       builder: (context) {
+      //         return AppModal(
+      //           title: 'Profile',
+      //           description:
+      //               'Email: ${user.email}\nName: ${user.firstName} ${user.lastName}\nRole: ${user.role}',
+      //         );
+      //       });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return AppScaffold(
-      body: Container(
-        color: Colors.white,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildAppSidebar(),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  InkWell(
-                    child: AppCircleAvatar(
-                      style: WidgetStyle.subtle,
-                      size: WidgetSize.lg,
-                      path: Assets.mock.avatarSquared.keyName,
-                      badge: null,
-                    ),
-                    onTap: () {
-                      _onTapProfile();
-                    },
+    return buildScaffoldWithBloc(
+      listenEvent: onListenerEvent,
+      body: (context, state) {
+        if (state.isLoading) return Center(child: AppCircularLoading());
+        if (state.isFail) return AppEmpty();
+
+        return _buildBody(context);
+      },
+    );
+  }
+
+  Widget _buildBody(BuildContext context) {
+    return Container(
+      color: Colors.white,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildAppSidebar(),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                InkWell(
+                  child: AppCircleAvatar(
+                    style: WidgetStyle.subtle,
+                    size: WidgetSize.lg,
+                    path: Assets.mock.avatarSquared.keyName,
+                    badge: null,
                   ),
-                ],
-              ),
+                  onTap: () {
+                    _onTapProfile();
+                  },
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -65,7 +116,7 @@ class _ConsolePageState
           icon: Assets.icon.infoRegular.keyName,
           title: 'Analytics',
           onPress: () {
-            print('onPress');
+
           },
         ),
         AppSidebarSection(
@@ -105,25 +156,16 @@ class _ConsolePageState
   }
 
   void _onTapProfile() {
-    //
+    final profile = bloc.data!;
+
     showDialog(
         context: context,
         builder: (context) {
           return AppModal(
             title: 'Profile',
-            description: 'aaa \n aaa',
+            description:
+                'Email: ${profile.email}\nName: ${profile.firstName} ${profile.lastName}\nRole: ${profile.role}',
           );
         });
-
-    //
-    final data = (
-      accessToken: '',
-      email: '',
-    );
-
-    bloc.addEvent(
-      ConsoleEvent.tapProfile,
-      data: data,
-    );
   }
 }
