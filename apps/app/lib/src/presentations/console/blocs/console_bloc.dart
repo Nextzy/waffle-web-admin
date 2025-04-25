@@ -5,7 +5,7 @@ enum ConsoleEvent {
   getProfile,
 }
 
-class ConsoleBloc extends AppBloc<ConsoleEvent, ProfileEntity> {
+class ConsoleBloc extends AppBloc<ConsoleEvent, ConsoleEntity> {
   ConsoleBloc({
     GetProfileUsecase? getProfileUsecase,
   }) : _getProfileUsecase = getProfileUsecase ?? GetProfileUsecase();
@@ -47,7 +47,11 @@ class ConsoleBloc extends AppBloc<ConsoleEvent, ProfileEntity> {
     if (jsonRpcResponse.hasResult) {
       final profile = ProfileEntity.fromResponse(jsonRpcResponse.result!);
 
-      emitSuccess(profile);
+      final console = ConsoleEntity(
+        profile: profile,
+      );
+
+      emitSuccess(console);
     }
   }
 

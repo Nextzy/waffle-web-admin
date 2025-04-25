@@ -1,9 +1,7 @@
 import 'package:change_application_name/application.dart';
-import 'package:change_application_name/src/domain/console/console.dart';
 
 enum ConsolePageEvent {
   showResult,
-  showProfile,
 }
 
 @RoutePage()
@@ -34,7 +32,7 @@ class ConsolePage extends AppPage implements AutoRouteWrapper {
 }
 
 class _ConsolePageState
-    extends AppPageBlocWidgetState<ConsolePage, ConsoleBloc, ProfileEntity?> {
+    extends AppPageBlocWidgetState<ConsolePage, ConsoleBloc, ConsoleEntity?> {
   void onListenerEvent(
     BuildContext context,
     Object event,
@@ -49,18 +47,6 @@ class _ConsolePageState
             duration: Duration(seconds: 5),
           ),
         );
-      // case ConsolePageEvent.showProfile:
-      //   final user = data as RemoteUser;
-      //
-      //   showDialog(
-      //       context: context,
-      //       builder: (context) {
-      //         return AppModal(
-      //           title: 'Profile',
-      //           description:
-      //               'Email: ${user.email}\nName: ${user.firstName} ${user.lastName}\nRole: ${user.role}',
-      //         );
-      //       });
     }
   }
 
@@ -115,9 +101,7 @@ class _ConsolePageState
         AppSidebarSection(
           icon: Assets.icon.infoRegular.keyName,
           title: 'Analytics',
-          onPress: () {
-
-          },
+          onPress: () {},
         ),
         AppSidebarSection(
           icon: Assets.icon.infoRegular.keyName,
@@ -156,7 +140,7 @@ class _ConsolePageState
   }
 
   void _onTapProfile() {
-    final profile = bloc.data!;
+    final profile = bloc.data!.profile!;
 
     showDialog(
         context: context,
