@@ -148,15 +148,20 @@ class _ConsolePageState
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           InkWell(
+            onTap: () {
+              _onTapProfile();
+            },
             child: AppCircleAvatar(
               style: WidgetStyle.subtle,
               size: WidgetSize.lg,
               path: Assets.mock.avatarSquared.keyName,
               badge: null,
             ),
-            onTap: () {
-              _onTapProfile();
-            },
+          ),
+          AppIconButton(
+            icon: Assets.icon.caretDownLight.keyName,
+            style: AppButtonStyle.text,
+            onPress: _onTapEditProfile,
           ),
         ],
       ),
@@ -164,7 +169,9 @@ class _ConsolePageState
   }
 
   void _onTapProfile() {
-    final profile = bloc.data!.profile!;
+    final profile = bloc.data?.profile;
+
+    if (profile == null) return;
 
     showDialog(
         context: context,
@@ -174,6 +181,14 @@ class _ConsolePageState
             description:
                 'Email: ${profile.email}\nName: ${profile.firstName} ${profile.lastName}\nRole: ${profile.role}',
           );
+        });
+  }
+
+  void _onTapEditProfile() {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return EditProfileModal();
         });
   }
 }
