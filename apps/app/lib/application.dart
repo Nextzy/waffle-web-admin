@@ -138,11 +138,9 @@ class _MyApplicationState extends ApplicationState<MyApplication>
                         AutoRouteObserver(),
                       ],
                     ),
-                    builder: (context, child) => WebZoom(
-                      child: InApplicationUpdate(
-                        packageInfo: setup.packageInfo,
-                        child: widget.builder?.call(context, child) ?? child!,
-                      ),
+                    builder: (context, child) => InApplicationUpdate(
+                      packageInfo: setup.packageInfo,
+                      child: widget.builder?.call(context, child) ?? child!,
                     ),
                   ),
                 ),

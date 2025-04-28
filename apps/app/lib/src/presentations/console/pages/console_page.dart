@@ -19,7 +19,6 @@ class ConsolePage extends AppPage implements AutoRouteWrapper {
           accessToken: '',
           email: '',
         );
-
         return ConsoleBloc()
           ..addEvent(
             ConsoleEvent.getProfile,
@@ -33,63 +32,37 @@ class ConsolePage extends AppPage implements AutoRouteWrapper {
 
 class _ConsolePageState
     extends AppPageBlocWidgetState<ConsolePage, ConsoleBloc, ConsoleEntity?> {
-  void onListenerEvent(
-    BuildContext context,
-    Object event,
-    Object? data,
-  ) {
-    switch (event) {
-      case ConsolePageEvent.showResult:
-        final resultMessage = data as String;
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(resultMessage),
-            duration: Duration(seconds: 5),
-          ),
-        );
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return buildScaffoldWithBloc(
-      listenEvent: onListenerEvent,
-      body: (context, state) {
-        if (state.isLoading) return Center(child: AppCircularLoading());
-        if (state.isFail) return AppEmpty();
+        listenEvent: null,
+        body: (context, state) {
+          if (state.isLoading) return Center(child: AppCircularLoading());
+          if (state.isFail) return AppEmpty();
 
-        return _buildBody(context);
-      },
-    );
+          return _buildBody();
+        });
   }
 
-  Widget _buildBody(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _buildAppSidebar(),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                InkWell(
-                  child: AppCircleAvatar(
-                    style: WidgetStyle.subtle,
-                    size: WidgetSize.lg,
-                    path: Assets.mock.avatarSquared.keyName,
-                    badge: null,
-                  ),
-                  onTap: () {
-                    _onTapProfile();
-                  },
-                ),
-              ],
+  Widget _buildBody() {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildAppSidebar(),
+            Expanded(
+              child: Column(
+                children: [
+                  _buildTopBar(),
+                  Expanded(child: AutoRouter()),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -99,43 +72,77 @@ class _ConsolePageState
       logo: Assets.logo.iconText.keyName,
       items: [
         AppSidebarSection(
-          icon: Assets.icon.infoRegular.keyName,
+          icon: Assets.icon.atLight.keyName,
           title: 'Analytics',
+          onPress: () {
+            push(ProfileRoute());
+          },
+        ),
+        AppSidebarSection(
+          icon: Assets.icon.bookOpenFilled.keyName,
+          title: 'Campaigns',
+          onPress: () {
+            push(SettingRoute());
+          },
+        ),
+        AppSidebarSection(
+          icon: Assets.icon.fileTextFilled.keyName,
+          title: 'Games',
           onPress: () {},
         ),
         AppSidebarSection(
-          icon: Assets.icon.infoRegular.keyName,
-          title: 'Campaigns',
-        ),
-        AppSidebarSection(
-          icon: Assets.icon.infoRegular.keyName,
-          title: 'Games',
-        ),
-        AppSidebarSection(
-          icon: Assets.icon.infoRegular.keyName,
+          icon: Assets.icon.codeLight.keyName,
           title: 'Customers',
+          onPress: () {},
         ),
         AppSidebarSection(
-          icon: Assets.icon.infoRegular.keyName,
+          icon: Assets.icon.bellFilled.keyName,
           title: 'Consent and policy',
+          onPress: () {},
         ),
         AppSidebarSection(
-          icon: Assets.icon.infoRegular.keyName,
+          icon: Assets.icon.gearFilled.keyName,
           title: 'All games',
+          onPress: () {},
         ),
         AppSidebarSection(
-          icon: Assets.icon.infoRegular.keyName,
+          icon: Assets.icon.chatTextRegular.keyName,
           title: 'Users',
+          onPress: () {},
         ),
         AppSidebarSection(
-          icon: Assets.icon.infoRegular.keyName,
+          icon: Assets.icon.calendarBlankFilled.keyName,
           title: 'Roles',
+          onPress: () {},
         ),
         AppSidebarSection(
-          icon: Assets.icon.infoRegular.keyName,
+          icon: Assets.icon.cubeLight.keyName,
           title: 'Billing',
+          onPress: () {},
         ),
       ],
+    );
+  }
+
+  Widget _buildTopBar() {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          InkWell(
+            child: AppCircleAvatar(
+              style: WidgetStyle.subtle,
+              size: WidgetSize.lg,
+              path: Assets.mock.avatarSquared.keyName,
+              badge: null,
+            ),
+            onTap: () {
+              _onTapProfile();
+            },
+          ),
+        ],
+      ),
     );
   }
 

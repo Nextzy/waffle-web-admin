@@ -22,8 +22,9 @@ class TodoView extends AppStatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey,
       appBar: AppTopBackNavigationBar(
-        title: 'รอดำเนินการจัดทำ',
+        title: todo,
       ),
       body: Center(
         child: Column(

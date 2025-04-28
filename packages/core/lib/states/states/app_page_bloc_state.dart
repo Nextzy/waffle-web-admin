@@ -57,7 +57,7 @@ abstract class AppPageBlocWidgetState<
       listenState: listenState,
       buildWhen: buildWhen,
       builder: (context, state) => GestureDetector(
-        onTap: clearFocus,
+        // onTap: clearFocus, //TODO: cause bug
         child: buildPopScope(
           state: state,
           canPop: canPop,
