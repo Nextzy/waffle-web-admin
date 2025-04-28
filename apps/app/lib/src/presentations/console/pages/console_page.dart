@@ -32,10 +32,27 @@ class ConsolePage extends AppPage implements AutoRouteWrapper {
 
 class _ConsolePageState
     extends AppPageBlocWidgetState<ConsolePage, ConsoleBloc, ConsoleEntity?> {
+  void onListenerEvent(
+    BuildContext context,
+    Object event,
+    Object? data,
+  ) {
+    switch (event) {
+      case ConsolePageEvent.showResult:
+        final resultMessage = data as String;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(resultMessage),
+            duration: Duration(seconds: 5),
+          ),
+        );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return buildScaffoldWithBloc(
-        listenEvent: null,
+        listenEvent: onListenerEvent,
         body: (context, state) {
           if (state.isLoading) return Center(child: AppCircularLoading());
           if (state.isFail) return AppEmpty();
