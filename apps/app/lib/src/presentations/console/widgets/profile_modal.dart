@@ -92,6 +92,8 @@ class ProfileContent extends StatelessWidget {
                     AppText(
                       firstName,
                       style: AppTextStyleBuilder.header.build(context),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ],
                 ),
@@ -108,6 +110,8 @@ class ProfileContent extends StatelessWidget {
                     AppText(
                       lastName,
                       style: AppTextStyleBuilder.header.build(context),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ],
                 ),
@@ -129,6 +133,8 @@ class ProfileContent extends StatelessWidget {
                     AppText(
                       email,
                       style: AppTextStyleBuilder.header.build(context),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ],
                 ),
@@ -145,6 +151,8 @@ class ProfileContent extends StatelessWidget {
                     AppText(
                       phone,
                       style: AppTextStyleBuilder.header.build(context),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ],
                 ),

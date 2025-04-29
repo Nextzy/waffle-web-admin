@@ -152,7 +152,7 @@ class _ConsolePageState
             child: AppCircleAvatar(
               style: WidgetStyle.subtle,
               size: WidgetSize.lg,
-              path: Assets.mock.avatarSquared.keyName,
+              path: bloc.data?.profile?.photoUrl ?? '',
               badge: null,
             ),
           ),
