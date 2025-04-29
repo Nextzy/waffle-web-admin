@@ -3,6 +3,8 @@ import 'package:change_application_name/application.dart';
 enum ConsoleEvent {
   initial,
   getProfile,
+  updateProfile,
+  changePassword,
 }
 
 class ConsoleBloc extends AppBloc<ConsoleEvent, ConsoleEntity> {
@@ -26,6 +28,30 @@ class ConsoleBloc extends AppBloc<ConsoleEvent, ConsoleEntity> {
         return _getProfile(
           accessToken: data.accessToken,
           email: data.email,
+        );
+      case ConsoleEvent.updateProfile:
+        final data = event.data as ({
+          String firstName,
+          String lastName,
+          String email,
+          String phone,
+        });
+
+        _updateProfile(
+          firstName: data.firstName,
+          lastName: data.lastName,
+          email: data.email,
+          phone: data.phone,
+        );
+      case ConsoleEvent.changePassword:
+        final data = event.data as ({
+          String oldPassword,
+          String newPassword,
+        });
+
+        _changePassword(
+          oldPassword: data.oldPassword,
+          newPassword: data.newPassword,
         );
     }
   }
@@ -53,6 +79,22 @@ class ConsoleBloc extends AppBloc<ConsoleEvent, ConsoleEntity> {
 
       emitSuccess(console);
     }
+  }
+
+  Future<void> _updateProfile({
+    required String firstName,
+    required String lastName,
+    required String email,
+    required String phone,
+  }) async {
+    print('update profile: $firstName $lastName $email $phone');
+  }
+
+  Future<void> _changePassword({
+    required String oldPassword,
+    required String newPassword,
+  }) async {
+    print('change password: $oldPassword $newPassword');
   }
 
   void _showResult(JsonRpcResponse jsonRpcResponse) {

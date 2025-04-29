@@ -3,7 +3,7 @@ import 'package:data/lib.dart';
 class AdminRpcService extends RpcService {
   const AdminRpcService(
     super.dio, {
-    this.path = '/admin',
+    this.path = '/users',
     // super.baseUrl = 'https://waffle.nextzy.com/v1',
     super.baseUrl = 'https://mock.apidog.com/m1/890771-872568-default/v1',
   });

@@ -1,9 +1,30 @@
 import 'package:change_application_name/application.dart';
 
 class EditProfileModal extends StatelessWidget {
-  const EditProfileModal({
+  EditProfileModal({
     super.key,
+    required this.onTapUpdateProfile,
+    required this.onTapChangePassword,
   });
+
+  final Function(
+    String firstName,
+    String lastName,
+    String email,
+    String phone,
+  ) onTapUpdateProfile;
+
+  final Function(
+    String oldPassword,
+    String newPassword,
+  ) onTapChangePassword;
+
+  final firstNameController = TextEditingController();
+  final lastNameController = TextEditingController();
+  final emailController = TextEditingController();
+  final phoneController = TextEditingController();
+  final oldPasswordController = TextEditingController();
+  final newPasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -41,10 +62,12 @@ class EditProfileModal extends StatelessWidget {
                       children: [
                         AppTextField(
                           label: 'First Name',
+                          controller: firstNameController,
                         ),
                         Space.gap20,
                         AppTextField(
                           label: 'Email',
+                          controller: emailController,
                         ),
                       ],
                     ),
@@ -55,10 +78,12 @@ class EditProfileModal extends StatelessWidget {
                       children: [
                         AppTextField(
                           label: 'Last Name',
+                          controller: lastNameController,
                         ),
                         Space.gap20,
                         AppTextField(
                           label: 'Phone',
+                          controller: phoneController,
                         ),
                       ],
                     ),
@@ -69,9 +94,17 @@ class EditProfileModal extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                AppButton(text: 'Cancel'),
-                Space.gap32,
-                AppButton(text: 'Save'),
+                // AppButton(text: 'Cancel'),
+                // Space.gap32,
+                AppButton(
+                  text: 'Save',
+                  onPress: () => onTapUpdateProfile(
+                    firstNameController.text,
+                    lastNameController.text,
+                    emailController.text,
+                    phoneController.text,
+                  ),
+                ),
               ],
             ),
             Space.gap32,
@@ -82,7 +115,7 @@ class EditProfileModal extends StatelessWidget {
             ),
             Space.gap32,
             AppText(
-              'Reset Password',
+              'Change Password',
               textAlign: TextAlign.start,
               style:
                   AppTextStyleBuilder.ui.s14.colorPrimary.bold.build(context),
@@ -94,16 +127,24 @@ class EditProfileModal extends StatelessWidget {
                 Expanded(
                   child: AppTextField(
                     label: 'Old Password',
+                    controller: oldPasswordController,
                   ),
                 ),
                 Space.gap20,
                 Expanded(
                   child: AppTextField(
                     label: 'New Password',
+                    controller: newPasswordController,
                   ),
                 ),
                 Space.gap20,
-                AppButton(text: 'Change Password'),
+                AppButton(
+                  text: 'Change Password',
+                  onPress: () => onTapChangePassword(
+                    oldPasswordController.text,
+                    newPasswordController.text,
+                  ),
+                ),
               ],
             )
           ],

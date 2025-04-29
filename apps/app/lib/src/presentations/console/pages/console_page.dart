@@ -148,9 +148,7 @@ class _ConsolePageState
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           InkWell(
-            onTap: () {
-              _onTapProfile();
-            },
+            onTap: _onTapProfile,
             child: AppCircleAvatar(
               style: WidgetStyle.subtle,
               size: WidgetSize.lg,
@@ -188,7 +186,32 @@ class _ConsolePageState
     showDialog(
         context: context,
         builder: (context) {
-          return EditProfileModal();
+          return EditProfileModal(
+            onTapUpdateProfile: (firstName, lastName, email, phone) {
+              final data = (
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                phone: phone,
+              );
+
+              bloc.addEvent(
+                ConsoleEvent.updateProfile,
+                data: data,
+              );
+            },
+            onTapChangePassword: (oldPassword, newPassword) {
+              final data = (
+                oldPassword: oldPassword,
+                newPassword: newPassword,
+              );
+
+              bloc.addEvent(
+                ConsoleEvent.changePassword,
+                data: data,
+              );
+            },
+          );
         });
   }
 }
