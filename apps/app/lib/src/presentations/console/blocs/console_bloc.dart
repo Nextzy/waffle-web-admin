@@ -4,15 +4,21 @@ enum ConsoleEvent {
   initial,
   getProfile,
   updateProfile,
-  changePassword,
+  resetPassword,
 }
 
 class ConsoleBloc extends AppBloc<ConsoleEvent, ConsoleEntity> {
   ConsoleBloc({
     GetProfileUsecase? getProfileUsecase,
-  }) : _getProfileUsecase = getProfileUsecase ?? GetProfileUsecase();
+    UpdateProfileUsecase? updateProfileUsecase,
+    ResetPasswordUsecase? resetPasswordUsecase,
+  })  : _getProfileUsecase = getProfileUsecase ?? GetProfileUsecase(),
+        _updateProfileUsecase = updateProfileUsecase ?? UpdateProfileUsecase(),
+        _resetPasswordUsecase = resetPasswordUsecase ?? ResetPasswordUsecase();
 
   final GetProfileUsecase _getProfileUsecase;
+  final UpdateProfileUsecase _updateProfileUsecase;
+  final ResetPasswordUsecase _resetPasswordUsecase;
 
   @override
   Future<void> onBlocEvent(BlocEvent<ConsoleEvent> event) async {
@@ -37,19 +43,21 @@ class ConsoleBloc extends AppBloc<ConsoleEvent, ConsoleEntity> {
           String phone,
         });
 
-        _updateProfile(
+        return _updateProfile(
           firstName: data.firstName,
           lastName: data.lastName,
           email: data.email,
           phone: data.phone,
         );
-      case ConsoleEvent.changePassword:
+      case ConsoleEvent.resetPassword:
         final data = event.data as ({
+          String email,
           String oldPassword,
           String newPassword,
         });
 
-        _changePassword(
+        return _resetPassword(
+          email: data.email,
           oldPassword: data.oldPassword,
           newPassword: data.newPassword,
         );
@@ -88,21 +96,41 @@ class ConsoleBloc extends AppBloc<ConsoleEvent, ConsoleEntity> {
     required String phone,
   }) async {
     print('update profile: $firstName $lastName $email $phone');
+
+    var jsonRpcResponse = await _updateProfileUsecase(
+      email: email,
+      firstName: firstName,
+      lastName: lastName,
+      phone: phone,
+    );
+
+    _showResult(jsonRpcResponse);
   }
 
-  Future<void> _changePassword({
+  Future<void> _resetPassword({
+    required String email,
     required String oldPassword,
     required String newPassword,
   }) async {
-    print('change password: $oldPassword $newPassword');
+    print('reset password: $oldPassword $newPassword');
+
+    var jsonRpcResponse = await _resetPasswordUsecase(
+      email: email,
+      oldPassword: oldPassword,
+      newPassword: newPassword,
+    );
+
+    _showResult(jsonRpcResponse);
   }
 
   void _showResult(JsonRpcResponse jsonRpcResponse) {
-    print('jsonRpcResponse: ${jsonRpcResponse}');
+    print('jsonRpcResponse: $jsonRpcResponse');
 
     final resultMessage = jsonRpcResponse.hasResult
         ? jsonRpcResponse.result.toString()
         : jsonRpcResponse.error?.userMessage ?? 'error';
+
+    print('result msg: $resultMessage');
 
     emitEvent(
       ConsolePageEvent.showResult,

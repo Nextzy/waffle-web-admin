@@ -4,19 +4,15 @@ class AppRepository {
   AppRepository({
     AuthenticationRemoteDatasources? authRemoteDatasource,
     AdminRemoteDatasources? adminRemoteDatasource,
-    MovieRemoteDatasources? movieRemoteDatasource,
     DatabaseLocalDataSources? localDatasource,
   })  : _authRemoteDatasource =
             authRemoteDatasource ?? AuthenticationRemoteDatasources(),
         _adminRemoteDatasource =
             adminRemoteDatasource ?? AdminRemoteDatasources(),
-        _movieRemoteDatasource =
-            movieRemoteDatasource ?? MovieRemoteDatasources(),
         _localDatasource = localDatasource ?? DatabaseLocalDataSources();
 
   final AuthenticationRemoteDatasources _authRemoteDatasource;
   final AdminRemoteDatasources _adminRemoteDatasource;
-  final MovieRemoteDatasources _movieRemoteDatasource;
   final DatabaseLocalDataSources _localDatasource;
 
   Future<JsonRpcResponse<RemoteAuthenticationResponse, ErrorResponse>>
@@ -38,37 +34,31 @@ class AppRepository {
     );
   }
 
-  Stream<Either<AppException, List<MovieTableData>>> getMovieList() =>
-      DatasourceBoundState.asStream<
-          ({
-            RemoteMovieListResponse hightLightMovieList,
-            RemoteMovieListResponse trendMovieList,
-            RemoteMovieListResponse mustWatchMovieList
-          }),
-          List<MovieTableData>>(
-        loadFromDbFuture: () => _localDatasource.loadMovieList(),
-        createCallFuture: () => _movieRemoteDatasource.getMovieList(),
-        saveCallResult: (response) => _localDatasource.saveMovieList([
-          ...?response.hightLightMovieList.data,
-          ...?response.trendMovieList.data,
-          ...?response.mustWatchMovieList.data,
-        ].map(
-          (e) => MovieTableData(
-            id: e.id!,
-            name: e.name!,
-          ),
-        )),
-        processResponse: (response) => [
-          ...?response.hightLightMovieList.data,
-          ...?response.trendMovieList.data,
-          ...?response.mustWatchMovieList.data,
-        ]
-            .map(
-              (e) => MovieTableData(
-                id: e.id!,
-                name: e.name!,
-              ),
-            )
-            .toList(),
-      ).mapAppException();
+  Future<JsonRpcResponse<RemoteGetProfileResponse, ErrorResponse>>
+      updateProfile({
+    required String email,
+    required String firstName,
+    required String lastName,
+    required String phone,
+  }) {
+    return _adminRemoteDatasource.updateProfile(
+      email: email,
+      firstName: firstName,
+      lastName: lastName,
+      phone: phone,
+    );
+  }
+
+  Future<JsonRpcResponse<RemoteGetProfileResponse, ErrorResponse>>
+      resetPassword({
+    required String email,
+    required String oldPassword,
+    required String newPassword,
+  }) {
+    return _adminRemoteDatasource.resetPassword(
+      email: email,
+      oldPassword: oldPassword,
+      newPassword: newPassword,
+    );
+  }
 }

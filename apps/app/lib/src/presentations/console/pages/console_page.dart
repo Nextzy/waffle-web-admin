@@ -204,12 +204,13 @@ class _ConsolePageState
             },
             onTapChangePassword: (oldPassword, newPassword) {
               final data = (
+                email: '',
                 oldPassword: oldPassword,
                 newPassword: newPassword,
               );
 
               bloc.addEvent(
-                ConsoleEvent.changePassword,
+                ConsoleEvent.resetPassword,
                 data: data,
               );
             },

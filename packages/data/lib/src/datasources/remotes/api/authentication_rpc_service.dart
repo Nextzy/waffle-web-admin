@@ -55,21 +55,6 @@ class AuthenticationRpcService extends RpcService {
             extra: {'requiredAuth': true},
           );
 
-  // Future<JsonRpcResponse<RemoteGetProfileResponse, ErrorResponse>> getProfile({
-  //   required String email,
-  //   String? requestId,
-  // }) =>
-  //     request(
-  //       path,
-  //       method: 'getProfile',
-  //       id: requestId,
-  //       params: RemoteGetProfileBody(
-  //         email: email,
-  //       ).toJson(),
-  //       fromJson: RemoteGetProfileResponse.fromJson,
-  //       extra: {'requiredAuth': true},
-  //     );
-
   Future<JsonRpcResponse<RemoteGetProfileResponse, ErrorResponse>>
       getSocialProfile({
     required String accessToken,

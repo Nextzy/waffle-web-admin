@@ -115,7 +115,7 @@ class EditProfileModal extends StatelessWidget {
             ),
             Space.gap32,
             AppText(
-              'Change Password',
+              'Reset Password',
               textAlign: TextAlign.start,
               style:
                   AppTextStyleBuilder.ui.s14.colorPrimary.bold.build(context),
