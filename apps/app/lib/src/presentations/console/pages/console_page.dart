@@ -174,10 +174,12 @@ class _ConsolePageState
     showDialog(
         context: context,
         builder: (context) {
-          return AppModal(
-            title: 'Profile',
-            description:
-                'Email: ${profile.email}\nName: ${profile.firstName} ${profile.lastName}\nRole: ${profile.role}',
+          return ProfileModal(
+            firstName: profile.firstName.toString(),
+            lastName: profile.lastName.toString(),
+            email: profile.email.toString(),
+            phone: profile.phone.toString(),
+            photoUrl: profile.photoUrl,
           );
         });
   }
