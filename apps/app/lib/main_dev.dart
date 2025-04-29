@@ -20,7 +20,7 @@ Future<void> setupMainDev() async {
 
   Bloc.observer = TalkerBlocObserver(
     settings: TalkerBlocLoggerSettings(
-      enabled: true,
+      enabled: false,
       printEventFullData: true,
       printStateFullData: true,
       printChanges: true,
@@ -35,7 +35,6 @@ Future<void> setupMainDev() async {
   AppLocalDatabase.initDatabase();
   // AppHttpClient.instance.setupProxyAdapter(
   //     '<YOUR_IP>', '9090'); // Port: 9090 is default port for Proxyman
-
 }
 
 Future<void> setupFirebaseDev() async {
@@ -51,7 +50,6 @@ Future<void> setupFirebaseDev() async {
 }
 
 Future<void> runApplication() async {
-
   // NewRelicHandler.instance.start(
   //   androidToken: F.newrelicAndroidToken,
   //   iosToken: F.newrelicIosToken,

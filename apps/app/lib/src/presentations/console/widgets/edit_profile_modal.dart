@@ -1,11 +1,22 @@
 import 'package:change_application_name/application.dart';
 
-class EditProfileModal extends StatelessWidget {
-  EditProfileModal({
+class EditProfileModal extends StatefulWidget {
+  const EditProfileModal({
     super.key,
+    required this.firstName,
+    required this.lastName,
+    required this.email,
+    required this.phone,
+    this.photoUrl,
     required this.onTapUpdateProfile,
     required this.onTapChangePassword,
   });
+
+  final String firstName;
+  final String lastName;
+  final String email;
+  final String phone;
+  final String? photoUrl;
 
   final Function(
     String firstName,
@@ -19,12 +30,27 @@ class EditProfileModal extends StatelessWidget {
     String newPassword,
   ) onTapChangePassword;
 
+  @override
+  State<EditProfileModal> createState() => _EditProfileModalState();
+}
+
+class _EditProfileModalState extends State<EditProfileModal> {
   final firstNameController = TextEditingController();
   final lastNameController = TextEditingController();
   final emailController = TextEditingController();
   final phoneController = TextEditingController();
   final oldPasswordController = TextEditingController();
   final newPasswordController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    firstNameController.text = widget.firstName;
+    lastNameController.text = widget.lastName;
+    emailController.text = widget.email;
+    phoneController.text = widget.phone;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +80,7 @@ class EditProfileModal extends StatelessWidget {
                   AppImage(
                     width: 100,
                     height: 100,
-                    path: null,
+                    path: widget.photoUrl,
                   ),
                   Space.gap32,
                   Expanded(
@@ -98,7 +124,7 @@ class EditProfileModal extends StatelessWidget {
                 // Space.gap32,
                 AppButton(
                   text: 'Save',
-                  onPress: () => onTapUpdateProfile(
+                  onPress: () => widget.onTapUpdateProfile(
                     firstNameController.text,
                     lastNameController.text,
                     emailController.text,
@@ -140,7 +166,7 @@ class EditProfileModal extends StatelessWidget {
                 Space.gap20,
                 AppButton(
                   text: 'Change Password',
-                  onPress: () => onTapChangePassword(
+                  onPress: () => widget.onTapChangePassword(
                     oldPasswordController.text,
                     newPasswordController.text,
                   ),

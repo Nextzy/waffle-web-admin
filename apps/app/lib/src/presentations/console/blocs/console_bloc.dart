@@ -104,7 +104,9 @@ class ConsoleBloc extends AppBloc<ConsoleEvent, ConsoleEntity> {
       phone: phone,
     );
 
-    _showResult(jsonRpcResponse);
+    //_showResult(jsonRpcResponse);
+
+    emitEvent(ConsolePageEvent.updateProfileSuccess);
   }
 
   Future<void> _resetPassword({
@@ -120,7 +122,9 @@ class ConsoleBloc extends AppBloc<ConsoleEvent, ConsoleEntity> {
       newPassword: newPassword,
     );
 
-    _showResult(jsonRpcResponse);
+    //_showResult(jsonRpcResponse);
+
+    emitEvent(ConsolePageEvent.resetPasswordSuccess);
   }
 
   void _showResult(JsonRpcResponse jsonRpcResponse) {

@@ -2,6 +2,8 @@ import 'package:change_application_name/application.dart';
 
 enum ConsolePageEvent {
   showResult,
+  updateProfileSuccess,
+  resetPasswordSuccess,
 }
 
 @RoutePage()
@@ -14,17 +16,7 @@ class ConsolePage extends AppPage implements AutoRouteWrapper {
   @override
   Widget wrappedRoute(BuildContext context) {
     return BlocProvider(
-      create: (context) {
-        final data = (
-          accessToken: '',
-          email: '',
-        );
-        return ConsoleBloc()
-          ..addEvent(
-            ConsoleEvent.getProfile,
-            data: data,
-          );
-      },
+      create: (context) => ConsoleBloc(),
       child: this,
     );
   }
@@ -37,6 +29,7 @@ class _ConsolePageState
     Object event,
     Object? data,
   ) {
+    print('event: $event');
     switch (event) {
       case ConsolePageEvent.showResult:
         final resultMessage = data as String;
@@ -46,7 +39,20 @@ class _ConsolePageState
             duration: Duration(seconds: 5),
           ),
         );
+      case ConsolePageEvent.updateProfileSuccess:
+        print('updateProfileSuccess');
+
+        _getProfile();
+      case ConsolePageEvent.resetPasswordSuccess:
+        print('resetPasswordSuccess');
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    _getProfile();
   }
 
   @override
@@ -168,7 +174,6 @@ class _ConsolePageState
 
   void _onTapProfile() {
     final profile = bloc.data?.profile;
-
     if (profile == null) return;
 
     showDialog(
@@ -185,36 +190,78 @@ class _ConsolePageState
   }
 
   void _onTapEditProfile() {
+    final profile = bloc.data?.profile;
+    if (profile == null) return;
+
     showDialog(
         context: context,
         builder: (context) {
           return EditProfileModal(
+            firstName: profile.firstName.toString(),
+            lastName: profile.lastName.toString(),
+            email: profile.email.toString(),
+            phone: profile.phone.toString(),
+            photoUrl: profile.photoUrl,
             onTapUpdateProfile: (firstName, lastName, email, phone) {
-              final data = (
+              pop();
+
+              _updateProfile(
                 firstName: firstName,
                 lastName: lastName,
                 email: email,
                 phone: phone,
               );
-
-              bloc.addEvent(
-                ConsoleEvent.updateProfile,
-                data: data,
-              );
             },
             onTapChangePassword: (oldPassword, newPassword) {
-              final data = (
-                email: '',
+              pop();
+
+              _resetPassword(
                 oldPassword: oldPassword,
                 newPassword: newPassword,
-              );
-
-              bloc.addEvent(
-                ConsoleEvent.resetPassword,
-                data: data,
               );
             },
           );
         });
+  }
+
+  void _getProfile() {
+    bloc.addEvent(
+      ConsoleEvent.getProfile,
+      data: (
+        accessToken: '',
+        email: '',
+      ),
+    );
+  }
+
+  void _updateProfile({
+    required String firstName,
+    required String lastName,
+    required String email,
+    required String phone,
+  }) {
+    bloc.addEvent(
+      ConsoleEvent.updateProfile,
+      data: (
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        phone: phone,
+      ),
+    );
+  }
+
+  void _resetPassword({
+    required String oldPassword,
+    required String newPassword,
+  }) {
+    bloc.addEvent(
+      ConsoleEvent.resetPassword,
+      data: (
+        email: '',
+        oldPassword: oldPassword,
+        newPassword: newPassword,
+      ),
+    );
   }
 }
