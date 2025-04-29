@@ -36,7 +36,6 @@ class ProfileModal extends StatelessWidget {
               child: AppImage(
                 width: 60,
                 height: 60,
-                fit: BoxFit.fill,
                 path: photoUrl,
               ),
             ),

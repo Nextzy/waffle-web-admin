@@ -92,14 +92,14 @@ class _ConsolePageState
           icon: Assets.icon.atLight.keyName,
           title: 'Analytics',
           onPress: () {
-            push(ProfileRoute());
+            push(SettingRoute());
           },
         ),
         AppSidebarSection(
           icon: Assets.icon.bookOpenFilled.keyName,
           title: 'Campaigns',
           onPress: () {
-            push(SettingRoute());
+            push(ProfileRoute());
           },
         ),
         AppSidebarSection(
