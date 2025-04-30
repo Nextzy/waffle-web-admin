@@ -7,4 +7,9 @@ class AdminRemoteDatasources {
             adminService ?? AdminRpcService(AppHttpClient.instance.dio);
 
   final AdminRpcService _adminService;
+
+  Future<JsonRpcResponse<RemoteGetAllRolesResponse, ErrorResponse>>
+      getAllRoles() async {
+    return _adminService.getAllRoles();
+  }
 }

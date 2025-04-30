@@ -1,4 +1,5 @@
 import 'package:change_application_name/application.dart';
+import 'package:change_application_name/src/domain/roles/entities/roles_entity.dart';
 
 enum RolesPageEvent {
   showResult,
@@ -21,7 +22,7 @@ class RolesPage extends AppPage implements AutoRouteWrapper {
 }
 
 class _RolesPageState
-    extends AppPageBlocWidgetState<RolesPage, RolesBloc, dynamic> {
+    extends AppPageBlocWidgetState<RolesPage, RolesBloc, RolesEntity?> {
   void onListenerEvent(
     BuildContext context,
     Object event,
@@ -40,6 +41,13 @@ class _RolesPageState
   }
 
   @override
+  void initState() {
+    super.initState();
+
+    _getAllRoles();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return buildScaffoldWithBloc(
       listenEvent: onListenerEvent,
@@ -54,6 +62,7 @@ class _RolesPageState
 
   Widget _buildBody() {
     final items = List.generate(20, (index) => 'Item $index');
+    print('mydebug ${bloc.data?.roles}');
 
     return Container(
       color: Colors.white,
@@ -74,10 +83,18 @@ class _RolesPageState
             ],
           ),
           Expanded(
-            child: Content(items: items),
+            child: Content(
+              roles: bloc.data?.roles ?? [],
+            ),
           ),
         ],
       ),
+    );
+  }
+
+  void _getAllRoles() {
+    bloc.addEvent(
+      RolesEvent.getAllRoles,
     );
   }
 }
@@ -85,10 +102,10 @@ class _RolesPageState
 class Content extends StatelessWidget {
   const Content({
     super.key,
-    required this.items,
+    required this.roles,
   });
 
-  final List<String> items;
+  final List<RoleEntity> roles;
 
   @override
   Widget build(BuildContext context) {
@@ -117,7 +134,7 @@ class Content extends StatelessWidget {
           AppDivider(color: Colors.black),
           Expanded(
             child: ListView.builder(
-                itemCount: items.length,
+                itemCount: roles.length,
                 itemBuilder: (_, index) {
                   return ListTile(
                     // leading: SizedBox(
@@ -125,12 +142,8 @@ class Content extends StatelessWidget {
                     //   child: AppCheckbox(label: ''),
                     // ),
                     title: AppText(
-                      items[index],
-                      style: TextStyle(
-                        color: context.theme.color.textSecondary,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                      ),
+                      roles[index].name,
+                      style: AppTextStyleBuilder.header4.build(context),
                     ),
                     // trailing: AppIconButton(
                     //   icon: Assets.icon.dotsThreeLight.keyName,

@@ -10,12 +10,12 @@ class AdminRpcService extends RpcService {
 
   final String path;
 
-  Future<JsonRpcResponse<RemoteGetProfileResponse, ErrorResponse>> getAllRoles({
-    required String email,
+  Future<JsonRpcResponse<RemoteGetAllRolesResponse, ErrorResponse>>
+      getAllRoles({
     String? requestId,
   }) async {
     final successMockQueryParams = {
-      'apidogApiId': '16183500',
+      'apidogApiId': '16373268',
     };
     final failMockQueryParams = {
       'apidogApiId': '15405460',
@@ -26,10 +26,7 @@ class AdminRpcService extends RpcService {
       path,
       method: 'getAllRoles',
       id: requestId,
-      params: RemoteGetProfileBody(
-        email: email,
-      ).toJson(),
-      fromJson: RemoteGetProfileResponse.fromJson,
+      fromJson: RemoteGetAllRolesResponse.fromJson,
       extra: {'requiredAuth': true},
       queryParameters: successMockQueryParams,
     );

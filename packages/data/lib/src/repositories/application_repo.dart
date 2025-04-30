@@ -64,4 +64,9 @@ class AppRepository {
       newPassword: newPassword,
     );
   }
+
+  Future<JsonRpcResponse<RemoteGetAllRolesResponse, ErrorResponse>>
+      getAllRoles() {
+    return _adminRemoteDatasource.getAllRoles();
+  }
 }

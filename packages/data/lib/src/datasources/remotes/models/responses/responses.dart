@@ -6,3 +6,4 @@ export 'echo_response.dart';
 export 'request_otp_response.dart';
 export 'verify_otp_response.dart';
 export 'get_profile_response.dart';
+export 'get_all_roles_response.dart';
