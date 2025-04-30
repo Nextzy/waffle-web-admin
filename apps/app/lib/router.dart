@@ -26,8 +26,9 @@ class AppRouter extends RootStackRouter {
           page: ConsoleRoute.page,
           children: [
             // RedirectRoute(path: '', redirectTo: 'analytics'),
-            AppRoute(path: 'analytics', page: ProfileRoute.page, initial: true),
+            AppRoute(path: 'analytics', page: ProfileRoute.page),
             AppRoute(path: 'campaigns', page: SettingRoute.page),
+            AppRoute(path: 'roles', page: RolesRoute.page, initial: true),
           ],
         ),
         AppRoute(

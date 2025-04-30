@@ -68,9 +68,9 @@ class _ConsolePageState
   }
 
   Widget _buildBody() {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Padding(
+    return Container(
+      color: Colors.white,
+      child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -136,7 +136,9 @@ class _ConsolePageState
         AppSidebarSection(
           icon: Assets.icon.calendarBlankFilled.keyName,
           title: 'Roles',
-          onPress: () {},
+          onPress: () {
+            push(RolesRoute());
+          },
         ),
         AppSidebarSection(
           icon: Assets.icon.cubeLight.keyName,

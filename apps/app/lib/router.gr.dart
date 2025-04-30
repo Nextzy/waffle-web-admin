@@ -91,6 +91,22 @@ class ProfileRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [RolesPage]
+class RolesRoute extends PageRouteInfo<void> {
+  const RolesRoute({List<PageRouteInfo>? children})
+    : super(RolesRoute.name, initialChildren: children);
+
+  static const String name = 'RolesRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return WrappedRoute(child: const RolesPage());
+    },
+  );
+}
+
+/// generated route for
 /// [ScanPage]
 class ScanRoute extends PageRouteInfo<void> {
   const ScanRoute({List<PageRouteInfo>? children})

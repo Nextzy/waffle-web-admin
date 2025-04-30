@@ -88,7 +88,7 @@ class _AuthenticationPageState extends AppPageBlocWidgetState<
               onPress: _onTapSignIn,
             ),
             Gap(50),
-            AppText('v 1.0.3'),
+            AppText('v1.0.3'),
           ],
         ),
       ),
