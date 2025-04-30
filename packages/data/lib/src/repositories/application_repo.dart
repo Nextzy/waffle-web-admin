@@ -4,15 +4,18 @@ class AppRepository {
   AppRepository({
     AuthenticationRemoteDatasources? authRemoteDatasource,
     AdminRemoteDatasources? adminRemoteDatasource,
+    UserRemoteDatasources? userRemoteDatasource,
     DatabaseLocalDataSources? localDatasource,
   })  : _authRemoteDatasource =
             authRemoteDatasource ?? AuthenticationRemoteDatasources(),
         _adminRemoteDatasource =
             adminRemoteDatasource ?? AdminRemoteDatasources(),
+        _userRemoteDatasource = userRemoteDatasource ?? UserRemoteDatasources(),
         _localDatasource = localDatasource ?? DatabaseLocalDataSources();
 
   final AuthenticationRemoteDatasources _authRemoteDatasource;
   final AdminRemoteDatasources _adminRemoteDatasource;
+  final UserRemoteDatasources _userRemoteDatasource;
   final DatabaseLocalDataSources _localDatasource;
 
   Future<JsonRpcResponse<RemoteAuthenticationResponse, ErrorResponse>>
@@ -29,7 +32,7 @@ class AppRepository {
   Future<JsonRpcResponse<RemoteGetProfileResponse, ErrorResponse>> getProfile({
     required String email,
   }) {
-    return _adminRemoteDatasource.getProfile(
+    return _userRemoteDatasource.getProfile(
       email: email,
     );
   }
@@ -41,7 +44,7 @@ class AppRepository {
     required String lastName,
     required String phone,
   }) {
-    return _adminRemoteDatasource.updateProfile(
+    return _userRemoteDatasource.updateProfile(
       email: email,
       firstName: firstName,
       lastName: lastName,
@@ -55,7 +58,7 @@ class AppRepository {
     required String oldPassword,
     required String newPassword,
   }) {
-    return _adminRemoteDatasource.resetPassword(
+    return _userRemoteDatasource.resetPassword(
       email: email,
       oldPassword: oldPassword,
       newPassword: newPassword,

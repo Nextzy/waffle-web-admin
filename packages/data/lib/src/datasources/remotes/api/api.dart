@@ -4,6 +4,7 @@ export 'authentication_api_service.dart';
 export 'movie_api_service.dart';
 export 'authentication_rpc_service.dart';
 export 'admin_rpc_service.dart';
+export 'user_rpc_service.dart';
 export 'movie_rpc_service.dart';
 export 'base/rpc_service.dart';
 
