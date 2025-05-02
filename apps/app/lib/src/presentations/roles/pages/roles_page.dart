@@ -65,7 +65,7 @@ class _RolesPageState
     print('mydebug ${bloc.data?.roles}');
 
     return Container(
-      color: Colors.white,
+      color: context.theme.color.bg,
       padding: EdgeInsets.all(20),
       child: Column(
         children: [
@@ -77,6 +77,7 @@ class _RolesPageState
                 style: AppTextStyleBuilder.header3.bold.build(context),
               ),
               AppButton(
+                identifier: 'create-role-button',
                 startIcon: Assets.icon.plusRegular.keyName,
                 text: 'Create Role',
               ),

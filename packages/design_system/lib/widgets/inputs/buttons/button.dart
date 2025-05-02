@@ -32,6 +32,7 @@ class AppButton extends AppStatefulWidget {
     this.onLongPress,
     this.onHover,
     this.onFocusChange,
+    this.identifier,
   });
 
   final String text;
@@ -49,6 +50,7 @@ class AppButton extends AppStatefulWidget {
   final bool expanded;
   final bool loading;
   final bool disabled;
+  final String? identifier;
 
   ///============= CALLBACK METHOD =============///
   final VoidCallback? onPress;
@@ -211,95 +213,100 @@ class _AppButtonState extends AppState<AppButton> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureRowLayout(
-      key: key,
-      minWidth: 70.0,
-      width: widget.width,
-      height: widget.height,
-      border: border,
-      borderRadius: widget.borderRadius ?? borderRadius,
-      opacity: widget.disabled ? 0.5 : null,
-      backgroundColor: backgroundColor,
-      clipBehavior: Clip.antiAliasWithSaveLayer,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      mainAxisSize: widget.expanded ? MainAxisSize.max : MainAxisSize.min,
-      crossAxisIntrinsic: true,
-      disabled: widget.loading || widget.disabled,
-      mouseCursor: SystemMouseCursors.click,
-      onPress: widget.onPress,
-      onLongPress: widget.onLongPress,
-      onHover: widget.onHover,
-      onFocusChange: widget.onFocusChange,
-      tapFocus: false,
-      children: [
-        if (widget.startChild != null) widget.startChild!,
-        if (widget.startChild != null)
-          VerticalDivider(
-            width: theme.border.md.maxWidth,
-            indent: dividerIntent,
-            endIndent: dividerIntent,
-            thickness: theme.border.md.maxWidth,
-            color: dividerColor,
-          ),
-        Stack(
-          children: [
-            Opacity(
-              opacity: widget.loading ? 0.0 : 1.0,
-              child: RowLayout(
-                padding: padding,
-                gap: gap,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  if (widget.startIcon != null)
-                    widget.startIcon.toSvgIcon(
-                      size: iconSize,
-                      colorFilter: ColorFilter.mode(iconColor, BlendMode.srcIn),
-                    ),
-                  Padding(
-                    padding: paddingText,
-                    child: AppText(
-                      widget.text,
-                      style: _getTextStyle(
-                        context,
-                        style: widget.style,
-                        size: widgetSize,
-                        color: widget.color,
+    return Semantics(
+      identifier: widget.identifier,
+      child: GestureRowLayout(
+        key: key,
+        minWidth: 70.0,
+        width: widget.width,
+        height: widget.height,
+        border: border,
+        borderRadius: widget.borderRadius ?? borderRadius,
+        opacity: widget.disabled ? 0.5 : null,
+        backgroundColor: backgroundColor,
+        clipBehavior: Clip.antiAliasWithSaveLayer,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: widget.expanded ? MainAxisSize.max : MainAxisSize.min,
+        crossAxisIntrinsic: true,
+        disabled: widget.loading || widget.disabled,
+        mouseCursor: SystemMouseCursors.click,
+        onPress: widget.onPress,
+        onLongPress: widget.onLongPress,
+        onHover: widget.onHover,
+        onFocusChange: widget.onFocusChange,
+        tapFocus: false,
+        children: [
+          if (widget.startChild != null) widget.startChild!,
+          if (widget.startChild != null)
+            VerticalDivider(
+              width: theme.border.md.maxWidth,
+              indent: dividerIntent,
+              endIndent: dividerIntent,
+              thickness: theme.border.md.maxWidth,
+              color: dividerColor,
+            ),
+          Stack(
+            children: [
+              Opacity(
+                opacity: widget.loading ? 0.0 : 1.0,
+                child: RowLayout(
+                  padding: padding,
+                  gap: gap,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    if (widget.startIcon != null)
+                      widget.startIcon.toSvgIcon(
+                        size: iconSize,
+                        colorFilter:
+                            ColorFilter.mode(iconColor, BlendMode.srcIn),
+                      ),
+                    Padding(
+                      padding: paddingText,
+                      child: AppText(
+                        widget.text,
+                        style: _getTextStyle(
+                          context,
+                          style: widget.style,
+                          size: widgetSize,
+                          color: widget.color,
+                        ),
                       ),
                     ),
-                  ),
-                  if (widget.badge != null) widget.badge!,
-                  if (widget.endIcon != null)
-                    widget.endIcon.toSvgIcon(
-                      size: iconSize,
-                      colorFilter: ColorFilter.mode(iconColor, BlendMode.srcIn),
-                    ),
-                ],
-              ),
-            ),
-            if (widget.loading)
-              Positioned.fill(
-                child: Center(
-                  child: AppLinearLoadingIndicator(
-                    width: double.infinity,
-                    color: theme.color.bgInverse,
-                  ),
+                    if (widget.badge != null) widget.badge!,
+                    if (widget.endIcon != null)
+                      widget.endIcon.toSvgIcon(
+                        size: iconSize,
+                        colorFilter:
+                            ColorFilter.mode(iconColor, BlendMode.srcIn),
+                      ),
+                  ],
                 ),
               ),
-          ],
-        ),
-        if (widget.endChild != null)
-          VerticalDivider(
-            width: theme.border.md.maxWidth,
-            indent: dividerIntent,
-            endIndent: dividerIntent,
-            thickness: theme.border.md.maxWidth,
-            color: dividerColor,
+              if (widget.loading)
+                Positioned.fill(
+                  child: Center(
+                    child: AppLinearLoadingIndicator(
+                      width: double.infinity,
+                      color: theme.color.bgInverse,
+                    ),
+                  ),
+                ),
+            ],
           ),
-        if (widget.endChild != null) widget.endChild!,
-      ],
+          if (widget.endChild != null)
+            VerticalDivider(
+              width: theme.border.md.maxWidth,
+              indent: dividerIntent,
+              endIndent: dividerIntent,
+              thickness: theme.border.md.maxWidth,
+              color: dividerColor,
+            ),
+          if (widget.endChild != null) widget.endChild!,
+        ],
+      ),
     );
   }
 

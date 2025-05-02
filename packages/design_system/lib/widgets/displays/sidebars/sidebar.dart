@@ -45,11 +45,13 @@ class AppSidebar extends AppStatelessWidget {
               child: ColumnLayout(children: [
             for (final item in items)
               AppSidebarSection(
-                  icon: item.icon,
-                  title: item.title,
-                  active: item.active,
-                  disabled: item.disabled,
-                  onPress: item.onPress),
+                identifier: item.identifier,
+                icon: item.icon,
+                title: item.title,
+                active: item.active,
+                disabled: item.disabled,
+                onPress: item.onPress,
+              ),
           ])),
           if (bottoms != null)
             ColumnLayout(children: [

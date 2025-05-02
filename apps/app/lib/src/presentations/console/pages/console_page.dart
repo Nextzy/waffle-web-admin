@@ -69,7 +69,7 @@ class _ConsolePageState
 
   Widget _buildBody() {
     return Container(
-      color: Colors.white,
+      color: context.theme.color.bg,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
@@ -91,61 +91,73 @@ class _ConsolePageState
   }
 
   Widget _buildAppSidebar() {
-    return AppSidebar(
-      logo: Assets.logo.iconText.keyName,
-      items: [
-        AppSidebarSection(
-          icon: Assets.icon.atLight.keyName,
-          title: 'Analytics',
-          onPress: () {
-            push(SettingRoute());
-          },
-        ),
-        AppSidebarSection(
-          icon: Assets.icon.bookOpenFilled.keyName,
-          title: 'Campaigns',
-          onPress: () {
-            push(ProfileRoute());
-          },
-        ),
-        AppSidebarSection(
-          icon: Assets.icon.fileTextFilled.keyName,
-          title: 'Games',
-          onPress: () {},
-        ),
-        AppSidebarSection(
-          icon: Assets.icon.codeLight.keyName,
-          title: 'Customers',
-          onPress: () {},
-        ),
-        AppSidebarSection(
-          icon: Assets.icon.bellFilled.keyName,
-          title: 'Consent and policy',
-          onPress: () {},
-        ),
-        AppSidebarSection(
-          icon: Assets.icon.gearFilled.keyName,
-          title: 'All games',
-          onPress: () {},
-        ),
-        AppSidebarSection(
-          icon: Assets.icon.chatTextRegular.keyName,
-          title: 'Users',
-          onPress: () {},
-        ),
-        AppSidebarSection(
-          icon: Assets.icon.calendarBlankFilled.keyName,
-          title: 'Roles',
-          onPress: () {
-            push(RolesRoute());
-          },
-        ),
-        AppSidebarSection(
-          icon: Assets.icon.cubeLight.keyName,
-          title: 'Billing',
-          onPress: () {},
-        ),
-      ],
+    return Semantics(
+      identifier: 'my-sidebar',
+      child: AppSidebar(
+        logo: Assets.logo.iconText.keyName,
+        items: [
+          AppSidebarSection(
+            identifier: 'analytics-tab',
+            icon: Assets.icon.atLight.keyName,
+            title: 'Analytics',
+            onPress: () {
+              push(SettingRoute());
+            },
+          ),
+          AppSidebarSection(
+            identifier: 'campaigns-tab',
+            icon: Assets.icon.bookOpenFilled.keyName,
+            title: 'Campaigns',
+            onPress: () {
+              push(ProfileRoute());
+            },
+          ),
+          AppSidebarSection(
+            identifier: 'games-tab',
+            icon: Assets.icon.fileTextFilled.keyName,
+            title: 'Games',
+            onPress: () {},
+          ),
+          AppSidebarSection(
+            identifier: 'customers-tab',
+            icon: Assets.icon.codeLight.keyName,
+            title: 'Customers',
+            onPress: () {},
+          ),
+          AppSidebarSection(
+            identifier: 'consent-and-policy-tab',
+            icon: Assets.icon.bellFilled.keyName,
+            title: 'Consent and policy',
+            onPress: () {},
+          ),
+          AppSidebarSection(
+            identifier: 'all-games-tab',
+            icon: Assets.icon.gearFilled.keyName,
+            title: 'All games',
+            onPress: () {},
+          ),
+          AppSidebarSection(
+            identifier: 'users-tab',
+            icon: Assets.icon.chatTextRegular.keyName,
+            title: 'Users',
+            onPress: () {},
+          ),
+          AppSidebarSection(
+            identifier: 'roles-tab',
+            icon: Assets.icon.calendarBlankFilled.keyName,
+            title: 'Roles',
+            onPress: () {
+              push(RolesRoute());
+            },
+          ),
+          AppSidebarSection(
+            identifier: 'billing-tab',
+            icon: Assets.icon.cubeLight.keyName,
+            title: 'Billing',
+            onPress: () {},
+          ),
+        ],
+      ),
     );
   }
 
@@ -155,16 +167,20 @@ class _ConsolePageState
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          InkWell(
-            onTap: _onTapProfile,
-            child: AppCircleAvatar(
-              style: WidgetStyle.subtle,
-              size: WidgetSize.lg,
-              path: bloc.data?.profile?.photoUrl ?? '',
-              badge: null,
+          Semantics(
+            identifier: 'profile-button',
+            child: InkWell(
+              onTap: _onTapProfile,
+              child: AppCircleAvatar(
+                style: WidgetStyle.subtle,
+                size: WidgetSize.lg,
+                path: bloc.data?.profile?.photoUrl ?? '',
+                badge: null,
+              ),
             ),
           ),
           AppIconButton(
+            identifier: 'edit-profile-button',
             icon: Assets.icon.caretDownLight.keyName,
             style: AppButtonStyle.text,
             onPress: _onTapEditProfile,
@@ -182,6 +198,7 @@ class _ConsolePageState
         context: context,
         builder: (context) {
           return ProfileModal(
+            identifier: 'profile-modal',
             firstName: profile.firstName.toString(),
             lastName: profile.lastName.toString(),
             email: profile.email.toString(),
@@ -199,6 +216,7 @@ class _ConsolePageState
         context: context,
         builder: (context) {
           return EditProfileModal(
+            identifier: 'edit-profile-modal',
             firstName: profile.firstName.toString(),
             lastName: profile.lastName.toString(),
             email: profile.email.toString(),

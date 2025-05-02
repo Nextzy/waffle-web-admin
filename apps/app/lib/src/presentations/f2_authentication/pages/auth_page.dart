@@ -59,37 +59,46 @@ class _AuthenticationPageState extends AppPageBlocWidgetState<
   }
 
   Widget _buildBody(BuildContext context) {
-    return Center(
-      child: SizedBox(
-        width: 300,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            AppText(
-              'Sign in to Waffle Game',
-              textAlign: TextAlign.center,
-              style: AppTextStyleBuilder.ui.s24.bold.colorPrimaryInverse
-                  .build(context),
-            ),
-            Gap(32),
-            AppTextField(
-              placeholderText: 'Email',
-              controller: bloc.usernameController,
-            ),
-            Gap(16),
-            AppTextField(
-              placeholderText: 'Password',
-              controller: bloc.passwordController,
-            ),
-            Gap(16),
-            AppButton(
-              text: 'Login',
-              // style: AppButtonStyle.filled,
-              onPress: _onTapSignIn,
-            ),
-            Gap(50),
-            AppText('v1.0.3'),
-          ],
+    return Container(
+      color: context.theme.color.bg,
+      child: Center(
+        child: SizedBox(
+          width: 300,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              AppText(
+                'Sign in to Waffle Game',
+                textAlign: TextAlign.center,
+                style:
+                    AppTextStyleBuilder.ui.s24.bold.colorPrimary.build(context),
+              ),
+              Gap(32),
+              AppTextField(
+                identifier: 'email-text-field',
+                placeholderText: 'Email',
+                controller: bloc.usernameController,
+              ),
+              Gap(16),
+              AppTextField(
+                identifier: 'password-text-field',
+                placeholderText: 'Password',
+                controller: bloc.passwordController,
+              ),
+              Gap(16),
+              AppButton(
+                identifier: 'login-button',
+                text: 'Login',
+                // style: AppButtonStyle.filled,
+                onPress: _onTapSignIn,
+              ),
+              Gap(50),
+              AppText(
+                'v1.0.4',
+                style: AppTextStyleBuilder.ui.s14.colorPrimary.build(context),
+              ),
+            ],
+          ),
         ),
       ),
     );

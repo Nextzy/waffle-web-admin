@@ -28,6 +28,7 @@ class AppIconButton extends AppStatefulWidget {
     this.onLongPress,
     this.onHover,
     this.onFocusChange,
+    this.identifier,
   });
 
   final AppButtonStyle style;
@@ -40,6 +41,7 @@ class AppIconButton extends AppStatefulWidget {
   final bool loading;
   final bool disabled;
   final bool hasColorFilter;
+  final String? identifier;
 
   ///============= CALLBACK METHOD =============///
   final VoidCallback? onPress;
@@ -120,40 +122,43 @@ class _AppIconButtonState extends AppState<AppIconButton> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureContainerLayout(
-      mouseCursor: SystemMouseCursors.click,
-      clipBehavior: Clip.antiAliasWithSaveLayer,
-      border: border,
-      padding: widget.padding ?? padding,
-      backgroundColor: backgroundColor,
-      borderRadius: widget.borderRadius ?? borderRadius,
-      disabled: widget.loading || widget.disabled,
-      opacity: widget.disabled ? 0.5 : null,
-      onPress: widget.onPress,
-      onLongPress: widget.onLongPress,
-      onHover: widget.onHover,
-      onFocusChange: widget.onFocusChange,
-      child: Stack(
-        children: [
-          Opacity(
-            opacity: widget.loading ? 0.0 : 1.0,
-            child: widget.icon.toSvgIcon(
-              size: widget.customIconSize ?? size,
-              colorFilter: widget.hasColorFilter
-                  ? ColorFilter.mode(iconColor, BlendMode.srcIn)
-                  : null,
-            ),
-          ),
-          if (widget.loading)
-            Positioned.fill(
-              child: Center(
-                child: AppLinearLoadingIndicator(
-                  width: double.infinity,
-                  color: theme.color.bgInverse,
-                ),
+    return Semantics(
+      identifier: widget.identifier,
+      child: GestureContainerLayout(
+        mouseCursor: SystemMouseCursors.click,
+        clipBehavior: Clip.antiAliasWithSaveLayer,
+        border: border,
+        padding: widget.padding ?? padding,
+        backgroundColor: backgroundColor,
+        borderRadius: widget.borderRadius ?? borderRadius,
+        disabled: widget.loading || widget.disabled,
+        opacity: widget.disabled ? 0.5 : null,
+        onPress: widget.onPress,
+        onLongPress: widget.onLongPress,
+        onHover: widget.onHover,
+        onFocusChange: widget.onFocusChange,
+        child: Stack(
+          children: [
+            Opacity(
+              opacity: widget.loading ? 0.0 : 1.0,
+              child: widget.icon.toSvgIcon(
+                size: widget.customIconSize ?? size,
+                colorFilter: widget.hasColorFilter
+                    ? ColorFilter.mode(iconColor, BlendMode.srcIn)
+                    : null,
               ),
             ),
-        ],
+            if (widget.loading)
+              Positioned.fill(
+                child: Center(
+                  child: AppLinearLoadingIndicator(
+                    width: double.infinity,
+                    color: theme.color.bgInverse,
+                  ),
+                ),
+              ),
+          ],
+        ),
       ),
     );
   }

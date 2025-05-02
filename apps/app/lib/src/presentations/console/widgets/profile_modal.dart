@@ -8,6 +8,7 @@ class ProfileModal extends StatelessWidget {
     required this.email,
     required this.phone,
     this.photoUrl,
+    this.identifier,
   });
 
   final String firstName;
@@ -15,6 +16,8 @@ class ProfileModal extends StatelessWidget {
   final String email;
   final String phone;
   final String? photoUrl;
+
+  final String? identifier;
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +62,7 @@ class ProfileContent extends StatelessWidget {
     required this.lastName,
     required this.email,
     required this.phone,
+    this.identifier,
   });
 
   final String firstName;
@@ -66,99 +70,104 @@ class ProfileContent extends StatelessWidget {
   final String email;
   final String phone;
 
+  final String? identifier;
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(10),
-      padding: EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: context.theme.color.bgInputShaded,
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    AppText(
-                      'First Name',
-                      style: AppTextStyleBuilder.header4.bold.build(context),
-                    ),
-                    Space.gap10,
-                    AppText(
-                      firstName,
-                      style: AppTextStyleBuilder.header.build(context),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
+    return Semantics(
+      identifier: identifier,
+      child: Container(
+        margin: EdgeInsets.all(10),
+        padding: EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: context.theme.color.bgInputShaded,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      AppText(
+                        'First Name',
+                        style: AppTextStyleBuilder.header4.bold.build(context),
+                      ),
+                      Space.gap10,
+                      AppText(
+                        firstName,
+                        style: AppTextStyleBuilder.header.build(context),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    AppText(
-                      'Last Name',
-                      style: AppTextStyleBuilder.header4.bold.build(context),
-                    ),
-                    Space.gap10,
-                    AppText(
-                      lastName,
-                      style: AppTextStyleBuilder.header.build(context),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      AppText(
+                        'Last Name',
+                        style: AppTextStyleBuilder.header4.bold.build(context),
+                      ),
+                      Space.gap10,
+                      AppText(
+                        lastName,
+                        style: AppTextStyleBuilder.header.build(context),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          ),
-          Space.gap32,
-          Row(
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    AppText(
-                      'Email',
-                      style: AppTextStyleBuilder.header4.bold.build(context),
-                    ),
-                    Space.gap10,
-                    AppText(
-                      email,
-                      style: AppTextStyleBuilder.header.build(context),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
+              ],
+            ),
+            Space.gap32,
+            Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      AppText(
+                        'Email',
+                        style: AppTextStyleBuilder.header4.bold.build(context),
+                      ),
+                      Space.gap10,
+                      AppText(
+                        email,
+                        style: AppTextStyleBuilder.header.build(context),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    AppText(
-                      'Phone',
-                      style: AppTextStyleBuilder.header4.bold.build(context),
-                    ),
-                    Space.gap10,
-                    AppText(
-                      phone,
-                      style: AppTextStyleBuilder.header.build(context),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      AppText(
+                        'Phone',
+                        style: AppTextStyleBuilder.header4.bold.build(context),
+                      ),
+                      Space.gap10,
+                      AppText(
+                        phone,
+                        style: AppTextStyleBuilder.header.build(context),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          ),
-        ],
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

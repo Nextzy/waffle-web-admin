@@ -35,6 +35,7 @@ class AppTextField<T> extends AppStatefulWidget {
     this.border,
     this.borderRadius,
     this.backgroundColor,
+    this.identifier,
 
     ///========== CONTROLLER ==========///
     this.onTextChange,
@@ -85,6 +86,7 @@ class AppTextField<T> extends AppStatefulWidget {
   final VoidCallback? onEditingComplete;
   final ValueChanged? onFocusedChange;
   final ValueChanged<String>? onTextChange;
+  final String? identifier;
 
   ///============= CALLBACK METHOD =============///
   final VoidCallback? onButtonPress;
@@ -299,188 +301,192 @@ class _AppTextFieldState extends AppState<AppTextField> {
 
   @override
   Widget build(BuildContext context) {
-    return ColumnLayout(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      gap: 4,
-      children: [
-        if (widget.label.isNotNullOrBlank)
-          AppRichText(
-            style:
-                AppTextStyleBuilder.ui.s12.colorPrimary.medium.build(context),
-            spans: [
-              TextSpan(text: widget.label),
-              if (widget.required)
-                TextSpan(
-                  text: requiredChar,
-                  style: AppTextStyleBuilder.ui.s12
-                      .color(theme.color.textNegative)
-                      .medium
-                      .build(context),
-                ),
-            ],
-          ),
-        FullWidgetStateBuilder(
-            create: stateNotifier,
-            builder: (context, widgetState, snapshot) => GestureRowLayout(
-                  animate: true,
-                  animateDuration: 50.milliseconds,
-                  disabledPressAnimation: true,
-                  crossAxisIntrinsic: true,
-                  tapFocus: true,
-                  disabled: widget.disabled,
-                  onHover: _onHover,
-                  onPress: () {
-                    FocusScope.of(context).requestFocus(_focus);
-                  },
-                  onFocusChange: (value) {
-                    if (value) {
-                      FocusScope.of(context).requestFocus(_focus);
-                    }
-                  },
-                  mouseCursor: SystemMouseCursors.text,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  backgroundColor: backgroundColor,
-                  showFocus:
-                      widget.style == AppTextFieldStyle.shaded ? false : true,
-                  decoration: _createBorderStyle(
-                    style: widget.style,
-                    state: widgetState,
-                    feedbackState: widget.feedbackState,
-                    disabled: widget.disabled,
-                    borderRadius: widget.borderRadius,
+    return Semantics(
+      identifier: widget.identifier,
+      child: ColumnLayout(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        gap: 4,
+        children: [
+          if (widget.label.isNotNullOrBlank)
+            AppRichText(
+              style:
+                  AppTextStyleBuilder.ui.s12.colorPrimary.medium.build(context),
+              spans: [
+                TextSpan(text: widget.label),
+                if (widget.required)
+                  TextSpan(
+                    text: requiredChar,
+                    style: AppTextStyleBuilder.ui.s12
+                        .color(theme.color.textNegative)
+                        .medium
+                        .build(context),
                   ),
-                  children: [
-                    if (widget.prefixText.isNotNullOrBlank)
-                      buildPrefixText(
-                        context,
-                        text: widget.prefixText,
-                        borderRadius: widget.borderRadius,
-                      ),
-                    if (widget.startWidget != null) ...[
-                      widget.startWidget!,
-                      verticalDivider,
-                    ],
-                    buildIcon(
+              ],
+            ),
+          FullWidgetStateBuilder(
+              create: stateNotifier,
+              builder: (context, widgetState, snapshot) => GestureRowLayout(
+                    animate: true,
+                    animateDuration: 50.milliseconds,
+                    disabledPressAnimation: true,
+                    crossAxisIntrinsic: true,
+                    tapFocus: true,
+                    disabled: widget.disabled,
+                    onHover: _onHover,
+                    onPress: () {
+                      FocusScope.of(context).requestFocus(_focus);
+                    },
+                    onFocusChange: (value) {
+                      if (value) {
+                        FocusScope.of(context).requestFocus(_focus);
+                      }
+                    },
+                    mouseCursor: SystemMouseCursors.text,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    backgroundColor: backgroundColor,
+                    showFocus:
+                        widget.style == AppTextFieldStyle.shaded ? false : true,
+                    decoration: _createBorderStyle(
+                      style: widget.style,
+                      state: widgetState,
+                      feedbackState: widget.feedbackState,
                       disabled: widget.disabled,
-                      size: widgetSize,
-                      icon: widget.startIcon,
+                      borderRadius: widget.borderRadius,
                     ),
-                    Expanded(
-                      child: Center(
-                        child: TextFormField(
-                          style: textStyle,
-                          initialValue: widget.text?.isNotEmpty == true
-                              ? widget.text
-                              : null,
-                          textAlignVertical: TextAlignVertical.top,
-                          maxLines: widget.maxLines,
-                          maxLength: widget.maxLength,
-                          inputFormatters: widget.inputFormatters,
-                          keyboardType: widget.keyboardType,
-                          controller: widget.controller ?? _controller,
-                          textInputAction: widget.textInputAction,
-                          focusNode: _focus,
-                          textAlign: widget.textAlign,
-                          obscureText: obscure,
-                          obscuringCharacter: '•',
-                          validator: widget.validator,
-                          enabled: !widget.disabled,
-                          readOnly: widget.disabled,
-                          onEditingComplete: widget.onEditingComplete,
-                          //================ DECORATION ================//
-                          decoration: InputDecoration(
-                            contentPadding: contentPadding,
-                            hintText: widget.placeholderText,
-                            hintStyle: placeholderTextStyle,
-                            errorStyle: const TextStyle(height: 0),
-                            filled: true,
-                            fillColor: Colors.transparent,
-                            hoverColor: Colors.transparent,
-                            focusColor: Colors.transparent,
-                            isDense: true,
-                            counter: null,
-                            border: removeBorder,
-                            enabledBorder: removeBorder,
-                            disabledBorder: removeBorder,
-                            focusedBorder: removeBorder,
-                            errorBorder: removeBorder,
-                            focusedErrorBorder: removeBorder,
+                    children: [
+                      if (widget.prefixText.isNotNullOrBlank)
+                        buildPrefixText(
+                          context,
+                          text: widget.prefixText,
+                          borderRadius: widget.borderRadius,
+                        ),
+                      if (widget.startWidget != null) ...[
+                        widget.startWidget!,
+                        verticalDivider,
+                      ],
+                      buildIcon(
+                        disabled: widget.disabled,
+                        size: widgetSize,
+                        icon: widget.startIcon,
+                      ),
+                      Expanded(
+                        child: Center(
+                          child: TextFormField(
+                            style: textStyle,
+                            initialValue: widget.text?.isNotEmpty == true
+                                ? widget.text
+                                : null,
+                            textAlignVertical: TextAlignVertical.top,
+                            maxLines: widget.maxLines,
+                            maxLength: widget.maxLength,
+                            inputFormatters: widget.inputFormatters,
+                            keyboardType: widget.keyboardType,
+                            controller: widget.controller ?? _controller,
+                            textInputAction: widget.textInputAction,
+                            focusNode: _focus,
+                            textAlign: widget.textAlign,
+                            obscureText: obscure,
+                            obscuringCharacter: '•',
+                            validator: widget.validator,
+                            enabled: !widget.disabled,
+                            readOnly: widget.disabled,
+                            onEditingComplete: widget.onEditingComplete,
+                            //================ DECORATION ================//
+                            decoration: InputDecoration(
+                              contentPadding: contentPadding,
+                              hintText: widget.placeholderText,
+                              hintStyle: placeholderTextStyle,
+                              errorStyle: const TextStyle(height: 0),
+                              filled: true,
+                              fillColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              isDense: true,
+                              counter: null,
+                              border: removeBorder,
+                              enabledBorder: removeBorder,
+                              disabledBorder: removeBorder,
+                              focusedBorder: removeBorder,
+                              errorBorder: removeBorder,
+                              focusedErrorBorder: removeBorder,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    if (widget.loading)
-                      Center(
-                        child: AppCircularLoading(
-                            customSize: iconSize,
-                            color: theme.color.iconTertiary),
-                      ),
-                    if (widget.clearButton)
-                      ValueListenableBuilder(
-                        valueListenable: _showClearButtonNotifier,
-                        builder: (BuildContext context, bool value,
-                                Widget? child) =>
-                            value
-                                ? Center(
-                                    child: AppOnlyIconButton(
-                                      size: widgetSize,
-                                      icon:
-                                          Assets.icon.crossCircleFilled.keyName,
-                                      color: theme.color.iconTertiary,
-                                      disabled: widget.disabled,
-                                      onPress: _onPressClearText,
-                                    ),
-                                  )
-                                : const SizedBox(),
-                      ),
-                    buildIcon(
-                      disabled: widget.disabled,
-                      size: widgetSize,
-                      icon: widget.endIcon,
-                    ),
-                    if (widget.endTextButton != null)
-                      buildButton(
-                        context,
-                        size: widgetSize,
-                        endTextButton: widget.endTextButton,
-                        borderRadius: widget.borderRadius,
+                      if (widget.loading)
+                        Center(
+                          child: AppCircularLoading(
+                              customSize: iconSize,
+                              color: theme.color.iconTertiary),
+                        ),
+                      if (widget.clearButton)
+                        ValueListenableBuilder(
+                          valueListenable: _showClearButtonNotifier,
+                          builder: (BuildContext context, bool value,
+                                  Widget? child) =>
+                              value
+                                  ? Center(
+                                      child: AppOnlyIconButton(
+                                        size: widgetSize,
+                                        icon: Assets
+                                            .icon.crossCircleFilled.keyName,
+                                        color: theme.color.iconTertiary,
+                                        disabled: widget.disabled,
+                                        onPress: _onPressClearText,
+                                      ),
+                                    )
+                                  : const SizedBox(),
+                        ),
+                      buildIcon(
                         disabled: widget.disabled,
-                        onPress: widget.onButtonPress,
-                        onLongPress: widget.onButtonLongPress,
-                        onHover: widget.onButtonHover,
-                        onFocusChange: widget.onButtonFocusChange,
+                        size: widgetSize,
+                        icon: widget.endIcon,
                       ),
-                    if (widget.endWidget != null) ...[
-                      widget.endWidget!,
-                      verticalDivider,
+                      if (widget.endTextButton != null)
+                        buildButton(
+                          context,
+                          size: widgetSize,
+                          endTextButton: widget.endTextButton,
+                          borderRadius: widget.borderRadius,
+                          disabled: widget.disabled,
+                          onPress: widget.onButtonPress,
+                          onLongPress: widget.onButtonLongPress,
+                          onHover: widget.onButtonHover,
+                          onFocusChange: widget.onButtonFocusChange,
+                        ),
+                      if (widget.endWidget != null) ...[
+                        widget.endWidget!,
+                        verticalDivider,
+                      ],
+                      if (widget.suffixText.isNotNullOrBlank)
+                        buildSuffixText(
+                          context,
+                          text: widget.suffixText,
+                          borderRadius: widget.borderRadius,
+                        ),
                     ],
-                    if (widget.suffixText.isNotNullOrBlank)
-                      buildSuffixText(
-                        context,
-                        text: widget.suffixText,
-                        borderRadius: widget.borderRadius,
-                      ),
-                  ],
-                )),
-        if (widget.statusText.isNotNullOrBlank && widget.feedbackState != null)
-          AppText(
-            '$textFeedbackIcon${widget.statusText}',
-            style: AppTextStyleBuilder.ui.s12
-                .color(switch (widget.feedbackState) {
-                  FeedbackState.positive => theme.color.textPositive,
-                  FeedbackState.warning => theme.color.textWarning,
-                  FeedbackState.negative => theme.color.textNegative,
-                  FeedbackState.info => theme.color.textPrimary,
-                  null => theme.color.textPositive,
-                })
-                .build(context),
-          ),
-        if (widget.helperText.isNotNullOrBlank)
-          AppText(
-            widget.helperText,
-            style: helperTextStyle,
-          ),
-      ],
+                  )),
+          if (widget.statusText.isNotNullOrBlank &&
+              widget.feedbackState != null)
+            AppText(
+              '$textFeedbackIcon${widget.statusText}',
+              style: AppTextStyleBuilder.ui.s12
+                  .color(switch (widget.feedbackState) {
+                    FeedbackState.positive => theme.color.textPositive,
+                    FeedbackState.warning => theme.color.textWarning,
+                    FeedbackState.negative => theme.color.textNegative,
+                    FeedbackState.info => theme.color.textPrimary,
+                    null => theme.color.textPositive,
+                  })
+                  .build(context),
+            ),
+          if (widget.helperText.isNotNullOrBlank)
+            AppText(
+              widget.helperText,
+              style: helperTextStyle,
+            ),
+        ],
+      ),
     );
   }
 
