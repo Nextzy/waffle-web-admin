@@ -17,6 +17,7 @@ T _$identity<T>(T value) => value;
 mixin _$RoleEntity {
   String? get roleId;
   String? get name;
+  List<PagePermissionEntity>? get pagePermissions;
 
   /// Create a copy of RoleEntity
   /// with the given fields replaced by the non-null parameter values.
@@ -31,15 +32,18 @@ mixin _$RoleEntity {
         (other.runtimeType == runtimeType &&
             other is RoleEntity &&
             (identical(other.roleId, roleId) || other.roleId == roleId) &&
-            (identical(other.name, name) || other.name == name));
+            (identical(other.name, name) || other.name == name) &&
+            const DeepCollectionEquality()
+                .equals(other.pagePermissions, pagePermissions));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, roleId, name);
+  int get hashCode => Object.hash(runtimeType, roleId, name,
+      const DeepCollectionEquality().hash(pagePermissions));
 
   @override
   String toString() {
-    return 'RoleEntity(roleId: $roleId, name: $name)';
+    return 'RoleEntity(roleId: $roleId, name: $name, pagePermissions: $pagePermissions)';
   }
 }
 
@@ -49,7 +53,10 @@ abstract mixin class $RoleEntityCopyWith<$Res> {
           RoleEntity value, $Res Function(RoleEntity) _then) =
       _$RoleEntityCopyWithImpl;
   @useResult
-  $Res call({String? roleId, String? name});
+  $Res call(
+      {String? roleId,
+      String? name,
+      List<PagePermissionEntity>? pagePermissions});
 }
 
 /// @nodoc
@@ -66,6 +73,7 @@ class _$RoleEntityCopyWithImpl<$Res> implements $RoleEntityCopyWith<$Res> {
   $Res call({
     Object? roleId = freezed,
     Object? name = freezed,
+    Object? pagePermissions = freezed,
   }) {
     return _then(_self.copyWith(
       roleId: freezed == roleId
@@ -76,6 +84,10 @@ class _$RoleEntityCopyWithImpl<$Res> implements $RoleEntityCopyWith<$Res> {
           ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
+      pagePermissions: freezed == pagePermissions
+          ? _self.pagePermissions
+          : pagePermissions // ignore: cast_nullable_to_non_nullable
+              as List<PagePermissionEntity>?,
     ));
   }
 }
@@ -83,12 +95,25 @@ class _$RoleEntityCopyWithImpl<$Res> implements $RoleEntityCopyWith<$Res> {
 /// @nodoc
 
 class _RoleEntity implements RoleEntity {
-  const _RoleEntity({this.roleId, this.name});
+  const _RoleEntity(
+      {this.roleId,
+      this.name,
+      final List<PagePermissionEntity>? pagePermissions})
+      : _pagePermissions = pagePermissions;
 
   @override
   final String? roleId;
   @override
   final String? name;
+  final List<PagePermissionEntity>? _pagePermissions;
+  @override
+  List<PagePermissionEntity>? get pagePermissions {
+    final value = _pagePermissions;
+    if (value == null) return null;
+    if (_pagePermissions is EqualUnmodifiableListView) return _pagePermissions;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   /// Create a copy of RoleEntity
   /// with the given fields replaced by the non-null parameter values.
@@ -104,15 +129,18 @@ class _RoleEntity implements RoleEntity {
         (other.runtimeType == runtimeType &&
             other is _RoleEntity &&
             (identical(other.roleId, roleId) || other.roleId == roleId) &&
-            (identical(other.name, name) || other.name == name));
+            (identical(other.name, name) || other.name == name) &&
+            const DeepCollectionEquality()
+                .equals(other._pagePermissions, _pagePermissions));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, roleId, name);
+  int get hashCode => Object.hash(runtimeType, roleId, name,
+      const DeepCollectionEquality().hash(_pagePermissions));
 
   @override
   String toString() {
-    return 'RoleEntity(roleId: $roleId, name: $name)';
+    return 'RoleEntity(roleId: $roleId, name: $name, pagePermissions: $pagePermissions)';
   }
 }
 
@@ -124,7 +152,10 @@ abstract mixin class _$RoleEntityCopyWith<$Res>
       __$RoleEntityCopyWithImpl;
   @override
   @useResult
-  $Res call({String? roleId, String? name});
+  $Res call(
+      {String? roleId,
+      String? name,
+      List<PagePermissionEntity>? pagePermissions});
 }
 
 /// @nodoc
@@ -141,6 +172,7 @@ class __$RoleEntityCopyWithImpl<$Res> implements _$RoleEntityCopyWith<$Res> {
   $Res call({
     Object? roleId = freezed,
     Object? name = freezed,
+    Object? pagePermissions = freezed,
   }) {
     return _then(_RoleEntity(
       roleId: freezed == roleId
@@ -151,6 +183,10 @@ class __$RoleEntityCopyWithImpl<$Res> implements _$RoleEntityCopyWith<$Res> {
           ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
+      pagePermissions: freezed == pagePermissions
+          ? _self._pagePermissions
+          : pagePermissions // ignore: cast_nullable_to_non_nullable
+              as List<PagePermissionEntity>?,
     ));
   }
 }

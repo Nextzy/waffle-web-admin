@@ -1,5 +1,4 @@
 import 'package:change_application_name/application.dart';
-import 'package:change_application_name/src/domain/roles/entities/roles_entity.dart';
 
 enum RolesPageEvent {
   showResult,
@@ -80,6 +79,7 @@ class _RolesPageState
                 identifier: 'create-role-button',
                 startIcon: Assets.icon.plusRegular.keyName,
                 text: 'Create Role',
+                onPress: _onTapCreateRole,
               ),
             ],
           ),
@@ -97,6 +97,18 @@ class _RolesPageState
     bloc.addEvent(
       RolesEvent.getAllRoles,
     );
+  }
+
+  void _onTapCreateRole() {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return RoleModal(
+            mode: RoleModalMode.create,
+          );
+        }).then((v) {
+      print('v: $v');
+    });
   }
 }
 
@@ -150,7 +162,12 @@ class Content extends StatelessWidget {
                     //   icon: Assets.icon.dotsThreeLight.keyName,
                     //   style: AppButtonStyle.text,
                     // ),
-                    onTap: () => {},
+                    onTap: () {
+                      _onTapEditRole(
+                        context: context,
+                        role: roles[index],
+                      );
+                    },
                   );
                 }),
           ),
@@ -158,5 +175,20 @@ class Content extends StatelessWidget {
       ),
       // child: Placeholder(),
     );
+  }
+
+  void _onTapEditRole({
+    required BuildContext context,
+    RoleEntity? role,
+  }) async {
+    final res = await showDialog(
+        context: context,
+        builder: (context) {
+          return RoleModal(
+            mode: RoleModalMode.edit,
+            role: role,
+          );
+        });
+    print('res: $res');
   }
 }

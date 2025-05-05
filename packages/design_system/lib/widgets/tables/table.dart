@@ -10,6 +10,8 @@ class AppTable extends StatefulWidget {
     this.rowsPerPage = 0,
     this.filteredColumn = 0,
     this.hasCheckbox = false,
+    this.hasSearchField = false,
+    this.headerTextStyle,
   });
 
   final double width;
@@ -19,6 +21,8 @@ class AppTable extends StatefulWidget {
   final int rowsPerPage;
   final int filteredColumn;
   final bool hasCheckbox;
+  final bool hasSearchField;
+  final TextStyle? headerTextStyle;
 
   @override
   State<AppTable> createState() => _AppTableState();
@@ -49,13 +53,17 @@ class _AppTableState extends State<AppTable> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
-      child: SizedBox(
+      child: Container(
         width: widget.width,
         height: widget.height,
+        padding: EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey),
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            _buildSearchTextField(),
+            if (widget.hasSearchField) _buildSearchTextField(),
             _buildHeaderRow(),
             Divider(),
             _buildBodyRows(),
@@ -118,14 +126,15 @@ class _AppTableState extends State<AppTable> {
           Expanded(
             child: InkWell(
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Flexible(
-                    child: Text(
+                    child: AppText(
                       widget.headerNames[i],
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
+                      style: widget.headerTextStyle,
                     ),
                   ),
                   if (i == _sortColumn)

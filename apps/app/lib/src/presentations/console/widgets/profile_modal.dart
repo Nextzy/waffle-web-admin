@@ -21,34 +21,37 @@ class ProfileModal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Dialog(
-      child: Container(
-        padding: EdgeInsets.all(10),
-        width: 550,
-        height: 350,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: EdgeInsets.all(18),
-              child: AppImage(
-                width: 60,
-                height: 60,
-                path: photoUrl,
+    return Semantics(
+      identifier: identifier,
+      child: Dialog(
+        child: Container(
+          padding: EdgeInsets.all(10),
+          width: 550,
+          height: 350,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: EdgeInsets.all(18),
+                child: AppImage(
+                  width: 60,
+                  height: 60,
+                  path: photoUrl,
+                ),
               ),
-            ),
-            ProfileContent(
-              firstName: firstName,
-              lastName: lastName,
-              email: email,
-              phone: phone,
-            ),
-          ],
+              ProfileContent(
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                phone: phone,
+              ),
+            ],
+          ),
         ),
       ),
     );
