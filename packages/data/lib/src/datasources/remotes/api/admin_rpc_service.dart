@@ -31,4 +31,29 @@ class AdminRpcService extends RpcService {
       queryParameters: successMockQueryParams,
     );
   }
+
+  Future<JsonRpcResponse<RemoteGetRoleResponse, ErrorResponse>> getRole({
+    required String roleId,
+    String? requestId,
+  }) async {
+    final successMockQueryParams = {
+      'apidogApiId': '16374242',
+    };
+    final failMockQueryParams = {
+      'apidogApiId': '15405460',
+      'apidogResponseId': '21196837',
+    };
+
+    return request(
+      path,
+      method: 'getByRole',
+      id: requestId,
+      params: RemoteGetRoleBody(
+        roleId: roleId,
+      ).toJson(),
+      fromJson: RemoteGetRoleResponse.fromJson,
+      extra: {'requiredAuth': true},
+      queryParameters: successMockQueryParams,
+    );
+  }
 }

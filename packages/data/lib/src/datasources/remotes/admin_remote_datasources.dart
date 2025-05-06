@@ -12,4 +12,10 @@ class AdminRemoteDatasources {
       getAllRoles() async {
     return _adminService.getAllRoles();
   }
+
+  Future<JsonRpcResponse<RemoteGetRoleResponse, ErrorResponse>> getRole({
+    required String roleId,
+  }) async {
+    return _adminService.getRole(roleId: roleId);
+  }
 }

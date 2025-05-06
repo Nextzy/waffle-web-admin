@@ -13,14 +13,3 @@ abstract class RemoteGetAllRolesResponse with _$RemoteGetAllRolesResponse {
   factory RemoteGetAllRolesResponse.fromJson(Map<String, dynamic> json) =>
       _$RemoteGetAllRolesResponseFromJson(json);
 }
-
-@freezed
-abstract class RemoteRole with _$RemoteRole {
-  const factory RemoteRole({
-    String? roleId,
-    String? name,
-  }) = _RemoteRole;
-
-  factory RemoteRole.fromJson(Map<String, dynamic> json) =>
-      _$RemoteRoleFromJson(json);
-}

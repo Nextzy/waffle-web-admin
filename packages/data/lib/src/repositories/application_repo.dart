@@ -69,4 +69,10 @@ class AppRepository {
       getAllRoles() {
     return _adminRemoteDatasource.getAllRoles();
   }
+
+  Future<JsonRpcResponse<RemoteGetRoleResponse, ErrorResponse>> getRole({
+    required String roleId,
+  }) {
+    return _adminRemoteDatasource.getRole(roleId: roleId);
+  }
 }

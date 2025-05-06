@@ -84,8 +84,9 @@ class _RolesPageState
             ],
           ),
           Expanded(
-            child: Content(
+            child: RolesContent(
               roles: bloc.data?.roles ?? [],
+              onTapEditRole: (role) => _onTapEditRole(role: role),
             ),
           ),
         ],
@@ -99,26 +100,44 @@ class _RolesPageState
     );
   }
 
-  void _onTapCreateRole() {
-    showDialog(
+  void _onTapCreateRole() async {
+    final res = await showDialog(
         context: context,
         builder: (context) {
           return RoleModal(
             mode: RoleModalMode.create,
           );
-        }).then((v) {
-      print('v: $v');
-    });
+        });
+
+    print('res: $res');
+  }
+
+  void _onTapEditRole({
+    required RoleEntity role,
+  }) async {
+    final res = await showDialog(
+        context: context,
+        builder: (context) {
+          return RoleModal(
+            mode: RoleModalMode.edit,
+            role: role,
+          );
+        });
+
+    print('res: $res');
   }
 }
 
-class Content extends StatelessWidget {
-  const Content({
+class RolesContent extends StatelessWidget {
+  const RolesContent({
     super.key,
     required this.roles,
+    required this.onTapEditRole,
   });
 
   final List<RoleEntity> roles;
+
+  final Function(RoleEntity role) onTapEditRole;
 
   @override
   Widget build(BuildContext context) {
@@ -150,45 +169,18 @@ class Content extends StatelessWidget {
                 itemCount: roles.length,
                 itemBuilder: (_, index) {
                   return ListTile(
-                    // leading: SizedBox(
-                    //   width: 50,
-                    //   child: AppCheckbox(label: ''),
-                    // ),
                     title: AppText(
                       roles[index].name,
                       style: AppTextStyleBuilder.header4.build(context),
                     ),
-                    // trailing: AppIconButton(
-                    //   icon: Assets.icon.dotsThreeLight.keyName,
-                    //   style: AppButtonStyle.text,
-                    // ),
                     onTap: () {
-                      _onTapEditRole(
-                        context: context,
-                        role: roles[index],
-                      );
+                      onTapEditRole(roles[index]);
                     },
                   );
                 }),
           ),
         ],
       ),
-      // child: Placeholder(),
     );
-  }
-
-  void _onTapEditRole({
-    required BuildContext context,
-    RoleEntity? role,
-  }) async {
-    final res = await showDialog(
-        context: context,
-        builder: (context) {
-          return RoleModal(
-            mode: RoleModalMode.edit,
-            role: role,
-          );
-        });
-    print('res: $res');
   }
 }

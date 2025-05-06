@@ -8,3 +8,4 @@ export 'get_social_profile_body.dart';
 export 'get_profile_body.dart';
 export 'update_profile_body.dart';
 export 'reset_password_body.dart';
+export 'get_role_body.dart';

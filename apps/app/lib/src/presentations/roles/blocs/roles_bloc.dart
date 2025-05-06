@@ -1,17 +1,20 @@
 import 'package:change_application_name/application.dart';
-import 'package:change_application_name/src/domain/roles/entities/roles_entity.dart';
 
 enum RolesEvent {
   initial,
   getAllRoles,
+  getRole,
 }
 
 class RolesBloc extends AppBloc<RolesEvent, RolesEntity> {
   RolesBloc({
     GetAllRolesUsecase? getAllRolesUsecase,
-  }) : _getAllRolesUsecase = getAllRolesUsecase ?? GetAllRolesUsecase();
+    GetRoleUsecase? getRoleUsecase,
+  })  : _getAllRolesUsecase = getAllRolesUsecase ?? GetAllRolesUsecase(),
+        _getRoleUsecase = getRoleUsecase ?? GetRoleUsecase();
 
   final GetAllRolesUsecase _getAllRolesUsecase;
+  final GetRoleUsecase _getRoleUsecase;
 
   @override
   Future<void> onBlocEvent(BlocEvent<RolesEvent> event) async {
@@ -20,6 +23,8 @@ class RolesBloc extends AppBloc<RolesEvent, RolesEntity> {
         return;
       case RolesEvent.getAllRoles:
         return _getAllRoles();
+      case RolesEvent.getRole:
+        return _getRole();
     }
   }
 
@@ -39,6 +44,26 @@ class RolesBloc extends AppBloc<RolesEvent, RolesEntity> {
 
       emitSuccess(rolesData);
     }
+  }
+
+  Future<void> _getRole() async {
+    var jsonRpcResponse = await _getRoleUsecase(
+      roleId: '',
+    );
+
+    _showResult(jsonRpcResponse);
+
+    // if (jsonRpcResponse.hasResult) {
+    //   final roles = jsonRpcResponse.result?.roles
+    //       ?.map((e) => RoleEntity.fromResponse(e))
+    //       .toList();
+    //
+    //   final rolesData = RolesEntity(
+    //     roles: roles,
+    //   );
+    //
+    //   emitSuccess(rolesData);
+    // }
   }
 
   void _showResult(JsonRpcResponse jsonRpcResponse) {

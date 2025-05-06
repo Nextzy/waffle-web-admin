@@ -7,3 +7,7 @@ export 'request_otp_response.dart';
 export 'verify_otp_response.dart';
 export 'get_profile_response.dart';
 export 'get_all_roles_response.dart';
+export 'get_role_response.dart';
+export 'role_response.dart';
+
+
