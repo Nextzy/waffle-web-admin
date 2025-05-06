@@ -103,6 +103,7 @@ class _RolesPageState
   void _onTapCreateRole() async {
     final res = await showDialog(
         context: context,
+        barrierDismissible: true,
         builder: (context) {
           return RoleModal(
             mode: RoleModalMode.create,
@@ -117,6 +118,7 @@ class _RolesPageState
   }) async {
     final res = await showDialog(
         context: context,
+        barrierDismissible: true,
         builder: (context) {
           return RoleModal(
             mode: RoleModalMode.edit,

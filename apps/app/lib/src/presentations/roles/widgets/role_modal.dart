@@ -20,33 +20,24 @@ class RoleModal extends StatefulWidget {
 }
 
 class _RoleModalState extends State<RoleModal> {
-  final roleController = TextEditingController();
+  final _roleController = TextEditingController();
 
-  // RoleEntity? newRole;
-  // late PermissionTableSource permissionTableSource;
-
-  List<PagePermissionEntity> _pagePermissions = List.empty();
+  late final PermissionTableSource _permissionTableSource;
 
   @override
   void initState() {
     super.initState();
 
-    roleController.text = widget.role?.name ?? '';
+    _roleController.text = widget.role?.name ?? '';
 
-    _pagePermissions = widget.role?.pagePermissions?.toList() ?? List.empty();
-
-    // newRole = widget.role;
-    // newRole = newRole?.copyWith(pagePermissions: []);
-
-    // permissionTableSource = PermissionTableSource(
-    //   context: context,
-    //   items: widget.role?.pagePermissions ?? [],
-    // );
+    _permissionTableSource = PermissionTableSource(
+      context,
+      items: widget.role?.pagePermissions?.toList() ?? [],
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    print(_pagePermissions[0].isVisible);
     return Dialog(
       child: Container(
         padding: EdgeInsets.all(20),
@@ -64,19 +55,17 @@ class _RoleModalState extends State<RoleModal> {
               child: AppTextField(
                 label: 'Name',
                 style: AppTextFieldStyle.outline,
-                controller: roleController,
+                controller: _roleController,
               ),
             ),
             Space.gap20,
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.only(left: 5, top: 20),
-                // child: _buildPermissionTable(
-                //   context: context,
-                //   role: widget.role,
-                //   permissionTableSource: permissionTableSource,
-                // ),
-                child: _buildPermissionTable(),
+                child: _buildPermissionTable(
+                  role: widget.role,
+                  permissionTableSource: _permissionTableSource,
+                ),
               ),
             ),
             Space.gap20,
@@ -85,11 +74,9 @@ class _RoleModalState extends State<RoleModal> {
               child: AppButton(
                 text: widget.mode == RoleModalMode.create ? 'Create' : 'Update',
                 onPress: () {
-                  // print('v: ${permissionTableSource.items[0].isVisible}');
-
-                  final newRole = widget.role?.copyWith(
-                    name: roleController.text,
-                    pagePermissions: _pagePermissions,
+                  final newRole = RoleEntity(
+                    name: _roleController.text,
+                    pagePermissions: _permissionTableSource.items,
                   );
 
                   Navigator.pop(context, newRole);
@@ -102,83 +89,34 @@ class _RoleModalState extends State<RoleModal> {
     );
   }
 
-  Widget _buildPermissionTable() {
-    return ListView.builder(
-        itemCount: _pagePermissions.length,
-        itemBuilder: (_, index) {
-          return Row(
-            children: [
-              AppText(
-                _pagePermissions[index].page.toString(),
-                style: AppTextStyleBuilder.header4.build(context),
-              ),
-              AppCheckbox(
-                label: '',
-                defaultValue: _pagePermissions[index].isVisible,
-                onChanged: (b) {
-                  _pagePermissions[index] =
-                      _pagePermissions[index].copyWith(isVisible: b);
-                },
-              ),
-              AppCheckbox(
-                label: '',
-                defaultValue: _pagePermissions[index].canCreate,
-                onChanged: (b) {
-                  _pagePermissions[index] =
-                      _pagePermissions[index].copyWith(canCreate: b);
-                },
-              ),
-              AppCheckbox(
-                label: '',
-                defaultValue: _pagePermissions[index].canUpdate,
-                onChanged: (b) {
-                  _pagePermissions[index] =
-                      _pagePermissions[index].copyWith(canUpdate: b);
-                },
-              ),
-              AppCheckbox(
-                label: '',
-                defaultValue: _pagePermissions[index].canDelete,
-                onChanged: (v) {
-                  _pagePermissions[index] =
-                      _pagePermissions[index].copyWith(canDelete: v);
-                },
-              ),
-            ],
-          );
-        });
+  Widget _buildPermissionTable({
+    required RoleEntity? role,
+    required PermissionTableSource permissionTableSource,
+  }) {
+    return AppTable(
+      width: 700,
+      height: 500,
+      headerNames: [
+        'Page',
+        'Visible',
+        'Create',
+        'Update',
+        'Delete',
+      ],
+      source: permissionTableSource,
+      headerTextStyle: AppTextStyleBuilder.header3.bold.build(context),
+    );
   }
 }
 
-//   Widget _buildPermissionTable({
-//     required BuildContext context,
-//     required RoleEntity? role,
-//     required PermissionTableSource permissionTableSource,
-//   }) {
-//     return AppTable(
-//       width: 700,
-//       height: 500,
-//       headerNames: [
-//         'Page',
-//         'Visible',
-//         'Create',
-//         'Update',
-//         'Delete',
-//       ],
-//       source: permissionTableSource,
-//       headerTextStyle: AppTextStyleBuilder.header3.bold.build(context),
-//     );
-//   }
-// }
-
 class PermissionTableSource implements AppTableSource {
-  PermissionTableSource({
-    required this.context,
+  PermissionTableSource(
+    this.context, {
     required this.items,
   });
 
   final BuildContext context;
-  List<PagePermissionEntity> items;
+  final List<PagePermissionEntity> items;
 
   @override
   AppTableCellContainer getCellContainer(int index) {
@@ -197,9 +135,10 @@ class PermissionTableSource implements AppTableSource {
           widget: AppCheckbox(
             label: '',
             defaultValue: item.isVisible,
-            onChanged: (v) {
-              //items = item.copyWith(isVisible: v);
-              print('isVisible: ${item.isVisible}');
+            onChanged: (b) {
+              items[index] = items[index].copyWith(
+                isVisible: b,
+              );
             },
           ),
         ),
@@ -208,6 +147,11 @@ class PermissionTableSource implements AppTableSource {
           widget: AppCheckbox(
             label: '',
             defaultValue: item.canCreate,
+            onChanged: (b) {
+              items[index] = items[index].copyWith(
+                canCreate: b,
+              );
+            },
           ),
         ),
         AppTableCell(
@@ -215,6 +159,11 @@ class PermissionTableSource implements AppTableSource {
           widget: AppCheckbox(
             label: '',
             defaultValue: item.canUpdate,
+            onChanged: (b) {
+              items[index] = items[index].copyWith(
+                canUpdate: b,
+              );
+            },
           ),
         ),
         AppTableCell(
@@ -222,6 +171,11 @@ class PermissionTableSource implements AppTableSource {
           widget: AppCheckbox(
             label: '',
             defaultValue: item.canDelete,
+            onChanged: (b) {
+              items[index] = items[index].copyWith(
+                canDelete: b,
+              );
+            },
           ),
         ),
       ],
