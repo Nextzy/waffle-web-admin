@@ -2,7 +2,10 @@ import 'package:change_application_name/application.dart';
 
 enum RolesPageEvent {
   showResult,
-  getRoleSuccess,
+  finishRoleModal,
+  createRoleSuccess,
+  updateRoleSuccess,
+  deleteRoleSuccess,
 }
 
 @RoutePage()
@@ -37,9 +40,9 @@ class _RolesPageState
             duration: Duration(seconds: 5),
           ),
         );
-      case RolesPageEvent.getRoleSuccess:
+      case RolesPageEvent.finishRoleModal:
         final role = data as RoleEntity;
-        print('get role success: $role');
+        print('finish role modal: $role');
 
         final RoleEntity? response = await showDialog(
             context: context,
@@ -53,7 +56,13 @@ class _RolesPageState
 
         print('response: $response');
 
-        if (response != null) _getAllRoles();
+        if (response != null) _updateRole();
+      case RolesPageEvent.createRoleSuccess:
+        _getAllRoles();
+      case RolesPageEvent.updateRoleSuccess:
+        _getAllRoles();
+      case RolesPageEvent.deleteRoleSuccess:
+        _getAllRoles();
     }
   }
 
@@ -102,6 +111,7 @@ class _RolesPageState
             child: RolesContent(
               roles: bloc.data?.roles ?? [],
               onTapEditRole: (role) => _onTapEditRole(role: role),
+              onTapDeleteRole: (role) => _onTapDeleteRole(role: role),
             ),
           ),
         ],
@@ -135,13 +145,19 @@ class _RolesPageState
 
     print('response: $response');
 
-    if (response != null) _getAllRoles();
+    if (response != null) _createRole();
   }
 
   void _onTapEditRole({
     required RoleEntity role,
   }) {
     _getRole();
+  }
+
+  void _onTapDeleteRole({
+    required RoleEntity role,
+  }) {
+    _deleteRole();
   }
 
   void _getAllRoles() {
@@ -155,6 +171,24 @@ class _RolesPageState
       RolesEvent.getRole,
     );
   }
+
+  void _createRole() {
+    bloc.addEvent(
+      RolesEvent.createRole,
+    );
+  }
+
+  void _updateRole() {
+    bloc.addEvent(
+      RolesEvent.updateRole,
+    );
+  }
+
+  void _deleteRole() {
+    bloc.addEvent(
+      RolesEvent.deleteRole,
+    );
+  }
 }
 
 class RolesContent extends StatelessWidget {
@@ -162,11 +196,13 @@ class RolesContent extends StatelessWidget {
     super.key,
     required this.roles,
     required this.onTapEditRole,
+    required this.onTapDeleteRole,
   });
 
   final List<RoleEntity> roles;
 
   final Function(RoleEntity role) onTapEditRole;
+  final Function(RoleEntity role) onTapDeleteRole;
 
   @override
   Widget build(BuildContext context) {
@@ -219,6 +255,7 @@ class RolesContent extends StatelessWidget {
                               identifier: 'delete-button',
                               icon: Assets.icon.trashSimpleFilled.keyName,
                               style: AppButtonStyle.text,
+                              onPress: () => onTapDeleteRole(roles[index]),
                             ),
                           ],
                         ),

@@ -4,6 +4,9 @@ enum RolesEvent {
   initial,
   getAllRoles,
   getRole,
+  createRole,
+  updateRole,
+  deleteRole,
 }
 
 class RolesBloc extends AppBloc<RolesEvent, RolesEntity> {
@@ -25,6 +28,12 @@ class RolesBloc extends AppBloc<RolesEvent, RolesEntity> {
         return _getAllRoles();
       case RolesEvent.getRole:
         return _getRole();
+      case RolesEvent.createRole:
+        return _createRole();
+      case RolesEvent.updateRole:
+        return _updateRole();
+      case RolesEvent.deleteRole:
+        return _deleteRole();
     }
   }
 
@@ -62,14 +71,29 @@ class RolesBloc extends AppBloc<RolesEvent, RolesEntity> {
         pagePermission: PagePermissionEntity.fromResponse(action),
       );
 
-      print('mydebug role: $role');
-      print('mydebug per: ${role.pagePermission}');
-
       emitEvent(
-        RolesPageEvent.getRoleSuccess,
+        RolesPageEvent.finishRoleModal,
         role,
       );
     }
+  }
+
+  Future<void> _createRole() async {
+    emitEvent(
+      RolesPageEvent.createRoleSuccess,
+    );
+  }
+
+  Future<void> _updateRole() async {
+    emitEvent(
+      RolesPageEvent.updateRoleSuccess,
+    );
+  }
+
+  Future<void> _deleteRole() async {
+    emitEvent(
+      RolesPageEvent.deleteRoleSuccess,
+    );
   }
 
   void _showResult(JsonRpcResponse jsonRpcResponse) {

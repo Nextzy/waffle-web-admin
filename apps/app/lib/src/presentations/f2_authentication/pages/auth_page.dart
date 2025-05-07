@@ -94,7 +94,7 @@ class _AuthenticationPageState extends AppPageBlocWidgetState<
               ),
               Gap(50),
               AppText(
-                'v1.0.6',
+                'v1.0.7',
                 style: AppTextStyleBuilder.ui.s14.colorPrimary.build(context),
               ),
             ],
