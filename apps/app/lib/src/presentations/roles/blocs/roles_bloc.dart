@@ -53,17 +53,23 @@ class RolesBloc extends AppBloc<RolesEvent, RolesEntity> {
 
     _showResult(jsonRpcResponse);
 
-    // if (jsonRpcResponse.hasResult) {
-    //   final roles = jsonRpcResponse.result?.roles
-    //       ?.map((e) => RoleEntity.fromResponse(e))
-    //       .toList();
-    //
-    //   final rolesData = RolesEntity(
-    //     roles: roles,
-    //   );
-    //
-    //   emitSuccess(rolesData);
-    // }
+    if (jsonRpcResponse.hasResult) {
+      final action = jsonRpcResponse.result!.action!;
+
+      final role = RoleEntity(
+        roleId: '',
+        name: jsonRpcResponse.result?.role?.name ?? '',
+        pagePermission: PagePermissionEntity.fromResponse(action),
+      );
+
+      print('mydebug role: $role');
+      print('mydebug per: ${role.pagePermission}');
+
+      emitEvent(
+        RolesPageEvent.getRoleSuccess,
+        role,
+      );
+    }
   }
 
   void _showResult(JsonRpcResponse jsonRpcResponse) {
@@ -75,9 +81,9 @@ class RolesBloc extends AppBloc<RolesEvent, RolesEntity> {
 
     print('result msg: $resultMessage');
 
-    emitEvent(
-      RolesPageEvent.showResult,
-      resultMessage,
-    );
+    // emitEvent(
+    //   RolesPageEvent.showResult,
+    //   resultMessage,
+    // );
   }
 }

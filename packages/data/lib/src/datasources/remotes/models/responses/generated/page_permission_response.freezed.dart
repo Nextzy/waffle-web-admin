@@ -4,7 +4,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of '../page_permission_entity.dart';
+part of '../page_permission_response.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,31 +14,35 @@ part of '../page_permission_entity.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-mixin _$PagePermissionEntity {
-  PermissionEntity? get analytics;
-  PermissionEntity? get campaigns;
-  PermissionEntity? get games;
-  PermissionEntity? get customers;
-  PermissionEntity? get rewardsStock;
-  PermissionEntity? get consentAndPolicy;
-  PermissionEntity? get allGames;
-  PermissionEntity? get users;
-  PermissionEntity? get roles;
-  PermissionEntity? get billing;
+mixin _$RemotePagePermissionResponse {
+  RemotePermissionResponse? get analytics;
+  RemotePermissionResponse? get campaigns;
+  RemotePermissionResponse? get games;
+  RemotePermissionResponse? get customers;
+  RemotePermissionResponse? get rewardsStock;
+  RemotePermissionResponse? get consentAndPolicy;
+  RemotePermissionResponse? get allGames;
+  RemotePermissionResponse? get users;
+  RemotePermissionResponse? get roles;
+  RemotePermissionResponse? get billing;
 
-  /// Create a copy of PagePermissionEntity
+  /// Create a copy of RemotePagePermissionResponse
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  $PagePermissionEntityCopyWith<PagePermissionEntity> get copyWith =>
-      _$PagePermissionEntityCopyWithImpl<PagePermissionEntity>(
-          this as PagePermissionEntity, _$identity);
+  $RemotePagePermissionResponseCopyWith<RemotePagePermissionResponse>
+      get copyWith => _$RemotePagePermissionResponseCopyWithImpl<
+              RemotePagePermissionResponse>(
+          this as RemotePagePermissionResponse, _$identity);
+
+  /// Serializes this RemotePagePermissionResponse to a JSON map.
+  Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is PagePermissionEntity &&
+            other is RemotePagePermissionResponse &&
             (identical(other.analytics, analytics) ||
                 other.analytics == analytics) &&
             (identical(other.campaigns, campaigns) ||
@@ -57,6 +61,7 @@ mixin _$PagePermissionEntity {
             (identical(other.billing, billing) || other.billing == billing));
   }
 
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -73,49 +78,50 @@ mixin _$PagePermissionEntity {
 
   @override
   String toString() {
-    return 'PagePermissionEntity(analytics: $analytics, campaigns: $campaigns, games: $games, customers: $customers, rewardsStock: $rewardsStock, consentAndPolicy: $consentAndPolicy, allGames: $allGames, users: $users, roles: $roles, billing: $billing)';
+    return 'RemotePagePermissionResponse(analytics: $analytics, campaigns: $campaigns, games: $games, customers: $customers, rewardsStock: $rewardsStock, consentAndPolicy: $consentAndPolicy, allGames: $allGames, users: $users, roles: $roles, billing: $billing)';
   }
 }
 
 /// @nodoc
-abstract mixin class $PagePermissionEntityCopyWith<$Res> {
-  factory $PagePermissionEntityCopyWith(PagePermissionEntity value,
-          $Res Function(PagePermissionEntity) _then) =
-      _$PagePermissionEntityCopyWithImpl;
+abstract mixin class $RemotePagePermissionResponseCopyWith<$Res> {
+  factory $RemotePagePermissionResponseCopyWith(
+          RemotePagePermissionResponse value,
+          $Res Function(RemotePagePermissionResponse) _then) =
+      _$RemotePagePermissionResponseCopyWithImpl;
   @useResult
   $Res call(
-      {PermissionEntity? analytics,
-      PermissionEntity? campaigns,
-      PermissionEntity? games,
-      PermissionEntity? customers,
-      PermissionEntity? rewardsStock,
-      PermissionEntity? consentAndPolicy,
-      PermissionEntity? allGames,
-      PermissionEntity? users,
-      PermissionEntity? roles,
-      PermissionEntity? billing});
+      {RemotePermissionResponse? analytics,
+      RemotePermissionResponse? campaigns,
+      RemotePermissionResponse? games,
+      RemotePermissionResponse? customers,
+      RemotePermissionResponse? rewardsStock,
+      RemotePermissionResponse? consentAndPolicy,
+      RemotePermissionResponse? allGames,
+      RemotePermissionResponse? users,
+      RemotePermissionResponse? roles,
+      RemotePermissionResponse? billing});
 
-  $PermissionEntityCopyWith<$Res>? get analytics;
-  $PermissionEntityCopyWith<$Res>? get campaigns;
-  $PermissionEntityCopyWith<$Res>? get games;
-  $PermissionEntityCopyWith<$Res>? get customers;
-  $PermissionEntityCopyWith<$Res>? get rewardsStock;
-  $PermissionEntityCopyWith<$Res>? get consentAndPolicy;
-  $PermissionEntityCopyWith<$Res>? get allGames;
-  $PermissionEntityCopyWith<$Res>? get users;
-  $PermissionEntityCopyWith<$Res>? get roles;
-  $PermissionEntityCopyWith<$Res>? get billing;
+  $RemotePermissionResponseCopyWith<$Res>? get analytics;
+  $RemotePermissionResponseCopyWith<$Res>? get campaigns;
+  $RemotePermissionResponseCopyWith<$Res>? get games;
+  $RemotePermissionResponseCopyWith<$Res>? get customers;
+  $RemotePermissionResponseCopyWith<$Res>? get rewardsStock;
+  $RemotePermissionResponseCopyWith<$Res>? get consentAndPolicy;
+  $RemotePermissionResponseCopyWith<$Res>? get allGames;
+  $RemotePermissionResponseCopyWith<$Res>? get users;
+  $RemotePermissionResponseCopyWith<$Res>? get roles;
+  $RemotePermissionResponseCopyWith<$Res>? get billing;
 }
 
 /// @nodoc
-class _$PagePermissionEntityCopyWithImpl<$Res>
-    implements $PagePermissionEntityCopyWith<$Res> {
-  _$PagePermissionEntityCopyWithImpl(this._self, this._then);
+class _$RemotePagePermissionResponseCopyWithImpl<$Res>
+    implements $RemotePagePermissionResponseCopyWith<$Res> {
+  _$RemotePagePermissionResponseCopyWithImpl(this._self, this._then);
 
-  final PagePermissionEntity _self;
-  final $Res Function(PagePermissionEntity) _then;
+  final RemotePagePermissionResponse _self;
+  final $Res Function(RemotePagePermissionResponse) _then;
 
-  /// Create a copy of PagePermissionEntity
+  /// Create a copy of RemotePagePermissionResponse
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -135,191 +141,193 @@ class _$PagePermissionEntityCopyWithImpl<$Res>
       analytics: freezed == analytics
           ? _self.analytics
           : analytics // ignore: cast_nullable_to_non_nullable
-              as PermissionEntity?,
+              as RemotePermissionResponse?,
       campaigns: freezed == campaigns
           ? _self.campaigns
           : campaigns // ignore: cast_nullable_to_non_nullable
-              as PermissionEntity?,
+              as RemotePermissionResponse?,
       games: freezed == games
           ? _self.games
           : games // ignore: cast_nullable_to_non_nullable
-              as PermissionEntity?,
+              as RemotePermissionResponse?,
       customers: freezed == customers
           ? _self.customers
           : customers // ignore: cast_nullable_to_non_nullable
-              as PermissionEntity?,
+              as RemotePermissionResponse?,
       rewardsStock: freezed == rewardsStock
           ? _self.rewardsStock
           : rewardsStock // ignore: cast_nullable_to_non_nullable
-              as PermissionEntity?,
+              as RemotePermissionResponse?,
       consentAndPolicy: freezed == consentAndPolicy
           ? _self.consentAndPolicy
           : consentAndPolicy // ignore: cast_nullable_to_non_nullable
-              as PermissionEntity?,
+              as RemotePermissionResponse?,
       allGames: freezed == allGames
           ? _self.allGames
           : allGames // ignore: cast_nullable_to_non_nullable
-              as PermissionEntity?,
+              as RemotePermissionResponse?,
       users: freezed == users
           ? _self.users
           : users // ignore: cast_nullable_to_non_nullable
-              as PermissionEntity?,
+              as RemotePermissionResponse?,
       roles: freezed == roles
           ? _self.roles
           : roles // ignore: cast_nullable_to_non_nullable
-              as PermissionEntity?,
+              as RemotePermissionResponse?,
       billing: freezed == billing
           ? _self.billing
           : billing // ignore: cast_nullable_to_non_nullable
-              as PermissionEntity?,
+              as RemotePermissionResponse?,
     ));
   }
 
-  /// Create a copy of PagePermissionEntity
+  /// Create a copy of RemotePagePermissionResponse
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $PermissionEntityCopyWith<$Res>? get analytics {
+  $RemotePermissionResponseCopyWith<$Res>? get analytics {
     if (_self.analytics == null) {
       return null;
     }
 
-    return $PermissionEntityCopyWith<$Res>(_self.analytics!, (value) {
+    return $RemotePermissionResponseCopyWith<$Res>(_self.analytics!, (value) {
       return _then(_self.copyWith(analytics: value));
     });
   }
 
-  /// Create a copy of PagePermissionEntity
+  /// Create a copy of RemotePagePermissionResponse
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $PermissionEntityCopyWith<$Res>? get campaigns {
+  $RemotePermissionResponseCopyWith<$Res>? get campaigns {
     if (_self.campaigns == null) {
       return null;
     }
 
-    return $PermissionEntityCopyWith<$Res>(_self.campaigns!, (value) {
+    return $RemotePermissionResponseCopyWith<$Res>(_self.campaigns!, (value) {
       return _then(_self.copyWith(campaigns: value));
     });
   }
 
-  /// Create a copy of PagePermissionEntity
+  /// Create a copy of RemotePagePermissionResponse
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $PermissionEntityCopyWith<$Res>? get games {
+  $RemotePermissionResponseCopyWith<$Res>? get games {
     if (_self.games == null) {
       return null;
     }
 
-    return $PermissionEntityCopyWith<$Res>(_self.games!, (value) {
+    return $RemotePermissionResponseCopyWith<$Res>(_self.games!, (value) {
       return _then(_self.copyWith(games: value));
     });
   }
 
-  /// Create a copy of PagePermissionEntity
+  /// Create a copy of RemotePagePermissionResponse
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $PermissionEntityCopyWith<$Res>? get customers {
+  $RemotePermissionResponseCopyWith<$Res>? get customers {
     if (_self.customers == null) {
       return null;
     }
 
-    return $PermissionEntityCopyWith<$Res>(_self.customers!, (value) {
+    return $RemotePermissionResponseCopyWith<$Res>(_self.customers!, (value) {
       return _then(_self.copyWith(customers: value));
     });
   }
 
-  /// Create a copy of PagePermissionEntity
+  /// Create a copy of RemotePagePermissionResponse
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $PermissionEntityCopyWith<$Res>? get rewardsStock {
+  $RemotePermissionResponseCopyWith<$Res>? get rewardsStock {
     if (_self.rewardsStock == null) {
       return null;
     }
 
-    return $PermissionEntityCopyWith<$Res>(_self.rewardsStock!, (value) {
+    return $RemotePermissionResponseCopyWith<$Res>(_self.rewardsStock!,
+        (value) {
       return _then(_self.copyWith(rewardsStock: value));
     });
   }
 
-  /// Create a copy of PagePermissionEntity
+  /// Create a copy of RemotePagePermissionResponse
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $PermissionEntityCopyWith<$Res>? get consentAndPolicy {
+  $RemotePermissionResponseCopyWith<$Res>? get consentAndPolicy {
     if (_self.consentAndPolicy == null) {
       return null;
     }
 
-    return $PermissionEntityCopyWith<$Res>(_self.consentAndPolicy!, (value) {
+    return $RemotePermissionResponseCopyWith<$Res>(_self.consentAndPolicy!,
+        (value) {
       return _then(_self.copyWith(consentAndPolicy: value));
     });
   }
 
-  /// Create a copy of PagePermissionEntity
+  /// Create a copy of RemotePagePermissionResponse
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $PermissionEntityCopyWith<$Res>? get allGames {
+  $RemotePermissionResponseCopyWith<$Res>? get allGames {
     if (_self.allGames == null) {
       return null;
     }
 
-    return $PermissionEntityCopyWith<$Res>(_self.allGames!, (value) {
+    return $RemotePermissionResponseCopyWith<$Res>(_self.allGames!, (value) {
       return _then(_self.copyWith(allGames: value));
     });
   }
 
-  /// Create a copy of PagePermissionEntity
+  /// Create a copy of RemotePagePermissionResponse
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $PermissionEntityCopyWith<$Res>? get users {
+  $RemotePermissionResponseCopyWith<$Res>? get users {
     if (_self.users == null) {
       return null;
     }
 
-    return $PermissionEntityCopyWith<$Res>(_self.users!, (value) {
+    return $RemotePermissionResponseCopyWith<$Res>(_self.users!, (value) {
       return _then(_self.copyWith(users: value));
     });
   }
 
-  /// Create a copy of PagePermissionEntity
+  /// Create a copy of RemotePagePermissionResponse
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $PermissionEntityCopyWith<$Res>? get roles {
+  $RemotePermissionResponseCopyWith<$Res>? get roles {
     if (_self.roles == null) {
       return null;
     }
 
-    return $PermissionEntityCopyWith<$Res>(_self.roles!, (value) {
+    return $RemotePermissionResponseCopyWith<$Res>(_self.roles!, (value) {
       return _then(_self.copyWith(roles: value));
     });
   }
 
-  /// Create a copy of PagePermissionEntity
+  /// Create a copy of RemotePagePermissionResponse
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $PermissionEntityCopyWith<$Res>? get billing {
+  $RemotePermissionResponseCopyWith<$Res>? get billing {
     if (_self.billing == null) {
       return null;
     }
 
-    return $PermissionEntityCopyWith<$Res>(_self.billing!, (value) {
+    return $RemotePermissionResponseCopyWith<$Res>(_self.billing!, (value) {
       return _then(_self.copyWith(billing: value));
     });
   }
 }
 
 /// @nodoc
-
-class _PagePermissionEntity implements PagePermissionEntity {
-  const _PagePermissionEntity(
+@JsonSerializable()
+class _RemotePagePermissionResponse implements RemotePagePermissionResponse {
+  const _RemotePagePermissionResponse(
       {this.analytics,
       this.campaigns,
       this.games,
@@ -330,42 +338,51 @@ class _PagePermissionEntity implements PagePermissionEntity {
       this.users,
       this.roles,
       this.billing});
+  factory _RemotePagePermissionResponse.fromJson(Map<String, dynamic> json) =>
+      _$RemotePagePermissionResponseFromJson(json);
 
   @override
-  final PermissionEntity? analytics;
+  final RemotePermissionResponse? analytics;
   @override
-  final PermissionEntity? campaigns;
+  final RemotePermissionResponse? campaigns;
   @override
-  final PermissionEntity? games;
+  final RemotePermissionResponse? games;
   @override
-  final PermissionEntity? customers;
+  final RemotePermissionResponse? customers;
   @override
-  final PermissionEntity? rewardsStock;
+  final RemotePermissionResponse? rewardsStock;
   @override
-  final PermissionEntity? consentAndPolicy;
+  final RemotePermissionResponse? consentAndPolicy;
   @override
-  final PermissionEntity? allGames;
+  final RemotePermissionResponse? allGames;
   @override
-  final PermissionEntity? users;
+  final RemotePermissionResponse? users;
   @override
-  final PermissionEntity? roles;
+  final RemotePermissionResponse? roles;
   @override
-  final PermissionEntity? billing;
+  final RemotePermissionResponse? billing;
 
-  /// Create a copy of PagePermissionEntity
+  /// Create a copy of RemotePagePermissionResponse
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  _$PagePermissionEntityCopyWith<_PagePermissionEntity> get copyWith =>
-      __$PagePermissionEntityCopyWithImpl<_PagePermissionEntity>(
-          this, _$identity);
+  _$RemotePagePermissionResponseCopyWith<_RemotePagePermissionResponse>
+      get copyWith => __$RemotePagePermissionResponseCopyWithImpl<
+          _RemotePagePermissionResponse>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$RemotePagePermissionResponseToJson(
+      this,
+    );
+  }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _PagePermissionEntity &&
+            other is _RemotePagePermissionResponse &&
             (identical(other.analytics, analytics) ||
                 other.analytics == analytics) &&
             (identical(other.campaigns, campaigns) ||
@@ -384,6 +401,7 @@ class _PagePermissionEntity implements PagePermissionEntity {
             (identical(other.billing, billing) || other.billing == billing));
   }
 
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -400,61 +418,62 @@ class _PagePermissionEntity implements PagePermissionEntity {
 
   @override
   String toString() {
-    return 'PagePermissionEntity(analytics: $analytics, campaigns: $campaigns, games: $games, customers: $customers, rewardsStock: $rewardsStock, consentAndPolicy: $consentAndPolicy, allGames: $allGames, users: $users, roles: $roles, billing: $billing)';
+    return 'RemotePagePermissionResponse(analytics: $analytics, campaigns: $campaigns, games: $games, customers: $customers, rewardsStock: $rewardsStock, consentAndPolicy: $consentAndPolicy, allGames: $allGames, users: $users, roles: $roles, billing: $billing)';
   }
 }
 
 /// @nodoc
-abstract mixin class _$PagePermissionEntityCopyWith<$Res>
-    implements $PagePermissionEntityCopyWith<$Res> {
-  factory _$PagePermissionEntityCopyWith(_PagePermissionEntity value,
-          $Res Function(_PagePermissionEntity) _then) =
-      __$PagePermissionEntityCopyWithImpl;
+abstract mixin class _$RemotePagePermissionResponseCopyWith<$Res>
+    implements $RemotePagePermissionResponseCopyWith<$Res> {
+  factory _$RemotePagePermissionResponseCopyWith(
+          _RemotePagePermissionResponse value,
+          $Res Function(_RemotePagePermissionResponse) _then) =
+      __$RemotePagePermissionResponseCopyWithImpl;
   @override
   @useResult
   $Res call(
-      {PermissionEntity? analytics,
-      PermissionEntity? campaigns,
-      PermissionEntity? games,
-      PermissionEntity? customers,
-      PermissionEntity? rewardsStock,
-      PermissionEntity? consentAndPolicy,
-      PermissionEntity? allGames,
-      PermissionEntity? users,
-      PermissionEntity? roles,
-      PermissionEntity? billing});
+      {RemotePermissionResponse? analytics,
+      RemotePermissionResponse? campaigns,
+      RemotePermissionResponse? games,
+      RemotePermissionResponse? customers,
+      RemotePermissionResponse? rewardsStock,
+      RemotePermissionResponse? consentAndPolicy,
+      RemotePermissionResponse? allGames,
+      RemotePermissionResponse? users,
+      RemotePermissionResponse? roles,
+      RemotePermissionResponse? billing});
 
   @override
-  $PermissionEntityCopyWith<$Res>? get analytics;
+  $RemotePermissionResponseCopyWith<$Res>? get analytics;
   @override
-  $PermissionEntityCopyWith<$Res>? get campaigns;
+  $RemotePermissionResponseCopyWith<$Res>? get campaigns;
   @override
-  $PermissionEntityCopyWith<$Res>? get games;
+  $RemotePermissionResponseCopyWith<$Res>? get games;
   @override
-  $PermissionEntityCopyWith<$Res>? get customers;
+  $RemotePermissionResponseCopyWith<$Res>? get customers;
   @override
-  $PermissionEntityCopyWith<$Res>? get rewardsStock;
+  $RemotePermissionResponseCopyWith<$Res>? get rewardsStock;
   @override
-  $PermissionEntityCopyWith<$Res>? get consentAndPolicy;
+  $RemotePermissionResponseCopyWith<$Res>? get consentAndPolicy;
   @override
-  $PermissionEntityCopyWith<$Res>? get allGames;
+  $RemotePermissionResponseCopyWith<$Res>? get allGames;
   @override
-  $PermissionEntityCopyWith<$Res>? get users;
+  $RemotePermissionResponseCopyWith<$Res>? get users;
   @override
-  $PermissionEntityCopyWith<$Res>? get roles;
+  $RemotePermissionResponseCopyWith<$Res>? get roles;
   @override
-  $PermissionEntityCopyWith<$Res>? get billing;
+  $RemotePermissionResponseCopyWith<$Res>? get billing;
 }
 
 /// @nodoc
-class __$PagePermissionEntityCopyWithImpl<$Res>
-    implements _$PagePermissionEntityCopyWith<$Res> {
-  __$PagePermissionEntityCopyWithImpl(this._self, this._then);
+class __$RemotePagePermissionResponseCopyWithImpl<$Res>
+    implements _$RemotePagePermissionResponseCopyWith<$Res> {
+  __$RemotePagePermissionResponseCopyWithImpl(this._self, this._then);
 
-  final _PagePermissionEntity _self;
-  final $Res Function(_PagePermissionEntity) _then;
+  final _RemotePagePermissionResponse _self;
+  final $Res Function(_RemotePagePermissionResponse) _then;
 
-  /// Create a copy of PagePermissionEntity
+  /// Create a copy of RemotePagePermissionResponse
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
@@ -470,186 +489,188 @@ class __$PagePermissionEntityCopyWithImpl<$Res>
     Object? roles = freezed,
     Object? billing = freezed,
   }) {
-    return _then(_PagePermissionEntity(
+    return _then(_RemotePagePermissionResponse(
       analytics: freezed == analytics
           ? _self.analytics
           : analytics // ignore: cast_nullable_to_non_nullable
-              as PermissionEntity?,
+              as RemotePermissionResponse?,
       campaigns: freezed == campaigns
           ? _self.campaigns
           : campaigns // ignore: cast_nullable_to_non_nullable
-              as PermissionEntity?,
+              as RemotePermissionResponse?,
       games: freezed == games
           ? _self.games
           : games // ignore: cast_nullable_to_non_nullable
-              as PermissionEntity?,
+              as RemotePermissionResponse?,
       customers: freezed == customers
           ? _self.customers
           : customers // ignore: cast_nullable_to_non_nullable
-              as PermissionEntity?,
+              as RemotePermissionResponse?,
       rewardsStock: freezed == rewardsStock
           ? _self.rewardsStock
           : rewardsStock // ignore: cast_nullable_to_non_nullable
-              as PermissionEntity?,
+              as RemotePermissionResponse?,
       consentAndPolicy: freezed == consentAndPolicy
           ? _self.consentAndPolicy
           : consentAndPolicy // ignore: cast_nullable_to_non_nullable
-              as PermissionEntity?,
+              as RemotePermissionResponse?,
       allGames: freezed == allGames
           ? _self.allGames
           : allGames // ignore: cast_nullable_to_non_nullable
-              as PermissionEntity?,
+              as RemotePermissionResponse?,
       users: freezed == users
           ? _self.users
           : users // ignore: cast_nullable_to_non_nullable
-              as PermissionEntity?,
+              as RemotePermissionResponse?,
       roles: freezed == roles
           ? _self.roles
           : roles // ignore: cast_nullable_to_non_nullable
-              as PermissionEntity?,
+              as RemotePermissionResponse?,
       billing: freezed == billing
           ? _self.billing
           : billing // ignore: cast_nullable_to_non_nullable
-              as PermissionEntity?,
+              as RemotePermissionResponse?,
     ));
   }
 
-  /// Create a copy of PagePermissionEntity
+  /// Create a copy of RemotePagePermissionResponse
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $PermissionEntityCopyWith<$Res>? get analytics {
+  $RemotePermissionResponseCopyWith<$Res>? get analytics {
     if (_self.analytics == null) {
       return null;
     }
 
-    return $PermissionEntityCopyWith<$Res>(_self.analytics!, (value) {
+    return $RemotePermissionResponseCopyWith<$Res>(_self.analytics!, (value) {
       return _then(_self.copyWith(analytics: value));
     });
   }
 
-  /// Create a copy of PagePermissionEntity
+  /// Create a copy of RemotePagePermissionResponse
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $PermissionEntityCopyWith<$Res>? get campaigns {
+  $RemotePermissionResponseCopyWith<$Res>? get campaigns {
     if (_self.campaigns == null) {
       return null;
     }
 
-    return $PermissionEntityCopyWith<$Res>(_self.campaigns!, (value) {
+    return $RemotePermissionResponseCopyWith<$Res>(_self.campaigns!, (value) {
       return _then(_self.copyWith(campaigns: value));
     });
   }
 
-  /// Create a copy of PagePermissionEntity
+  /// Create a copy of RemotePagePermissionResponse
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $PermissionEntityCopyWith<$Res>? get games {
+  $RemotePermissionResponseCopyWith<$Res>? get games {
     if (_self.games == null) {
       return null;
     }
 
-    return $PermissionEntityCopyWith<$Res>(_self.games!, (value) {
+    return $RemotePermissionResponseCopyWith<$Res>(_self.games!, (value) {
       return _then(_self.copyWith(games: value));
     });
   }
 
-  /// Create a copy of PagePermissionEntity
+  /// Create a copy of RemotePagePermissionResponse
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $PermissionEntityCopyWith<$Res>? get customers {
+  $RemotePermissionResponseCopyWith<$Res>? get customers {
     if (_self.customers == null) {
       return null;
     }
 
-    return $PermissionEntityCopyWith<$Res>(_self.customers!, (value) {
+    return $RemotePermissionResponseCopyWith<$Res>(_self.customers!, (value) {
       return _then(_self.copyWith(customers: value));
     });
   }
 
-  /// Create a copy of PagePermissionEntity
+  /// Create a copy of RemotePagePermissionResponse
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $PermissionEntityCopyWith<$Res>? get rewardsStock {
+  $RemotePermissionResponseCopyWith<$Res>? get rewardsStock {
     if (_self.rewardsStock == null) {
       return null;
     }
 
-    return $PermissionEntityCopyWith<$Res>(_self.rewardsStock!, (value) {
+    return $RemotePermissionResponseCopyWith<$Res>(_self.rewardsStock!,
+        (value) {
       return _then(_self.copyWith(rewardsStock: value));
     });
   }
 
-  /// Create a copy of PagePermissionEntity
+  /// Create a copy of RemotePagePermissionResponse
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $PermissionEntityCopyWith<$Res>? get consentAndPolicy {
+  $RemotePermissionResponseCopyWith<$Res>? get consentAndPolicy {
     if (_self.consentAndPolicy == null) {
       return null;
     }
 
-    return $PermissionEntityCopyWith<$Res>(_self.consentAndPolicy!, (value) {
+    return $RemotePermissionResponseCopyWith<$Res>(_self.consentAndPolicy!,
+        (value) {
       return _then(_self.copyWith(consentAndPolicy: value));
     });
   }
 
-  /// Create a copy of PagePermissionEntity
+  /// Create a copy of RemotePagePermissionResponse
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $PermissionEntityCopyWith<$Res>? get allGames {
+  $RemotePermissionResponseCopyWith<$Res>? get allGames {
     if (_self.allGames == null) {
       return null;
     }
 
-    return $PermissionEntityCopyWith<$Res>(_self.allGames!, (value) {
+    return $RemotePermissionResponseCopyWith<$Res>(_self.allGames!, (value) {
       return _then(_self.copyWith(allGames: value));
     });
   }
 
-  /// Create a copy of PagePermissionEntity
+  /// Create a copy of RemotePagePermissionResponse
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $PermissionEntityCopyWith<$Res>? get users {
+  $RemotePermissionResponseCopyWith<$Res>? get users {
     if (_self.users == null) {
       return null;
     }
 
-    return $PermissionEntityCopyWith<$Res>(_self.users!, (value) {
+    return $RemotePermissionResponseCopyWith<$Res>(_self.users!, (value) {
       return _then(_self.copyWith(users: value));
     });
   }
 
-  /// Create a copy of PagePermissionEntity
+  /// Create a copy of RemotePagePermissionResponse
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $PermissionEntityCopyWith<$Res>? get roles {
+  $RemotePermissionResponseCopyWith<$Res>? get roles {
     if (_self.roles == null) {
       return null;
     }
 
-    return $PermissionEntityCopyWith<$Res>(_self.roles!, (value) {
+    return $RemotePermissionResponseCopyWith<$Res>(_self.roles!, (value) {
       return _then(_self.copyWith(roles: value));
     });
   }
 
-  /// Create a copy of PagePermissionEntity
+  /// Create a copy of RemotePagePermissionResponse
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $PermissionEntityCopyWith<$Res>? get billing {
+  $RemotePermissionResponseCopyWith<$Res>? get billing {
     if (_self.billing == null) {
       return null;
     }
 
-    return $PermissionEntityCopyWith<$Res>(_self.billing!, (value) {
+    return $RemotePermissionResponseCopyWith<$Res>(_self.billing!, (value) {
       return _then(_self.copyWith(billing: value));
     });
   }

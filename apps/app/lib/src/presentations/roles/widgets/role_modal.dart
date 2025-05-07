@@ -9,11 +9,11 @@ class RoleModal extends StatefulWidget {
   const RoleModal({
     super.key,
     required this.mode,
-    this.role,
+    required this.role,
   });
 
   final RoleModalMode mode;
-  final RoleEntity? role;
+  final RoleEntity role;
 
   @override
   State<RoleModal> createState() => _RoleModalState();
@@ -28,11 +28,24 @@ class _RoleModalState extends State<RoleModal> {
   void initState() {
     super.initState();
 
-    _roleController.text = widget.role?.name ?? '';
+    _roleController.text = widget.role.name ?? '';
 
+    final pagePermission = widget.role.pagePermission!;
     _permissionTableSource = PermissionTableSource(
       context,
-      items: widget.role?.pagePermissions?.toList() ?? [],
+      items: [
+        pagePermission.analytics!,
+        pagePermission.campaigns!,
+        pagePermission.games!,
+        pagePermission.customers!,
+        pagePermission.rewardsStock!,
+        pagePermission.consentAndPolicy!,
+        pagePermission.allGames!,
+        pagePermission.users!,
+        pagePermission.roles!,
+        pagePermission.billing!,
+      ],
+      // items: widget.role?.pagePermissions?.toList() ?? [],
     );
   }
 
@@ -76,7 +89,19 @@ class _RoleModalState extends State<RoleModal> {
                 onPress: () {
                   final newRole = RoleEntity(
                     name: _roleController.text,
-                    pagePermissions: _permissionTableSource.items,
+                    pagePermission: PagePermissionEntity(
+                      analytics: _permissionTableSource.items[0],
+                      campaigns: _permissionTableSource.items[1],
+                      games: _permissionTableSource.items[2],
+                      customers: _permissionTableSource.items[3],
+                      rewardsStock: _permissionTableSource.items[4],
+                      consentAndPolicy: _permissionTableSource.items[5],
+                      allGames: _permissionTableSource.items[6],
+                      users: _permissionTableSource.items[7],
+                      roles: _permissionTableSource.items[8],
+                      billing: _permissionTableSource.items[9],
+                    ),
+                    // pagePermission: _permissionTableSource.items,
                   );
 
                   Navigator.pop(context, newRole);
@@ -116,7 +141,7 @@ class PermissionTableSource implements AppTableSource {
   });
 
   final BuildContext context;
-  final List<PagePermissionEntity> items;
+  final List<PermissionEntity> items;
 
   @override
   AppTableCellContainer getCellContainer(int index) {

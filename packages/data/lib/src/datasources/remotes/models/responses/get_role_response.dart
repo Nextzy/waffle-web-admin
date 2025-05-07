@@ -8,6 +8,7 @@ part 'generated/get_role_response.g.dart';
 abstract class RemoteGetRoleResponse with _$RemoteGetRoleResponse {
   const factory RemoteGetRoleResponse({
     RemoteRole? role,
+    RemotePagePermissionResponse? action,
   }) = _RemoteGetRoleResponse;
 
   factory RemoteGetRoleResponse.fromJson(Map<String, dynamic> json) =>

@@ -9,5 +9,5 @@ export 'get_profile_response.dart';
 export 'get_all_roles_response.dart';
 export 'get_role_response.dart';
 export 'role_response.dart';
-
-
+export 'page_permission_response.dart';
+export 'permission_response.dart';

@@ -2,6 +2,7 @@ import 'package:change_application_name/application.dart';
 
 enum RolesPageEvent {
   showResult,
+  getRoleSuccess,
 }
 
 @RoutePage()
@@ -26,7 +27,7 @@ class _RolesPageState
     BuildContext context,
     Object event,
     Object? data,
-  ) {
+  ) async {
     switch (event) {
       case RolesPageEvent.showResult:
         final resultMessage = data as String;
@@ -36,6 +37,21 @@ class _RolesPageState
             duration: Duration(seconds: 5),
           ),
         );
+      case RolesPageEvent.getRoleSuccess:
+        final role = data as RoleEntity;
+        print('get role success: $role');
+
+        final res = await showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (context) {
+              return RoleModal(
+                mode: RoleModalMode.edit,
+                role: role,
+              );
+            });
+
+        print('res: $res');
     }
   }
 
@@ -94,19 +110,27 @@ class _RolesPageState
     );
   }
 
-  void _getAllRoles() {
-    bloc.addEvent(
-      RolesEvent.getAllRoles,
-    );
-  }
-
   void _onTapCreateRole() async {
     final res = await showDialog(
         context: context,
-        barrierDismissible: true,
+        barrierDismissible: false,
         builder: (context) {
           return RoleModal(
             mode: RoleModalMode.create,
+            role: RoleEntity(
+              pagePermission: PagePermissionEntity(
+                analytics: PermissionEntity(page: 'Analytics'),
+                campaigns: PermissionEntity(page: 'Campaigns'),
+                games: PermissionEntity(page: 'Games'),
+                customers: PermissionEntity(page: 'Customers'),
+                rewardsStock: PermissionEntity(page: 'Rewards Stock'),
+                consentAndPolicy: PermissionEntity(page: 'Consent And Policy'),
+                allGames: PermissionEntity(page: 'All Games'),
+                users: PermissionEntity(page: 'Users'),
+                roles: PermissionEntity(page: 'Roles'),
+                billing: PermissionEntity(page: 'Billing'),
+              ),
+            ),
           );
         });
 
@@ -115,18 +139,20 @@ class _RolesPageState
 
   void _onTapEditRole({
     required RoleEntity role,
-  }) async {
-    final res = await showDialog(
-        context: context,
-        barrierDismissible: true,
-        builder: (context) {
-          return RoleModal(
-            mode: RoleModalMode.edit,
-            role: role,
-          );
-        });
+  }) {
+    _getRole();
+  }
 
-    print('res: $res');
+  void _getAllRoles() {
+    bloc.addEvent(
+      RolesEvent.getAllRoles,
+    );
+  }
+
+  void _getRole() {
+    bloc.addEvent(
+      RolesEvent.getRole,
+    );
   }
 }
 

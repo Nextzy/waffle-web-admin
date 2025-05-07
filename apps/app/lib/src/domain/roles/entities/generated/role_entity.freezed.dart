@@ -17,7 +17,7 @@ T _$identity<T>(T value) => value;
 mixin _$RoleEntity {
   String? get roleId;
   String? get name;
-  List<PagePermissionEntity>? get pagePermissions;
+  PagePermissionEntity? get pagePermission;
 
   /// Create a copy of RoleEntity
   /// with the given fields replaced by the non-null parameter values.
@@ -33,17 +33,16 @@ mixin _$RoleEntity {
             other is RoleEntity &&
             (identical(other.roleId, roleId) || other.roleId == roleId) &&
             (identical(other.name, name) || other.name == name) &&
-            const DeepCollectionEquality()
-                .equals(other.pagePermissions, pagePermissions));
+            (identical(other.pagePermission, pagePermission) ||
+                other.pagePermission == pagePermission));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, roleId, name,
-      const DeepCollectionEquality().hash(pagePermissions));
+  int get hashCode => Object.hash(runtimeType, roleId, name, pagePermission);
 
   @override
   String toString() {
-    return 'RoleEntity(roleId: $roleId, name: $name, pagePermissions: $pagePermissions)';
+    return 'RoleEntity(roleId: $roleId, name: $name, pagePermission: $pagePermission)';
   }
 }
 
@@ -54,9 +53,9 @@ abstract mixin class $RoleEntityCopyWith<$Res> {
       _$RoleEntityCopyWithImpl;
   @useResult
   $Res call(
-      {String? roleId,
-      String? name,
-      List<PagePermissionEntity>? pagePermissions});
+      {String? roleId, String? name, PagePermissionEntity? pagePermission});
+
+  $PagePermissionEntityCopyWith<$Res>? get pagePermission;
 }
 
 /// @nodoc
@@ -73,7 +72,7 @@ class _$RoleEntityCopyWithImpl<$Res> implements $RoleEntityCopyWith<$Res> {
   $Res call({
     Object? roleId = freezed,
     Object? name = freezed,
-    Object? pagePermissions = freezed,
+    Object? pagePermission = freezed,
   }) {
     return _then(_self.copyWith(
       roleId: freezed == roleId
@@ -84,36 +83,39 @@ class _$RoleEntityCopyWithImpl<$Res> implements $RoleEntityCopyWith<$Res> {
           ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      pagePermissions: freezed == pagePermissions
-          ? _self.pagePermissions
-          : pagePermissions // ignore: cast_nullable_to_non_nullable
-              as List<PagePermissionEntity>?,
+      pagePermission: freezed == pagePermission
+          ? _self.pagePermission
+          : pagePermission // ignore: cast_nullable_to_non_nullable
+              as PagePermissionEntity?,
     ));
+  }
+
+  /// Create a copy of RoleEntity
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PagePermissionEntityCopyWith<$Res>? get pagePermission {
+    if (_self.pagePermission == null) {
+      return null;
+    }
+
+    return $PagePermissionEntityCopyWith<$Res>(_self.pagePermission!, (value) {
+      return _then(_self.copyWith(pagePermission: value));
+    });
   }
 }
 
 /// @nodoc
 
 class _RoleEntity implements RoleEntity {
-  const _RoleEntity(
-      {this.roleId,
-      this.name,
-      final List<PagePermissionEntity>? pagePermissions})
-      : _pagePermissions = pagePermissions;
+  const _RoleEntity({this.roleId, this.name, this.pagePermission});
 
   @override
   final String? roleId;
   @override
   final String? name;
-  final List<PagePermissionEntity>? _pagePermissions;
   @override
-  List<PagePermissionEntity>? get pagePermissions {
-    final value = _pagePermissions;
-    if (value == null) return null;
-    if (_pagePermissions is EqualUnmodifiableListView) return _pagePermissions;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
+  final PagePermissionEntity? pagePermission;
 
   /// Create a copy of RoleEntity
   /// with the given fields replaced by the non-null parameter values.
@@ -130,17 +132,16 @@ class _RoleEntity implements RoleEntity {
             other is _RoleEntity &&
             (identical(other.roleId, roleId) || other.roleId == roleId) &&
             (identical(other.name, name) || other.name == name) &&
-            const DeepCollectionEquality()
-                .equals(other._pagePermissions, _pagePermissions));
+            (identical(other.pagePermission, pagePermission) ||
+                other.pagePermission == pagePermission));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, roleId, name,
-      const DeepCollectionEquality().hash(_pagePermissions));
+  int get hashCode => Object.hash(runtimeType, roleId, name, pagePermission);
 
   @override
   String toString() {
-    return 'RoleEntity(roleId: $roleId, name: $name, pagePermissions: $pagePermissions)';
+    return 'RoleEntity(roleId: $roleId, name: $name, pagePermission: $pagePermission)';
   }
 }
 
@@ -153,9 +154,10 @@ abstract mixin class _$RoleEntityCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? roleId,
-      String? name,
-      List<PagePermissionEntity>? pagePermissions});
+      {String? roleId, String? name, PagePermissionEntity? pagePermission});
+
+  @override
+  $PagePermissionEntityCopyWith<$Res>? get pagePermission;
 }
 
 /// @nodoc
@@ -172,7 +174,7 @@ class __$RoleEntityCopyWithImpl<$Res> implements _$RoleEntityCopyWith<$Res> {
   $Res call({
     Object? roleId = freezed,
     Object? name = freezed,
-    Object? pagePermissions = freezed,
+    Object? pagePermission = freezed,
   }) {
     return _then(_RoleEntity(
       roleId: freezed == roleId
@@ -183,11 +185,25 @@ class __$RoleEntityCopyWithImpl<$Res> implements _$RoleEntityCopyWith<$Res> {
           ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      pagePermissions: freezed == pagePermissions
-          ? _self._pagePermissions
-          : pagePermissions // ignore: cast_nullable_to_non_nullable
-              as List<PagePermissionEntity>?,
+      pagePermission: freezed == pagePermission
+          ? _self.pagePermission
+          : pagePermission // ignore: cast_nullable_to_non_nullable
+              as PagePermissionEntity?,
     ));
+  }
+
+  /// Create a copy of RoleEntity
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PagePermissionEntityCopyWith<$Res>? get pagePermission {
+    if (_self.pagePermission == null) {
+      return null;
+    }
+
+    return $PagePermissionEntityCopyWith<$Res>(_self.pagePermission!, (value) {
+      return _then(_self.copyWith(pagePermission: value));
+    });
   }
 }
 

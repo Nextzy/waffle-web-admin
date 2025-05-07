@@ -16,6 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$RemoteGetRoleResponse {
   RemoteRole? get role;
+  RemotePagePermissionResponse? get action;
 
   /// Create a copy of RemoteGetRoleResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -33,16 +34,17 @@ mixin _$RemoteGetRoleResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is RemoteGetRoleResponse &&
-            (identical(other.role, role) || other.role == role));
+            (identical(other.role, role) || other.role == role) &&
+            (identical(other.action, action) || other.action == action));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, role);
+  int get hashCode => Object.hash(runtimeType, role, action);
 
   @override
   String toString() {
-    return 'RemoteGetRoleResponse(role: $role)';
+    return 'RemoteGetRoleResponse(role: $role, action: $action)';
   }
 }
 
@@ -52,9 +54,10 @@ abstract mixin class $RemoteGetRoleResponseCopyWith<$Res> {
           $Res Function(RemoteGetRoleResponse) _then) =
       _$RemoteGetRoleResponseCopyWithImpl;
   @useResult
-  $Res call({RemoteRole? role});
+  $Res call({RemoteRole? role, RemotePagePermissionResponse? action});
 
   $RemoteRoleCopyWith<$Res>? get role;
+  $RemotePagePermissionResponseCopyWith<$Res>? get action;
 }
 
 /// @nodoc
@@ -71,12 +74,17 @@ class _$RemoteGetRoleResponseCopyWithImpl<$Res>
   @override
   $Res call({
     Object? role = freezed,
+    Object? action = freezed,
   }) {
     return _then(_self.copyWith(
       role: freezed == role
           ? _self.role
           : role // ignore: cast_nullable_to_non_nullable
               as RemoteRole?,
+      action: freezed == action
+          ? _self.action
+          : action // ignore: cast_nullable_to_non_nullable
+              as RemotePagePermissionResponse?,
     ));
   }
 
@@ -93,17 +101,33 @@ class _$RemoteGetRoleResponseCopyWithImpl<$Res>
       return _then(_self.copyWith(role: value));
     });
   }
+
+  /// Create a copy of RemoteGetRoleResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $RemotePagePermissionResponseCopyWith<$Res>? get action {
+    if (_self.action == null) {
+      return null;
+    }
+
+    return $RemotePagePermissionResponseCopyWith<$Res>(_self.action!, (value) {
+      return _then(_self.copyWith(action: value));
+    });
+  }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _RemoteGetRoleResponse implements RemoteGetRoleResponse {
-  const _RemoteGetRoleResponse({this.role});
+  const _RemoteGetRoleResponse({this.role, this.action});
   factory _RemoteGetRoleResponse.fromJson(Map<String, dynamic> json) =>
       _$RemoteGetRoleResponseFromJson(json);
 
   @override
   final RemoteRole? role;
+  @override
+  final RemotePagePermissionResponse? action;
 
   /// Create a copy of RemoteGetRoleResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -126,16 +150,17 @@ class _RemoteGetRoleResponse implements RemoteGetRoleResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _RemoteGetRoleResponse &&
-            (identical(other.role, role) || other.role == role));
+            (identical(other.role, role) || other.role == role) &&
+            (identical(other.action, action) || other.action == action));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, role);
+  int get hashCode => Object.hash(runtimeType, role, action);
 
   @override
   String toString() {
-    return 'RemoteGetRoleResponse(role: $role)';
+    return 'RemoteGetRoleResponse(role: $role, action: $action)';
   }
 }
 
@@ -147,10 +172,12 @@ abstract mixin class _$RemoteGetRoleResponseCopyWith<$Res>
       __$RemoteGetRoleResponseCopyWithImpl;
   @override
   @useResult
-  $Res call({RemoteRole? role});
+  $Res call({RemoteRole? role, RemotePagePermissionResponse? action});
 
   @override
   $RemoteRoleCopyWith<$Res>? get role;
+  @override
+  $RemotePagePermissionResponseCopyWith<$Res>? get action;
 }
 
 /// @nodoc
@@ -167,12 +194,17 @@ class __$RemoteGetRoleResponseCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   $Res call({
     Object? role = freezed,
+    Object? action = freezed,
   }) {
     return _then(_RemoteGetRoleResponse(
       role: freezed == role
           ? _self.role
           : role // ignore: cast_nullable_to_non_nullable
               as RemoteRole?,
+      action: freezed == action
+          ? _self.action
+          : action // ignore: cast_nullable_to_non_nullable
+              as RemotePagePermissionResponse?,
     ));
   }
 
@@ -187,6 +219,20 @@ class __$RemoteGetRoleResponseCopyWithImpl<$Res>
 
     return $RemoteRoleCopyWith<$Res>(_self.role!, (value) {
       return _then(_self.copyWith(role: value));
+    });
+  }
+
+  /// Create a copy of RemoteGetRoleResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $RemotePagePermissionResponseCopyWith<$Res>? get action {
+    if (_self.action == null) {
+      return null;
+    }
+
+    return $RemotePagePermissionResponseCopyWith<$Res>(_self.action!, (value) {
+      return _then(_self.copyWith(action: value));
     });
   }
 }

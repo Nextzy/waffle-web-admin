@@ -17,7 +17,6 @@ T _$identity<T>(T value) => value;
 mixin _$RemoteRole {
   String? get roleId;
   String? get name;
-  dynamic get action;
 
   /// Create a copy of RemoteRole
   /// with the given fields replaced by the non-null parameter values.
@@ -35,18 +34,16 @@ mixin _$RemoteRole {
         (other.runtimeType == runtimeType &&
             other is RemoteRole &&
             (identical(other.roleId, roleId) || other.roleId == roleId) &&
-            (identical(other.name, name) || other.name == name) &&
-            const DeepCollectionEquality().equals(other.action, action));
+            (identical(other.name, name) || other.name == name));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, roleId, name, const DeepCollectionEquality().hash(action));
+  int get hashCode => Object.hash(runtimeType, roleId, name);
 
   @override
   String toString() {
-    return 'RemoteRole(roleId: $roleId, name: $name, action: $action)';
+    return 'RemoteRole(roleId: $roleId, name: $name)';
   }
 }
 
@@ -56,7 +53,7 @@ abstract mixin class $RemoteRoleCopyWith<$Res> {
           RemoteRole value, $Res Function(RemoteRole) _then) =
       _$RemoteRoleCopyWithImpl;
   @useResult
-  $Res call({String? roleId, String? name, dynamic action});
+  $Res call({String? roleId, String? name});
 }
 
 /// @nodoc
@@ -73,7 +70,6 @@ class _$RemoteRoleCopyWithImpl<$Res> implements $RemoteRoleCopyWith<$Res> {
   $Res call({
     Object? roleId = freezed,
     Object? name = freezed,
-    Object? action = freezed,
   }) {
     return _then(_self.copyWith(
       roleId: freezed == roleId
@@ -84,10 +80,6 @@ class _$RemoteRoleCopyWithImpl<$Res> implements $RemoteRoleCopyWith<$Res> {
           ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      action: freezed == action
-          ? _self.action
-          : action // ignore: cast_nullable_to_non_nullable
-              as dynamic,
     ));
   }
 }
@@ -95,7 +87,7 @@ class _$RemoteRoleCopyWithImpl<$Res> implements $RemoteRoleCopyWith<$Res> {
 /// @nodoc
 @JsonSerializable()
 class _RemoteRole implements RemoteRole {
-  const _RemoteRole({this.roleId, this.name, this.action});
+  const _RemoteRole({this.roleId, this.name});
   factory _RemoteRole.fromJson(Map<String, dynamic> json) =>
       _$RemoteRoleFromJson(json);
 
@@ -103,8 +95,6 @@ class _RemoteRole implements RemoteRole {
   final String? roleId;
   @override
   final String? name;
-  @override
-  final dynamic action;
 
   /// Create a copy of RemoteRole
   /// with the given fields replaced by the non-null parameter values.
@@ -127,18 +117,16 @@ class _RemoteRole implements RemoteRole {
         (other.runtimeType == runtimeType &&
             other is _RemoteRole &&
             (identical(other.roleId, roleId) || other.roleId == roleId) &&
-            (identical(other.name, name) || other.name == name) &&
-            const DeepCollectionEquality().equals(other.action, action));
+            (identical(other.name, name) || other.name == name));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, roleId, name, const DeepCollectionEquality().hash(action));
+  int get hashCode => Object.hash(runtimeType, roleId, name);
 
   @override
   String toString() {
-    return 'RemoteRole(roleId: $roleId, name: $name, action: $action)';
+    return 'RemoteRole(roleId: $roleId, name: $name)';
   }
 }
 
@@ -150,7 +138,7 @@ abstract mixin class _$RemoteRoleCopyWith<$Res>
       __$RemoteRoleCopyWithImpl;
   @override
   @useResult
-  $Res call({String? roleId, String? name, dynamic action});
+  $Res call({String? roleId, String? name});
 }
 
 /// @nodoc
@@ -167,7 +155,6 @@ class __$RemoteRoleCopyWithImpl<$Res> implements _$RemoteRoleCopyWith<$Res> {
   $Res call({
     Object? roleId = freezed,
     Object? name = freezed,
-    Object? action = freezed,
   }) {
     return _then(_RemoteRole(
       roleId: freezed == roleId
@@ -178,10 +165,6 @@ class __$RemoteRoleCopyWithImpl<$Res> implements _$RemoteRoleCopyWith<$Res> {
           ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      action: freezed == action
-          ? _self.action
-          : action // ignore: cast_nullable_to_non_nullable
-              as dynamic,
     ));
   }
 }

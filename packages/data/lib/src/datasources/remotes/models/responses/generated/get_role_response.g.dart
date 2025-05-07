@@ -12,10 +12,15 @@ _RemoteGetRoleResponse _$RemoteGetRoleResponseFromJson(
       role: json['role'] == null
           ? null
           : RemoteRole.fromJson(json['role'] as Map<String, dynamic>),
+      action: json['action'] == null
+          ? null
+          : RemotePagePermissionResponse.fromJson(
+              json['action'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$RemoteGetRoleResponseToJson(
         _RemoteGetRoleResponse instance) =>
     <String, dynamic>{
       'role': instance.role,
+      'action': instance.action,
     };
