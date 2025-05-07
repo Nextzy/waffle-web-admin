@@ -51,42 +51,45 @@ class _RoleModalState extends State<RoleModal> {
 
   @override
   Widget build(BuildContext context) {
-    return Dialog(
-      child: Container(
-        padding: EdgeInsets.all(20),
-        width: 750,
-        height: 700,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              width: 300,
-              child: AppTextField(
-                label: 'Name',
-                style: AppTextFieldStyle.outline,
-                controller: _roleController,
-                onTextChange: (text) {
-                  setState(() {});
-                },
-              ),
-            ),
-            Space.gap20,
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(left: 5, top: 20),
-                child: _buildPermissionTable(
-                  role: widget.role,
-                  permissionTableSource: _permissionTableSource,
+    return Semantics(
+      identifier: 'role-modal',
+      child: Dialog(
+        child: Container(
+          padding: EdgeInsets.all(20),
+          width: 750,
+          height: 700,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                width: 300,
+                child: AppTextField(
+                  label: 'Name',
+                  style: AppTextFieldStyle.outline,
+                  controller: _roleController,
+                  onTextChange: (text) {
+                    setState(() {});
+                  },
                 ),
               ),
-            ),
-            Space.gap20,
-            _buildButtons(context),
-          ],
+              Space.gap20,
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 5, top: 20),
+                  child: _buildPermissionTable(
+                    role: widget.role,
+                    permissionTableSource: _permissionTableSource,
+                  ),
+                ),
+              ),
+              Space.gap20,
+              _buildButtons(context),
+            ],
+          ),
         ),
       ),
     );
@@ -97,13 +100,17 @@ class _RoleModalState extends State<RoleModal> {
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         AppButton(
+          identifier: 'cancel-button',
           text: 'Cancel',
           onPress: () => Navigator.pop(context),
         ),
         Space.gap20,
         AppButton(
-          disabled: _roleController.text.isEmpty,
+          identifier: widget.mode == RoleModalMode.create
+              ? 'create-button'
+              : 'update-button',
           text: widget.mode == RoleModalMode.create ? 'Create' : 'Update',
+          disabled: _roleController.text.isEmpty,
           onPress: () {
             final newRole = RoleEntity(
               name: _roleController.text,

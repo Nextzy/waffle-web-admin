@@ -170,59 +170,64 @@ class RolesContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(30),
-      padding: EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withValues(alpha: 0.5),
-            spreadRadius: 5,
-            blurRadius: 7,
-            offset: Offset(0, 3), // changes position of shadow
-          ),
-        ],
-        borderRadius: BorderRadius.circular(5),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          AppText(
-            'Roles Name',
-            style: AppTextStyleBuilder.header5.bold.build(context),
-          ),
-          AppDivider(color: Colors.black),
-          Expanded(
-            child: ListView.builder(
-                itemCount: roles.length,
-                itemBuilder: (_, index) {
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      AppText(
-                        roles[index].name,
-                        style: AppTextStyleBuilder.header4.build(context),
-                      ),
-                      Row(
-                        children: [
-                          AppIconButton(
-                            icon: Assets.icon.pencilLineFilled.keyName,
-                            style: AppButtonStyle.text,
-                            onPress: () => onTapEditRole(roles[index]),
-                          ),
-                          Space.gap10,
-                          AppIconButton(
-                            icon: Assets.icon.trashSimpleFilled.keyName,
-                            style: AppButtonStyle.text,
-                          ),
-                        ],
-                      ),
-                    ],
-                  );
-                }),
-          ),
-        ],
+    return Semantics(
+      identifier: 'roles-view',
+      child: Container(
+        margin: EdgeInsets.all(30),
+        padding: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withValues(alpha: 0.5),
+              spreadRadius: 5,
+              blurRadius: 7,
+              offset: Offset(0, 3), // changes position of shadow
+            ),
+          ],
+          borderRadius: BorderRadius.circular(5),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            AppText(
+              'Roles Name',
+              style: AppTextStyleBuilder.header5.bold.build(context),
+            ),
+            AppDivider(color: Colors.black),
+            Expanded(
+              child: ListView.builder(
+                  itemCount: roles.length,
+                  itemBuilder: (_, index) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        AppText(
+                          roles[index].name,
+                          style: AppTextStyleBuilder.header4.build(context),
+                        ),
+                        Row(
+                          children: [
+                            AppIconButton(
+                              identifier: 'edit-button',
+                              icon: Assets.icon.pencilLineFilled.keyName,
+                              style: AppButtonStyle.text,
+                              onPress: () => onTapEditRole(roles[index]),
+                            ),
+                            Space.gap10,
+                            AppIconButton(
+                              identifier: 'delete-button',
+                              icon: Assets.icon.trashSimpleFilled.keyName,
+                              style: AppButtonStyle.text,
+                            ),
+                          ],
+                        ),
+                      ],
+                    );
+                  }),
+            ),
+          ],
+        ),
       ),
     );
   }
