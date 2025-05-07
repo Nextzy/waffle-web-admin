@@ -69,6 +69,9 @@ class _RoleModalState extends State<RoleModal> {
                 label: 'Name',
                 style: AppTextFieldStyle.outline,
                 controller: _roleController,
+                onTextChange: (text) {
+                  setState(() {});
+                },
               ),
             ),
             Space.gap20,
@@ -82,35 +85,47 @@ class _RoleModalState extends State<RoleModal> {
               ),
             ),
             Space.gap20,
-            Align(
-              alignment: Alignment.bottomRight,
-              child: AppButton(
-                text: widget.mode == RoleModalMode.create ? 'Create' : 'Update',
-                onPress: () {
-                  final newRole = RoleEntity(
-                    name: _roleController.text,
-                    pagePermission: PagePermissionEntity(
-                      analytics: _permissionTableSource.items[0],
-                      campaigns: _permissionTableSource.items[1],
-                      games: _permissionTableSource.items[2],
-                      customers: _permissionTableSource.items[3],
-                      rewardsStock: _permissionTableSource.items[4],
-                      consentAndPolicy: _permissionTableSource.items[5],
-                      allGames: _permissionTableSource.items[6],
-                      users: _permissionTableSource.items[7],
-                      roles: _permissionTableSource.items[8],
-                      billing: _permissionTableSource.items[9],
-                    ),
-                    // pagePermission: _permissionTableSource.items,
-                  );
-
-                  Navigator.pop(context, newRole);
-                },
-              ),
-            ),
+            _buildButtons(context),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildButtons(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        AppButton(
+          text: 'Cancel',
+          onPress: () => Navigator.pop(context),
+        ),
+        Space.gap20,
+        AppButton(
+          disabled: _roleController.text.isEmpty,
+          text: widget.mode == RoleModalMode.create ? 'Create' : 'Update',
+          onPress: () {
+            final newRole = RoleEntity(
+              name: _roleController.text,
+              pagePermission: PagePermissionEntity(
+                analytics: _permissionTableSource.items[0],
+                campaigns: _permissionTableSource.items[1],
+                games: _permissionTableSource.items[2],
+                customers: _permissionTableSource.items[3],
+                rewardsStock: _permissionTableSource.items[4],
+                consentAndPolicy: _permissionTableSource.items[5],
+                allGames: _permissionTableSource.items[6],
+                users: _permissionTableSource.items[7],
+                roles: _permissionTableSource.items[8],
+                billing: _permissionTableSource.items[9],
+              ),
+              // pagePermission: _permissionTableSource.items,
+            );
+
+            Navigator.pop(context, newRole);
+          },
+        ),
+      ],
     );
   }
 

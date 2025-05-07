@@ -29,7 +29,6 @@ class _ConsolePageState
     Object event,
     Object? data,
   ) {
-    print('event: $event');
     switch (event) {
       case ConsolePageEvent.showResult:
         final resultMessage = data as String;

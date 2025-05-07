@@ -104,7 +104,7 @@ class ConsoleBloc extends AppBloc<ConsoleEvent, ConsoleEntity> {
       phone: phone,
     );
 
-    //_showResult(jsonRpcResponse);
+    _showResult(jsonRpcResponse);
 
     emitEvent(ConsolePageEvent.updateProfileSuccess);
   }
@@ -122,7 +122,7 @@ class ConsoleBloc extends AppBloc<ConsoleEvent, ConsoleEntity> {
       newPassword: newPassword,
     );
 
-    //_showResult(jsonRpcResponse);
+    _showResult(jsonRpcResponse);
 
     emitEvent(ConsolePageEvent.resetPasswordSuccess);
   }
@@ -136,9 +136,9 @@ class ConsoleBloc extends AppBloc<ConsoleEvent, ConsoleEntity> {
 
     print('result msg: $resultMessage');
 
-    emitEvent(
-      ConsolePageEvent.showResult,
-      resultMessage,
-    );
+    // emitEvent(
+    //   ConsolePageEvent.showResult,
+    //   resultMessage,
+    // );
   }
 }

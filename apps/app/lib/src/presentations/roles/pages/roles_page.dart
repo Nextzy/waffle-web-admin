@@ -41,7 +41,7 @@ class _RolesPageState
         final role = data as RoleEntity;
         print('get role success: $role');
 
-        final res = await showDialog(
+        final RoleEntity? response = await showDialog(
             context: context,
             barrierDismissible: false,
             builder: (context) {
@@ -51,7 +51,9 @@ class _RolesPageState
               );
             });
 
-        print('res: $res');
+        print('response: $response');
+
+        if (response != null) _getAllRoles();
     }
   }
 
@@ -76,9 +78,6 @@ class _RolesPageState
   }
 
   Widget _buildBody() {
-    final items = List.generate(20, (index) => 'Item $index');
-    print('mydebug ${bloc.data?.roles}');
-
     return Container(
       color: context.theme.color.bg,
       padding: EdgeInsets.all(20),
@@ -111,7 +110,7 @@ class _RolesPageState
   }
 
   void _onTapCreateRole() async {
-    final res = await showDialog(
+    final RoleEntity? response = await showDialog(
         context: context,
         barrierDismissible: false,
         builder: (context) {
@@ -134,7 +133,9 @@ class _RolesPageState
           );
         });
 
-    print('res: $res');
+    print('response: $response');
+
+    if (response != null) _getAllRoles();
   }
 
   void _onTapEditRole({
