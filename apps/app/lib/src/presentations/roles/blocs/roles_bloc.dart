@@ -13,11 +13,20 @@ class RolesBloc extends AppBloc<RolesEvent, RolesEntity> {
   RolesBloc({
     GetAllRolesUsecase? getAllRolesUsecase,
     GetRoleUsecase? getRoleUsecase,
+    CreateRoleUsecase? createRoleUsecase,
+    UpdateRoleUsecase? updateRoleUsecase,
+    DeleteRoleUsecase? deleteRoleUsecase,
   })  : _getAllRolesUsecase = getAllRolesUsecase ?? GetAllRolesUsecase(),
-        _getRoleUsecase = getRoleUsecase ?? GetRoleUsecase();
+        _getRoleUsecase = getRoleUsecase ?? GetRoleUsecase(),
+        _createRoleUsecase = createRoleUsecase ?? CreateRoleUsecase(),
+        _updateRoleUsecase = updateRoleUsecase ?? UpdateRoleUsecase(),
+        _deleteRoleUsecase = deleteRoleUsecase ?? DeleteRoleUsecase();
 
   final GetAllRolesUsecase _getAllRolesUsecase;
   final GetRoleUsecase _getRoleUsecase;
+  final CreateRoleUsecase _createRoleUsecase;
+  final UpdateRoleUsecase _updateRoleUsecase;
+  final DeleteRoleUsecase _deleteRoleUsecase;
 
   @override
   Future<void> onBlocEvent(BlocEvent<RolesEvent> event) async {
@@ -31,9 +40,21 @@ class RolesBloc extends AppBloc<RolesEvent, RolesEntity> {
       case RolesEvent.createRole:
         return _createRole();
       case RolesEvent.updateRole:
-        return _updateRole();
+        final data = event.data as ({
+          String roleId,
+        });
+
+        return _updateRole(
+          roleId: data.roleId,
+        );
       case RolesEvent.deleteRole:
-        return _deleteRole();
+        final data = event.data as ({
+          String roleId,
+        });
+
+        return _deleteRole(
+          roleId: data.roleId,
+        );
     }
   }
 
@@ -79,21 +100,47 @@ class RolesBloc extends AppBloc<RolesEvent, RolesEntity> {
   }
 
   Future<void> _createRole() async {
-    emitEvent(
-      RolesPageEvent.createRoleSuccess,
-    );
+    var jsonRpcResponse = await _createRoleUsecase();
+
+    _showResult(jsonRpcResponse);
+
+    if (jsonRpcResponse.hasResult) {
+      emitEvent(
+        RolesPageEvent.createRoleSuccess,
+      );
+    }
   }
 
-  Future<void> _updateRole() async {
-    emitEvent(
-      RolesPageEvent.updateRoleSuccess,
+  Future<void> _updateRole({
+    required roleId,
+  }) async {
+    var jsonRpcResponse = await _updateRoleUsecase(
+      roleId: roleId,
     );
+
+    _showResult(jsonRpcResponse);
+
+    if (jsonRpcResponse.hasResult) {
+      emitEvent(
+        RolesPageEvent.updateRoleSuccess,
+      );
+    }
   }
 
-  Future<void> _deleteRole() async {
-    emitEvent(
-      RolesPageEvent.deleteRoleSuccess,
+  Future<void> _deleteRole({
+    required roleId,
+  }) async {
+    var jsonRpcResponse = await _deleteRoleUsecase(
+      roleId: roleId,
     );
+
+    _showResult(jsonRpcResponse);
+
+    if (jsonRpcResponse.hasResult) {
+      emitEvent(
+        RolesPageEvent.deleteRoleSuccess,
+      );
+    }
   }
 
   void _showResult(JsonRpcResponse jsonRpcResponse) {

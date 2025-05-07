@@ -56,4 +56,69 @@ class AdminRpcService extends RpcService {
       queryParameters: successMockQueryParams,
     );
   }
+
+  Future<JsonRpcResponse<dynamic, ErrorResponse>> createRole({
+    String? requestId,
+  }) async {
+    final successMockQueryParams = {
+      'apidogApiId': '16377546',
+    };
+    final failMockQueryParams = {
+      'apidogApiId': '15405460',
+      'apidogResponseId': '21196837',
+    };
+
+    return request(
+      path,
+      method: 'createByRole',
+      id: requestId,
+      fromJson: RemoteGetRoleResponse.fromJson, //todo temp
+      extra: {'requiredAuth': true},
+      queryParameters: successMockQueryParams,
+    );
+  }
+
+  Future<JsonRpcResponse<dynamic, ErrorResponse>> updateRole({
+    required String roleId,
+    String? requestId,
+  }) async {
+    final successMockQueryParams = {
+      'apidogApiId': '16374888',
+    };
+    final failMockQueryParams = {
+      'apidogApiId': '15405460',
+      'apidogResponseId': '21196837',
+    };
+
+    return request(
+      path,
+      method: 'updateByRole',
+      id: requestId,
+      fromJson: RemoteGetRoleResponse.fromJson, //todo temp
+      extra: {'requiredAuth': true},
+      queryParameters: successMockQueryParams,
+    );
+  }
+
+  Future<JsonRpcResponse<dynamic, ErrorResponse>> deleteRole({
+    required String roleId,
+    String? requestId,
+  }) async {
+    final successMockQueryParams = {
+      'apidogApiId': '16376915',
+    };
+    final failMockQueryParams = {
+      'apidogApiId': '15405460',
+      'apidogResponseId': '21196837',
+    };
+
+    return request(
+      path,
+      method: 'deleteByRole',
+      id: requestId,
+      fromJson: RemoteGetRoleResponse.fromJson, //todo temp
+      extra: {'requiredAuth': true},
+      queryParameters: successMockQueryParams,
+    );
+  }
 }

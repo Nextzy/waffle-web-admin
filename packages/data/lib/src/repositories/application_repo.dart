@@ -75,4 +75,20 @@ class AppRepository {
   }) {
     return _adminRemoteDatasource.getRole(roleId: roleId);
   }
+
+  Future<JsonRpcResponse<dynamic, ErrorResponse>> createRole() {
+    return _adminRemoteDatasource.createRole();
+  }
+
+  Future<JsonRpcResponse<dynamic, ErrorResponse>> updateRole({
+    required String roleId,
+  }) {
+    return _adminRemoteDatasource.updateRole(roleId: roleId);
+  }
+
+  Future<JsonRpcResponse<dynamic, ErrorResponse>> deleteRole({
+    required String roleId,
+  }) {
+    return _adminRemoteDatasource.deleteRole(roleId: roleId);
+  }
 }

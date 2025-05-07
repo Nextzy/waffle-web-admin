@@ -56,7 +56,7 @@ class _RolesPageState
 
         print('response: $response');
 
-        if (response != null) _updateRole();
+        if (response != null) _updateRole(roleId: role.roleId ?? '');
       case RolesPageEvent.createRoleSuccess:
         _getAllRoles();
       case RolesPageEvent.updateRoleSuccess:
@@ -157,7 +157,7 @@ class _RolesPageState
   void _onTapDeleteRole({
     required RoleEntity role,
   }) {
-    _deleteRole();
+    _deleteRole(roleId: role.roleId ?? '');
   }
 
   void _getAllRoles() {
@@ -178,15 +178,21 @@ class _RolesPageState
     );
   }
 
-  void _updateRole() {
+  void _updateRole({
+    required String roleId,
+  }) {
     bloc.addEvent(
       RolesEvent.updateRole,
+      data: (roleId: roleId),
     );
   }
 
-  void _deleteRole() {
+  void _deleteRole({
+    required String roleId,
+  }) {
     bloc.addEvent(
       RolesEvent.deleteRole,
+      data: (roleId: roleId),
     );
   }
 }
