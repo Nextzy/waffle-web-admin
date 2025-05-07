@@ -197,14 +197,28 @@ class RolesContent extends StatelessWidget {
             child: ListView.builder(
                 itemCount: roles.length,
                 itemBuilder: (_, index) {
-                  return ListTile(
-                    title: AppText(
-                      roles[index].name,
-                      style: AppTextStyleBuilder.header4.build(context),
-                    ),
-                    onTap: () {
-                      onTapEditRole(roles[index]);
-                    },
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      AppText(
+                        roles[index].name,
+                        style: AppTextStyleBuilder.header4.build(context),
+                      ),
+                      Row(
+                        children: [
+                          AppIconButton(
+                            icon: Assets.icon.pencilLineFilled.keyName,
+                            style: AppButtonStyle.text,
+                            onPress: () => onTapEditRole(roles[index]),
+                          ),
+                          Space.gap10,
+                          AppIconButton(
+                            icon: Assets.icon.trashSimpleFilled.keyName,
+                            style: AppButtonStyle.text,
+                          ),
+                        ],
+                      ),
+                    ],
                   );
                 }),
           ),
