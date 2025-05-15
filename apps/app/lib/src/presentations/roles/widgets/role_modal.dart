@@ -68,6 +68,7 @@ class _RoleModalState extends State<RoleModal> {
               SizedBox(
                 width: 300,
                 child: AppTextField(
+                  identifier: 'name-text-field',
                   label: 'Name',
                   style: AppTextFieldStyle.outline,
                   controller: _roleController,
@@ -168,6 +169,8 @@ class PermissionTableSource implements AppTableSource {
   @override
   AppTableCellContainer getCellContainer(int index) {
     var item = items[index];
+    var pageIdentifier = item.page.removeWhiteSpace.toLowerCase();
+
     return AppTableCellContainer(
       cells: [
         AppTableCell(
@@ -180,6 +183,7 @@ class PermissionTableSource implements AppTableSource {
         AppTableCell(
           value: item.isVisible.toString(),
           widget: AppCheckbox(
+            identifier: '$pageIdentifier-visible-checkbox',
             label: '',
             defaultValue: item.isVisible,
             onChanged: (b) {
@@ -192,6 +196,7 @@ class PermissionTableSource implements AppTableSource {
         AppTableCell(
           value: item.canCreate.toString(),
           widget: AppCheckbox(
+            identifier: '$pageIdentifier-create-checkbox',
             label: '',
             defaultValue: item.canCreate,
             onChanged: (b) {
@@ -204,6 +209,7 @@ class PermissionTableSource implements AppTableSource {
         AppTableCell(
           value: item.canUpdate.toString(),
           widget: AppCheckbox(
+            identifier: '$pageIdentifier-update-checkbox',
             label: '',
             defaultValue: item.canUpdate,
             onChanged: (b) {
@@ -216,6 +222,7 @@ class PermissionTableSource implements AppTableSource {
         AppTableCell(
           value: item.canDelete.toString(),
           widget: AppCheckbox(
+            identifier: '$pageIdentifier-delete-checkbox',
             label: '',
             defaultValue: item.canDelete,
             onChanged: (b) {

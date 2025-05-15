@@ -3,18 +3,20 @@ import 'package:design_system/lib.dart';
 enum AppCheckboxPosition { left, right }
 
 class AppCheckbox extends AppStatefulWidget {
-  const AppCheckbox(
-      {super.key,
-      super.size = WidgetSize.md,
-      this.style = AppTextFieldStyle.outline,
-      this.position = AppCheckboxPosition.left,
-      required this.label,
-      this.defaultValue = false,
-      this.feedbackState,
-      this.statusText,
-      this.helperText,
-      this.disabled = false,
-      this.onChanged});
+  const AppCheckbox({
+    super.key,
+    super.size = WidgetSize.md,
+    this.style = AppTextFieldStyle.outline,
+    this.position = AppCheckboxPosition.left,
+    required this.label,
+    this.defaultValue = false,
+    this.feedbackState,
+    this.statusText,
+    this.helperText,
+    this.disabled = false,
+    this.onChanged,
+    this.identifier,
+  });
 
   final AppTextFieldStyle style;
   final AppCheckboxPosition position;
@@ -24,6 +26,7 @@ class AppCheckbox extends AppStatefulWidget {
   final String? statusText;
   final String? helperText;
   final bool disabled;
+  final String? identifier;
 
   final ValueChanged<bool>? onChanged;
 
@@ -54,64 +57,69 @@ class _AppCheckboxState extends AppState<AppCheckbox> {
 
   @override
   Widget build(BuildContext context) {
-    return ColumnLayout(
-      mainAxisAlignment: MainAxisAlignment.start,
-      gap: 4,
-      children: [
-        Row(
-          mainAxisAlignment: widget.position == AppCheckboxPosition.left
-              ? MainAxisAlignment.start
-              : MainAxisAlignment.spaceBetween,
-          children: [
-            if (widget.position == AppCheckboxPosition.left) _buildCheckbox(),
-            AppText(
-              widget.label,
-              style: TextStyle(
-                color: widget.disabled
-                    ? context.theme.color.textTertiary
-                    : context.theme.color.textPrimary,
-                fontSize: widgetSize == WidgetSize.sm ? 12 : 14,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-            if (widget.position == AppCheckboxPosition.right) _buildCheckbox(),
-          ],
-        ),
-        if (widget.helperText.isNotNullOrBlank)
-          Padding(
-            padding: widget.position == AppCheckboxPosition.right
-                ? EdgeInsets.zero
-                : const EdgeInsets.only(left: 32),
-            child: AppText(
-              widget.helperText,
-              style: TextStyle(
-                color: widget.disabled
-                    ? context.theme.color.textTertiary
-                    : context.theme.color.textSecondary,
-                fontSize: 12,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-          ),
-        if (widget.statusText.isNotNullOrBlank && widget.feedbackState != null)
+    return Semantics(
+      identifier: widget.identifier,
+      child: ColumnLayout(
+        mainAxisAlignment: MainAxisAlignment.start,
+        gap: 4,
+        children: [
           Row(
+            mainAxisAlignment: widget.position == AppCheckboxPosition.left
+                ? MainAxisAlignment.start
+                : MainAxisAlignment.spaceBetween,
             children: [
-              Padding(
-                padding: widget.position == AppCheckboxPosition.right
-                    ? EdgeInsets.zero
-                    : const EdgeInsets.only(left: 32),
-                child: AppText(
-                  '$textFeedbackIcon${widget.statusText}',
-                  style: TextStyle(
-                    color: textFeedbackColor,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                  ),
+              if (widget.position == AppCheckboxPosition.left) _buildCheckbox(),
+              AppText(
+                widget.label,
+                style: TextStyle(
+                  color: widget.disabled
+                      ? context.theme.color.textTertiary
+                      : context.theme.color.textPrimary,
+                  fontSize: widgetSize == WidgetSize.sm ? 12 : 14,
+                  fontWeight: FontWeight.w400,
                 ),
-              )
+              ),
+              if (widget.position == AppCheckboxPosition.right)
+                _buildCheckbox(),
             ],
-          )
-      ],
+          ),
+          if (widget.helperText.isNotNullOrBlank)
+            Padding(
+              padding: widget.position == AppCheckboxPosition.right
+                  ? EdgeInsets.zero
+                  : const EdgeInsets.only(left: 32),
+              child: AppText(
+                widget.helperText,
+                style: TextStyle(
+                  color: widget.disabled
+                      ? context.theme.color.textTertiary
+                      : context.theme.color.textSecondary,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ),
+          if (widget.statusText.isNotNullOrBlank &&
+              widget.feedbackState != null)
+            Row(
+              children: [
+                Padding(
+                  padding: widget.position == AppCheckboxPosition.right
+                      ? EdgeInsets.zero
+                      : const EdgeInsets.only(left: 32),
+                  child: AppText(
+                    '$textFeedbackIcon${widget.statusText}',
+                    style: TextStyle(
+                      color: textFeedbackColor,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                )
+              ],
+            )
+        ],
+      ),
     );
   }
 
